@@ -21,3 +21,22 @@ code {
   margin: 0.5rem;
   height: 99vh;
 }
+.navbar {
+  background-color: #577198;
+}
+.login {
+  color: #43546f;
+}
+.button {
+  background: rgb(56, 74, 101);
+  background: linear-gradient(
+    90deg,
+    rgba(56, 74, 101, 1) 51%,
+    rgba(110, 142, 189, 1) 100%
+  );
+}
+.round {
+  background-image: url(./images/round.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
