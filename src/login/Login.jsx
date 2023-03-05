@@ -4,9 +4,8 @@ import Navbar from "./Navbar";
 import Conference from "../images/conference.png";
 
 function Login(props) {
-  const { adminLog, mentorLog, studentLog, setSignup, setIsLoggedIn } = props;
+  const { candidateLog, OrganizationLog } = props;
   const { show, setShow } = props;
-  const [logType, setLogType] = useState(true);
   return (
     <div>
       <div className="">

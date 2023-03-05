@@ -1,8 +1,7 @@
-import Login from "./login/Decide";
 import "./components/InterviewCam.css";
 import { useState } from "react";
 import WithLogin from "./Routing/WithLogin";
-
+import WithoutLogin from "./Routing/WithoutLogin";
 function App() {
   const [show, setShow] = useState(false);
 
@@ -18,7 +17,7 @@ function App() {
       {show ? (
         <WithLogin/>
       ) : (
-        <Login show={show} setShow={setShow} />
+        <WithoutLogin show={show} setShow={setShow} />
       )}
     </div>
   );
