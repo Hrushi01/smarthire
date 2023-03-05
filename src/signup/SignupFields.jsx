@@ -5,19 +5,20 @@ import { FaArrowRight } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
 
 function Fields(props) {
-  const { setShow } = props;
+  const { setSignup } = props;
   const onsubmit = () => {
     if (
       initialValues.name === "Hrushi" &&
       initialValues.password === "Keystone"
     ) {
-      setShow(true);
+      setSignup(true);
     }
   };
 
   const [initialValues, setInitialvalues] = useState({
     name: "",
     password: "",
+    confirmpass: "",
   });
 
   return (
@@ -58,16 +59,26 @@ function Fields(props) {
                 className="p-3 w-80 font-mono text-sm login outline-none rounded-md shadow"
               />
             </div>
+            <div className="p-5 pl-0">
+              <Field
+                type="password"
+                label="confirmpass"
+                name="confirmpass"
+                placeholder="Confirm-Password"
+                className="p-3 w-80 font-mono text-sm login outline-none rounded-md shadow"
+              />
+            </div>
           </div>
-          <div className="ml-24">
-            <div className="login text-sm font-semibold">Forgot password?</div>
-          </div>
+
           <div className="ml-24 pl-0 p-5 ">
             <button
-              type="button "
+              type="submit "
+              onClick={() => {
+                setInitialvalues(props.values);
+              }}
               className="w-fit p-3 rounded-lg text-white font-semibold button flex"
             >
-              <div className="pr-20 pl-5">Log In</div>
+              <div className="pr-20 pl-5">Register</div>
               <div className="p-1">
                 <FaArrowRight />
               </div>
@@ -75,13 +86,12 @@ function Fields(props) {
           </div>
           <div className="h-20">
             <div className="login ml-24 text-xs h-12 flex rounded-full border-gray-400  pr-3 pl-3 round">
-              <div className="pl-9 pt-4">don’t have an account yet?</div>
+              <div className="pl-9 pt-4">already have an account?</div>
               <span className="font-semibold  pt-4 pl-2 underline hover:cursor-pointer">
-                Sign up
+                Log in
               </span>
             </div>
           </div>
-          {setInitialvalues(props.values)}
         </Form>
       )}
     </Formik>

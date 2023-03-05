@@ -1,24 +1,15 @@
 import React from "react";
-import InterviewCam from "./InterviewCam";
 import { useRecordWebcam } from "react-record-webcam";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+
 import "./InterviewCam.css";
 import MicroPhoneTesting from "./MicroPhoneTesting";
 
 function Extra() {
   const recordWebcam = useRecordWebcam({ frameRate: 60 });
   const saveFile = async () => {
-    const blob = await recordWebcam.getRecording();
     alert("File Saved To server");
   };
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
+
   return (
     <div>
       {" "}
