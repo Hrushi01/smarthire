@@ -1,10 +1,8 @@
 import Decide from "../login/Decide";
-import { useState } from "react";
 import Login from "../login/Login";
 import "./withoutLogin.css";
 const WithoutLogin = (Props) => {
   const {
-    show,
     setShow,
     OrganizationLog,
     setOrganizationLog,

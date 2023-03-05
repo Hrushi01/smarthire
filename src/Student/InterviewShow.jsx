@@ -1,41 +1,39 @@
-import { useState, useEffect } from "react";
 import Extra from "./CameraMicrophone/Extra";
 import Timer from "./Timer";
-// import questionsData from "./questionsData";
 
 function InterviewShow() {
-  const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  // const [questions, setQuestions] = useState([]);
+  // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  // const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  const questionsData = [
-    "What is your name?",
-    "What is your favorite color?",
-    "What is your favorite food?",
-  ];
+  // const questionsData = [
+  //   "What is your name?",
+  //   "What is your favorite color?",
+  //   "What is your favorite food?",
+  // ];
 
-  useEffect(() => {
-    // Load questions from database or API
-    setQuestions(questionsData);
-  }, []);
+  // useEffect(() => {
+  //   // Load questions from database or API
+  //   setQuestions(questionsData);
+  // }, []);
 
-  function handleStartInterview() {
-    setIsTimerRunning(true);
-  }
+  // function handleStartInterview() {
+  //   setIsTimerRunning(true);
+  // }
 
-  function handleNextQuestion() {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  }
+  // function handleNextQuestion() {
+  //   setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  // }
 
-  function handlePreviousQuestion() {
-    setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
-  }
+  // function handlePreviousQuestion() {
+  //   setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+  // }
 
-  function handleFinish() {
-    setIsTimerRunning(false);
-    // Calculate result and show it
-    alert("RESULT");
-  }
+  // function handleFinish() {
+  //   setIsTimerRunning(false);
+  //   // Calculate result and show it
+  //   alert("RESULT");
+  // }
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -45,7 +43,7 @@ function InterviewShow() {
       <div className="bg-white w-full md:w-1/2 h-screen md:h-auto flex flex-col justify-between p-4">
         <div>
           <div className="text-right">
-            <Timer duration={20 * 60} isRunning={isTimerRunning} />
+            <Timer duration={20 * 60} />
           </div>
           {/* <div className="p-4 border rounded-md">
             <h2 className="text-xl font-bold mb-4">

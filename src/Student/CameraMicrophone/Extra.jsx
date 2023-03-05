@@ -5,9 +5,6 @@ import MicroPhoneTesting from "./MicroPhoneTesting";
 
 function Extra() {
   const recordWebcam = useRecordWebcam({ frameRate: 60 });
-  const saveFile = async () => {
-    alert("File Saved To server");
-  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
