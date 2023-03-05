@@ -9,6 +9,7 @@ import { useState } from "react";
 import AboutUs from "./Pages/AboutUs";
 import LandingPg from "./Pages/LandingPg";
 import ChatBot from "./ChatbotComponents/chatbot";
+import ResumeBuilder from "./ResumeBuilder/ResumeBuilder";
 
 function App() {
   const [Display, setDisplay] = useState("home");
@@ -43,6 +44,8 @@ function App() {
         <AboutUs setDisplay={setDisplay} />
       ) : Display === "chatbot" ? (
         <ChatBot setDisplay={setDisplay} />
+      ) : Display === "resumebuilder" ? (
+        <ResumeBuilder setDisplay={setDisplay} />
       ) : (
         <></>
       )}

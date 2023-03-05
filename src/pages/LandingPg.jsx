@@ -40,7 +40,7 @@ function LandingPg({ setDisplay }) {
           </div>
 
           <div className="mt-10">
-            <div className="flex justify-center items-center">
+            <div className="flex justify-evenly items-center">
               <button
                 onClick={() => {
                   setDisplay("chatbot");
@@ -59,7 +59,12 @@ function LandingPg({ setDisplay }) {
                   />
                 </motion.div>
               </button>
-              <button to="/resume-builder">
+              <button
+                onClick={() => {
+                  setDisplay("resumebuilder");
+                }}
+                to="/resume-builder"
+              >
                 <motion.div
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -86,7 +91,7 @@ function LandingPg({ setDisplay }) {
                 </motion.div>
               </button>
             </div>
-            <div className="flex justify-center items-center mt-8">
+            <div className="flex justify-evenly items-center mt-8">
               <button
                 onClick={() => {
                   setDisplay("chatbot");
@@ -97,6 +102,9 @@ function LandingPg({ setDisplay }) {
                 Chatbot
               </button>
               <button
+                onClick={() => {
+                  setDisplay("resumebuilder");
+                }}
                 to="/resume-builder"
                 className="text-green-500 font-semibold ml-8 hover:text-green-700"
               >
