@@ -4,8 +4,10 @@ import Navbar from "./Navbar";
 import Conference from "../images/conference.png";
 
 function Login(props) {
-  const { candidateLog, OrganizationLog } = props;
+  const { candidateLog, OrganizationLog, isLogged, setIsLoggedIn,refresher, setRefresher } = props;
   const { show, setShow } = props;
+  console.log("vvvvvvvvv", OrganizationLog ,candidateLog);
+
   return (
     <div>
       <div className="">
@@ -18,6 +20,9 @@ function Login(props) {
             setShow={setShow}
             setCandidateLog={candidateLog}
             setOrganizationLog={OrganizationLog}
+            isLogged={isLogged}
+            setIsLoggedIn={setIsLoggedIn}  
+            refresher={refresher} setRefresher={setRefresher}
           />
         </div>
         <div className="flex justify-center items-center p-28">
@@ -26,6 +31,5 @@ function Login(props) {
       </div>
     </div>
   );
-}
-
+};
 export default Login;
