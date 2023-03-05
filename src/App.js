@@ -1,26 +1,31 @@
 import "./components/InterviewCam.css";
-import { useState, useEffect } from "react";
-import WithLoginOrganization from "./Routing/WithLoginOrganization";
-import WithoutLogin from "./Routing/WithoutLogin";
-import WithLoginStudent from "./Routing/WithLoginStudent";
-import axios from "axios";
-import Cookies from "universal-cookie";
+// import { useState, useEffect } from "react";
+// import WithLoginOrganization from "./Routing/WithLoginOrganization";
+// import WithoutLogin from "./Routing/WithoutLogin";
+// import WithLoginStudent from "./Routing/WithLoginStudent";
+// import axios from "axios";
+// import Cookies from "universal-cookie";
+import { useState } from "react";
+import AboutUs from "./Pages/AboutUs";
+import LandingPg from "./Pages/LandingPg";
+import ChatBot from "./ChatbotComponents/chatbot";
 
 function App() {
-  const [show, setShow] = useState(false);
-  const [OrganizationLog, setOrganizationLog] = useState(false);
-  const [candidateLog, setCandidateLog] = useState(false);
-  const [isLogged, setIsLoggedIn] = useState(false);
-  const [refresher, setRefresher] = useState(true);
-  const cookies = new Cookies();
+  const [Display, setDisplay] = useState("home");
 
+  //   const [show, setShow] = useState(false);
+  //   const [OrganizationLog, setOrganizationLog] = useState(false);
+  //   const [candidateLog, setCandidateLog] = useState(false);
+  //   const [isLogged, setIsLoggedIn] = useState(false);
+  //   const [refresher, setRefresher] = useState(true);
+  //   const cookies = new Cookies();
 
-  useEffect(() => {
-    const CheckAlreadyLogin = cookies.get("SmartToken");
-    if (CheckAlreadyLogin) {
-      setIsLoggedIn(true);
-    }
-  }, [refresher]);
+  //   useEffect(() => {
+  //     const CheckAlreadyLogin = cookies.get("SmartToken");
+  //     if (CheckAlreadyLogin) {
+  //       setIsLoggedIn(true);
+  //     }
+  //   }, [refresher]);
 
   return (
     <div>
@@ -31,7 +36,21 @@ function App() {
       {/* Smart hire cloned */}
       {/* Smart hire cloned */}
       {/* Smart hire cloned */}
-      {isLogged ? (
+
+      {Display === "home" ? (
+        <LandingPg setDisplay={setDisplay} />
+      ) : Display === "about" ? (
+        <AboutUs setDisplay={setDisplay} />
+      ) : Display === "chatbot" ? (
+        <ChatBot setDisplay={setDisplay} />
+      ) : (
+        <></>
+      )}
+
+      {/* <ChatBot /> */}
+      {/* <LandingPg /> */}
+      {/* <AboutUs /> */}
+      {/* {isLogged ? (
         OrganizationLog ? (
           <WithLoginOrganization
             OrganizationLog={OrganizationLog}
@@ -62,7 +81,7 @@ function App() {
           setIsLoggedIn={setIsLoggedIn}
           refresher={refresher} setRefresher={setRefresher}
         />
-      )}
+      )} */}
     </div>
   );
 }
