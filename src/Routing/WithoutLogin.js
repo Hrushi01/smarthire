@@ -8,6 +8,8 @@ const WithoutLogin = (Props) => {
     setOrganizationLog,
     candidateLog,
     setCandidateLog,
+    isLogged, setIsLoggedIn,
+    refresher, setRefresher
   } = Props;
 
   return (
@@ -17,12 +19,20 @@ const WithoutLogin = (Props) => {
           setCandidateLog={candidateLog}
           setOrganizationLog={OrganizationLog}
           setShow={setShow}
+          isLogged={isLogged}
+          setIsLoggedIn={setIsLoggedIn}
+          refresher={refresher} setRefresher={setRefresher}
+
         />
       ) : candidateLog ? (
         <Login
           setCandidateLog={candidateLog}
           setOrganizationLog={OrganizationLog}
           setShow={setShow}
+          isLogged={isLogged}
+          setIsLoggedIn={setIsLoggedIn}
+          refresher={refresher} setRefresher={setRefresher}
+
         />
       ) : (
         <Decide

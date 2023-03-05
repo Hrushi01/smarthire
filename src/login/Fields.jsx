@@ -1,18 +1,80 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Arrow from "../images/arrow.png";
 import { FaArrowRight } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import Snackbar from "@mui/material/Snackbar";
+import { RxCross2 } from "react-icons/rx";
 
 function Fields(props) {
+  const[typeOfUser, setTypeOfUser]= useState("");
+  const {
+    isLogged,
+    setIsLoggedIn,
+    refresher,
+    setRefresher,
+    OrganizationLog,
+    setOrganizationLog,
+    candidateLog,
+    setCandidateLog,
+  } = props;
+  console.log("jjj", OrganizationLog ,candidateLog)
+  const [Error, setError] = useState("");
+  const cookies = new Cookies();
   const { setShow } = props;
+  if (OrganizationLog===true){
+    setTypeOfUser("Company");
+  }else if(candidateLog===true){
+    setTypeOfUser("Candidate");
+  }
+
   const onsubmit = () => {
-    if (
-      initialValues.name === "abcd" &&
-      initialValues.password === "1234"
-    ) {
-      setShow(true);
-    }
+    OnClickLogin();
+  };
+
+  // for Snackbar
+  const [open, setOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState();
+  const [snackbarClass, setSnackbarClass] = useState();
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const action = (
+    <button onClick={handleClose}>
+      <RxCross2 />
+    </button>
+  );
+
+  const BASEURL = process.env.REACT_APP_SAMPLE;
+  //Login Api
+  const OnClickLogin = async () => {
+    setOpen(true);
+    setSnackbarMsg("Please Wait ...");
+    setSnackbarClass("default");
+    const Temp = await axios
+      .post(`${BASEURL}/login`, {
+        Res_EmailId: initialValues.name,
+        Res_Password: initialValues.password,
+        Res_TypeOfUser: typeOfUser,
+      })
+      .then((Data) => {
+        if (Data) {
+          cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
+          setIsLoggedIn(true);
+          setRefresher(!refresher);
+          console.log(refresher);
+        }
+      })
+      .catch((ErrorR) => {
+        setSnackbarClass("invalid");
+        setOpen(true);
+        setError(ErrorR?.response?.data?.message);
+        setSnackbarMsg(ErrorR?.response?.data?.message);
+        console.log("kkkkk", ErrorR);
+      });
   };
 
   const [initialValues, setInitialvalues] = useState({
@@ -66,6 +128,7 @@ function Fields(props) {
             <button
               type="submit"
               className="w-fit p-3 rounded-lg text-white font-semibold button flex"
+              onClick={setInitialvalues(props.values)}
             >
               <div className="pr-20 pl-5">Log In</div>
               <div className="p-1">
@@ -81,7 +144,6 @@ function Fields(props) {
               </span>
             </div>
           </div>
-          {setInitialvalues(props.values)}
         </Form>
       )}
     </Formik>
