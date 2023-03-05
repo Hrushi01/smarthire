@@ -3,9 +3,14 @@ import { useState } from "react";
 import Login from "../login/Login";
 import "./withoutLogin.css";
 const WithoutLogin = (Props) => {
-  const [OrganizationLog, setOrganizationLog] = useState(false);
-  const [candidateLog, setCandidateLog] = useState(false);
-  const { show, setShow } = Props;
+  const {
+    show,
+    setShow,
+    OrganizationLog,
+    setOrganizationLog,
+    candidateLog,
+    setCandidateLog,
+  } = Props;
 
   return (
     <div className="Login-Parent-Comp">
@@ -23,7 +28,7 @@ const WithoutLogin = (Props) => {
         />
       ) : (
         <Decide
-        setOrganizationLog={setOrganizationLog}
+          setOrganizationLog={setOrganizationLog}
           setCandidateLog={setCandidateLog}
         />
       )}

@@ -1,9 +1,12 @@
 import "./components/InterviewCam.css";
 import { useState } from "react";
-import WithLogin from "./Routing/WithLogin";
+import WithLoginOrganization from "./Routing/WithLoginOrganization";
 import WithoutLogin from "./Routing/WithoutLogin";
+import WithLoginStudent from "./Routing/WithLoginStudent";
 function App() {
   const [show, setShow] = useState(false);
+  const [OrganizationLog, setOrganizationLog] = useState(false);
+  const [candidateLog, setCandidateLog] = useState(false);
 
   return (
     <div>
@@ -15,9 +18,30 @@ function App() {
       {/* Smart hire cloned */}
       {/* Smart hire cloned */}
       {show ? (
-        <WithLogin/>
+        OrganizationLog ? (
+          <WithLoginOrganization
+            OrganizationLog={OrganizationLog}
+            setOrganizationLog={setOrganizationLog}
+            candidateLog={candidateLog}
+            setCandidateLog={setCandidateLog}
+          />
+        ) : (
+          <WithLoginStudent
+            OrganizationLog={OrganizationLog}
+            setOrganizationLog={setOrganizationLog}
+            candidateLog={candidateLog}
+            setCandidateLog={setCandidateLog}
+          />
+        )
       ) : (
-        <WithoutLogin show={show} setShow={setShow} />
+        <WithoutLogin
+          show={show}
+          setShow={setShow}
+          OrganizationLog={OrganizationLog}
+          setOrganizationLog={setOrganizationLog}
+          candidateLog={candidateLog}
+          setCandidateLog={setCandidateLog}
+        />
       )}
     </div>
   );
