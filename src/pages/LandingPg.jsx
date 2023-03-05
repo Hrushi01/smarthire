@@ -77,7 +77,12 @@ function LandingPg({ setDisplay }) {
                   />
                 </motion.div>
               </button>
-              <button to="/interview-generator">
+              <button
+                to="/interview-generator"
+                onClick={() => {
+                  setDisplay("interview");
+                }}
+              >
                 <motion.div
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}

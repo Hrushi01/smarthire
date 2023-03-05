@@ -1,17 +1,25 @@
 import React from "react";
 import Fields from "./Fields";
-import Navbar from "./Navbar";
-import Conference from "../images/conference.png";
-
+import Conference from "./images/conference.png";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 function Login(props) {
-  const { candidateLog, OrganizationLog, isLogged, setIsLoggedIn,refresher, setRefresher } = props;
+  const {
+    setDisplay,
+    candidateLog,
+    OrganizationLog,
+    isLogged,
+    setIsLoggedIn,
+    refresher,
+    setRefresher,
+  } = props;
   const { show, setShow } = props;
-  console.log("vvvvvvvvv", OrganizationLog ,candidateLog);
+  console.log("vvvvvvvvv", OrganizationLog, candidateLog);
 
   return (
     <div>
       <div className="">
-        <Navbar />
+        <Header setDisplay={setDisplay} />
       </div>
       <div className="flex">
         <div className="w-2/5">
@@ -21,15 +29,19 @@ function Login(props) {
             setCandidateLog={candidateLog}
             setOrganizationLog={OrganizationLog}
             isLogged={isLogged}
-            setIsLoggedIn={setIsLoggedIn}  
-            refresher={refresher} setRefresher={setRefresher}
+            setIsLoggedIn={setIsLoggedIn}
+            refresher={refresher}
+            setRefresher={setRefresher}
           />
         </div>
         <div className="flex justify-center items-center p-28">
           <img src={Conference} alt="img" />
         </div>
       </div>
+      <div className="mt-40">
+        <Footer />
+      </div>
     </div>
   );
-};
+}
 export default Login;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Arrow from "../images/arrow.png";
+import Arrow from "./images/arrow.png";
 import { FaArrowRight } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
@@ -9,7 +9,7 @@ import Snackbar from "@mui/material/Snackbar";
 import { RxCross2 } from "react-icons/rx";
 
 function Fields(props) {
-  const[typeOfUser, setTypeOfUser]= useState("");
+  const [typeOfUser, setTypeOfUser] = useState("");
   const {
     isLogged,
     setIsLoggedIn,
@@ -20,13 +20,13 @@ function Fields(props) {
     candidateLog,
     setCandidateLog,
   } = props;
-  console.log("jjj", OrganizationLog ,candidateLog)
+  console.log("jjj", OrganizationLog, candidateLog);
   const [Error, setError] = useState("");
   const cookies = new Cookies();
   const { setShow } = props;
-  if (OrganizationLog===true){
+  if (OrganizationLog === true) {
     setTypeOfUser("Company");
-  }else if(candidateLog===true){
+  } else if (candidateLog === true) {
     setTypeOfUser("Candidate");
   }
 

@@ -3,14 +3,14 @@ import Button from "@mui/material/Button";
 import "./Decide.css";
 import student from "./images/1.png";
 import admin from "./images/2.png";
+import Header from "../../components/Header";
 
 function Decide(props) {
-  const {
-    setCandidateLog,
-    setOrganizationLog,
-  } = props;
+  const { setCandidateLog, setOrganizationLog, setDisplay } = props;
   return (
     <div className="decide">
+      <Header setDisplay={setDisplay} />
+
       <h1>Select User Type</h1>
 
       <div className="loginButtons">
@@ -20,7 +20,8 @@ function Decide(props) {
           onClick={() => {
             setOrganizationLog(true);
             setCandidateLog(false);
-          }}>
+          }}
+        >
           <img src={admin} alt="admin" className="pic" />
           Organization
         </Button>
@@ -30,12 +31,12 @@ function Decide(props) {
           onClick={() => {
             setOrganizationLog(false);
             setCandidateLog(true);
-          }}>
+          }}
+        >
           <img src={student} alt="student" className="pic" />
           Candidate
         </Button>
       </div>
-
     </div>
   );
 }
