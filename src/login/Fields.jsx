@@ -8,8 +8,8 @@ function Fields(props) {
   const { setShow } = props;
   const onsubmit = () => {
     if (
-      initialValues.name === "Hrushi" &&
-      initialValues.password === "Keystone"
+      initialValues.name === "abcd" &&
+      initialValues.password === "1234"
     ) {
       setShow(true);
     }
@@ -64,7 +64,7 @@ function Fields(props) {
           </div>
           <div className="ml-24 pl-0 p-5 ">
             <button
-              type="button "
+              type="submit "
               className="w-fit p-3 rounded-lg text-white font-semibold button flex"
             >
               <div className="pr-20 pl-5">Log In</div>
