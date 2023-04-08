@@ -4,8 +4,8 @@ import WithLoginOrganization from "./Routing/WithLoginOrganization";
 import WithoutLogin from "./Routing/WithoutLogin";
 import WithLoginStudent from "./Routing/WithLoginStudent";
 import Cookies from "universal-cookie";
-import AboutUs from "./Pages/AboutUs";
-import LandingPg from "./Pages/LandingPg";
+import AboutUs from "./pages/AboutUs";
+import LandingPg from "./pages/LandingPg";
 import ChatBot from "./ChatbotComponents/chatbot";
 import ResumeBuilder from "./ResumeBuilder/ResumeBuilder";
 
@@ -28,13 +28,7 @@ function App() {
 
   return (
     <div>
-      {/* Smart hire cloned */}
-      {/* Smart hire cloned */}
-      {/* Smart hire cloned */}
-      {/* Smart hire cloned */}
-      {/* Smart hire cloned */}
-      {/* Smart hire cloned */}
-      {/* Smart hire cloned */}
+
 
       {Display === "home" ? (
         <LandingPg setDisplay={setDisplay} />
