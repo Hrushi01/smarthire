@@ -14,6 +14,8 @@ const WithoutLogin = (Props) => {
     setIsLoggedIn,
     refresher,
     setRefresher,
+    setStatus,
+    status,
   } = Props;
 
   return (
@@ -28,6 +30,7 @@ const WithoutLogin = (Props) => {
           setIsLoggedIn={setIsLoggedIn}
           refresher={refresher}
           setRefresher={setRefresher}
+          status={status}
         />
       ) : candidateLog ? (
         <Login
@@ -39,12 +42,14 @@ const WithoutLogin = (Props) => {
           setIsLoggedIn={setIsLoggedIn}
           refresher={refresher}
           setRefresher={setRefresher}
+          status={status}
         />
       ) : (
         <Decide
           setDisplay={setDisplay}
           setOrganizationLog={setOrganizationLog}
           setCandidateLog={setCandidateLog}
+          setStatus={setStatus}
         />
       )}
     </div>

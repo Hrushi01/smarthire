@@ -19,13 +19,14 @@ function Fields(props) {
     setOrganizationLog,
     candidateLog,
     setCandidateLog,
+    status,
   } = props;
   console.log("jjj", OrganizationLog, candidateLog);
   const [Error, setError] = useState("");
   const cookies = new Cookies();
   const { setShow } = props;
   if (OrganizationLog === true) {
-    setTypeOfUser("Organization");
+    setTypeOfUser("Company");
   } else if (candidateLog === true) {
     setTypeOfUser("Candidate");
   }
@@ -58,7 +59,7 @@ function Fields(props) {
       .post(`${BASEURL}/login`, {
         Res_EmailId: initialValues.name,
         Res_Password: initialValues.password,
-        Res_TypeOfUser: typeOfUser,
+        Res_TypeOfUser: status,
       })
       .then((Data) => {
         if (Data) {
@@ -96,7 +97,7 @@ function Fields(props) {
                 <div className=" pl-2">
                   <div className="p-0">in</div>
 
-                  <div className="text-xs font-medium p-0">Candidates</div>
+                  <div className="text-xs font-medium p-0">{status}</div>
                 </div>
               </div>
             </div>

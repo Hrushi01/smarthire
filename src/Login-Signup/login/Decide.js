@@ -6,7 +6,7 @@ import admin from "./images/2.png";
 import Header from "../../components/Header";
 
 function Decide(props) {
-  const { setCandidateLog, setOrganizationLog, setDisplay } = props;
+  const { setCandidateLog, setOrganizationLog, setDisplay, setStatus } = props;
   return (
     <div className="decide">
       <Header setDisplay={setDisplay} />
@@ -18,6 +18,7 @@ function Decide(props) {
           type="button"
           className="Btn-Account-Type"
           onClick={() => {
+            setStatus("Organization");
             setOrganizationLog(true);
             setCandidateLog(false);
           }}
@@ -29,6 +30,8 @@ function Decide(props) {
           type="button"
           className="Btn-Account-Type"
           onClick={() => {
+            setStatus("Student");
+
             setOrganizationLog(false);
             setCandidateLog(true);
           }}

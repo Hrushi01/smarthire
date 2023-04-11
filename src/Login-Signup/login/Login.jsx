@@ -12,6 +12,7 @@ function Login(props) {
     setIsLoggedIn,
     refresher,
     setRefresher,
+    status = { status },
   } = props;
   const { show, setShow } = props;
   console.log("vvvvvvvvv", OrganizationLog, candidateLog);
@@ -23,6 +24,7 @@ function Login(props) {
       </div>
       <div className="flex">
         <div className="w-2/5">
+          Hrushi-1
           <Fields
             show={show}
             setShow={setShow}
@@ -32,6 +34,7 @@ function Login(props) {
             setIsLoggedIn={setIsLoggedIn}
             refresher={refresher}
             setRefresher={setRefresher}
+            status={status}
           />
         </div>
         <div className="flex justify-center items-center p-28">
