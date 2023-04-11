@@ -4681,13 +4681,6 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
-ffmpeg@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/ffmpeg/-/ffmpeg-0.0.4.tgz#1c460df8e7da5127f62ceef4bfa06c59c89630cb"
-  integrity sha512-3TgWUJJlZGQn+crJFyhsO/oNeRRnGTy6GhgS98oUCIfZrOW5haPPV7DUfOm3xJcHr5q3TJpjk2GudPutrNisRA==
-  dependencies:
-    when ">= 0.0.1"
-
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-6.0.1.tgz"
@@ -6276,6 +6269,11 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz"
   integrity sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==
+
+jslib-html5-camera-photo@3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/jslib-html5-camera-photo/-/jslib-html5-camera-photo-3.3.4.tgz#ae859b1747f8dd709edeb98ea28a5c0802871157"
+  integrity sha512-qysjLnP4bud0+g0qs5uA/7i569x+6ID2ufgezf9XQ+BE3EvhYjz177vi9WXLEuq+V6C/WXEv73NUICvHm5VGmQ==
 
 json-parse-better-errors@^1.0.1:
   version "1.0.2"
@@ -7930,6 +7928,13 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
+react-html5-camera-photo@^1.5.11:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/react-html5-camera-photo/-/react-html5-camera-photo-1.5.11.tgz#0616539f65bea79485aa8a4c0c305f3ed72d5a27"
+  integrity sha512-5OpdW66UmwKwd0ZHvy/U9tEZj19GrcG6RDRXjs1bFBgJoWzLJoJ7YNd8rmdrizV/6go/z9GrwoWMovqCUyaJgQ==
+  dependencies:
+    jslib-html5-camera-photo "3.3.4"
+
 react-icons@^4.8.0:
   version "4.8.0"
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.8.0.tgz"
@@ -9561,11 +9566,6 @@ whatwg-url@^8.0.0, whatwg-url@^8.5.0:
     lodash "^4.7.0"
     tr46 "^2.1.0"
     webidl-conversions "^6.1.0"
-
-"when@>= 0.0.1":
-  version "3.7.8"
-  resolved "https://registry.yarnpkg.com/when/-/when-3.7.8.tgz#c7130b6a7ea04693e842cdc9e7a1f2aa39a39f82"
-  integrity sha512-5cZ7mecD3eYcMiCH4wtRPA5iFJZ50BJYDfckI5RRpQiktMiYTcn0ccLTZOvcbBume+1304fQztxeNzNS9Gvrnw==
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

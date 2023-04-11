@@ -3,7 +3,6 @@ import ffmpeg from 'ffmpeg.js/ffmpeg-mp4';
 
 function BlobToVideo({ blob }) {
   const [videoUrl, setVideoUrl] = useState(null);
-
   useEffect(() => {
     async function convertBlobToVideo() {
       const data = await blob.arrayBuffer();
