@@ -11,8 +11,8 @@ import ResumeBuilder from "./ResumeBuilder/ResumeBuilder";
 
 function App() {
   const [Display, setDisplay] = useState("home");
-
   const [show, setShow] = useState(false);
+  const [status, setStatus] = useState("");
   const [OrganizationLog, setOrganizationLog] = useState(false);
   const [candidateLog, setCandidateLog] = useState(false);
   const [isLogged, setIsLoggedIn] = useState(false);
@@ -23,13 +23,12 @@ function App() {
     const CheckAlreadyLogin = cookies.get("SmartToken");
     if (CheckAlreadyLogin) {
       setIsLoggedIn(true);
+      console.log("0009",CheckAlreadyLogin)
     }
   }, [refresher]);
 
   return (
     <div>
-
-
       {Display === "home" ? (
         <LandingPg setDisplay={setDisplay} />
       ) : Display === "about" ? (
@@ -70,7 +69,15 @@ function App() {
             setIsLoggedIn={setIsLoggedIn}
             refresher={refresher}
             setRefresher={setRefresher}
+            setStatus={setStatus}
+            status={status}
           />
+          // <WithLoginOrganization
+          //   OrganizationLog={OrganizationLog}
+          //   setOrganizationLog={setOrganizationLog}
+          //   candidateLog={candidateLog}
+          //   setCandidateLog={setCandidateLog}
+          // />
         )
       ) : (
         <></>
