@@ -25,7 +25,7 @@ function Fields(props) {
   const cookies = new Cookies();
   const { setShow } = props;
   if (OrganizationLog === true) {
-    setTypeOfUser("Company");
+    setTypeOfUser("Organization");
   } else if (candidateLog === true) {
     setTypeOfUser("Candidate");
   }

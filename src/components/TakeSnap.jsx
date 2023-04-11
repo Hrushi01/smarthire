@@ -11,14 +11,14 @@ function TakeSnapFunction (props) {
     console.log('dataUri',dataUri);
     setImgUri(dataUri);
   }
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      x.current.click();
-      flag= true;
-    }, 5000);
-    // handleTakePhoto(dataUri);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     x.current.click();
+  //     flag= true;
+  //   }, 5000);
+  //   // handleTakePhoto(dataUri);
+  //   return () => clearTimeout(timer);
+  // }, []);
   function handleTakePhotoAnimationDone (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
