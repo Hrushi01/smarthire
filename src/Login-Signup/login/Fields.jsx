@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import Arrow from "./images/arrow.png";
 import { FaArrowRight } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import Snackbar from "@mui/material/Snackbar";
 import { RxCross2 } from "react-icons/rx";
 
 function Fields(props) {
   const [typeOfUser, setTypeOfUser] = useState("");
   const {
-    isLogged,
     setIsLoggedIn,
     refresher,
     setRefresher,
     OrganizationLog,
-    setOrganizationLog,
     candidateLog,
-    setCandidateLog,
     status,
+    setSignup,
   } = props;
   console.log("jjj", OrganizationLog, candidateLog);
   const [Error, setError] = useState("");
@@ -140,9 +137,14 @@ function Fields(props) {
           <div className="h-20">
             <div className="login ml-24 text-xs h-12 flex rounded-full border-gray-400  pr-3 pl-3 round">
               <div className="pl-9 pt-4">don’t have an account yet?</div>
-              <span className="font-semibold  pt-4 pl-2 underline hover:cursor-pointer">
+              <div
+                className="font-semibold  pt-4 pl-2 underline hover:cursor-pointer"
+                onClick={() => {
+                  setSignup(true);
+                }}
+              >
                 Sign up
-              </span>
+              </div>
             </div>
           </div>
         </Form>

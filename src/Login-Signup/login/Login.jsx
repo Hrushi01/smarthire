@@ -1,8 +1,8 @@
 import React from "react";
 import Fields from "./Fields";
 import Conference from "./images/conference.png";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../organization/Header";
+import Footer from "../../organization/Footer";
 function Login(props) {
   const {
     setDisplay,
@@ -12,10 +12,10 @@ function Login(props) {
     setIsLoggedIn,
     refresher,
     setRefresher,
-    status = { status },
+    status,
+    setSignup,
   } = props;
   const { show, setShow } = props;
-  console.log("vvvvvvvvv", OrganizationLog, candidateLog);
 
   return (
     <div>
@@ -24,7 +24,6 @@ function Login(props) {
       </div>
       <div className="flex">
         <div className="w-2/5">
-          Hrushi-1
           <Fields
             show={show}
             setShow={setShow}
@@ -35,6 +34,7 @@ function Login(props) {
             refresher={refresher}
             setRefresher={setRefresher}
             status={status}
+            setSignup={setSignup}
           />
         </div>
         <div className="flex justify-center items-center p-28">

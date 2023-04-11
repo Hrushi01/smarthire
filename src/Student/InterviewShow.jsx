@@ -4,7 +4,7 @@ import StudentResult from "./studentResult/studentResult";
 // import BlobToVideo from "../TestingAssets/BlobHelpingFunction";
 import React, { useState, useEffect } from "react";
 import { useRecordWebcam } from "react-record-webcam";
-import TakeSnapFunction from "../components/TakeSnap";
+import TakeSnapFunction from "../organization/TakeSnap";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import SpeechRecognition, {
@@ -242,9 +242,12 @@ function InterviewShow() {
             <div>
               <div className="text-right">
                 {/* Right side interview section */}
-                <div className="Slefie-Taker" style={{"height" : '10rem', "width" : '10rem'}}>
-                <TakeSnapFunction />
-                  </div>    
+                <div
+                  className="Slefie-Taker"
+                  style={{ height: "10rem", width: "10rem" }}
+                >
+                  <TakeSnapFunction />
+                </div>
                 <div className="relative h-screen flex justify-center items-center ">
                   <div className="absolute top-0 right-0 border-2 border-black p-5">
                     <p className="text-3xl font-bold">{formatTime(time)}</p>
@@ -256,13 +259,13 @@ function InterviewShow() {
                     </div>
                     {submitRecord ? (
                       <>
-                      <h2>Company Name:</h2>
-                      <h3>Candidate Name:</h3>
-                      <h3>Total Time:</h3>
-                      <h3>Interview Time:</h3>
-                      <h3>Total Number of Questions:</h3>
-                      <h3>Total Questions Attempted:</h3>
-                      <>................</>
+                        <h2>Company Name:</h2>
+                        <h3>Candidate Name:</h3>
+                        <h3>Total Time:</h3>
+                        <h3>Interview Time:</h3>
+                        <h3>Total Number of Questions:</h3>
+                        <h3>Total Questions Attempted:</h3>
+                        <>................</>
                         <button
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
                           onClick={() => {
@@ -355,8 +358,7 @@ function InterviewShow() {
                   </div>
                 </div>
 
-                {/* Right side interview section ends*/}        
-
+                {/* Right side interview section ends*/}
               </div>
             </div>
           </div>

@@ -7,8 +7,8 @@ import {
   faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../organization/Header";
+import Footer from "../organization/Footer";
 
 function LandingPg({ setDisplay }) {
   return (

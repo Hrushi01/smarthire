@@ -23,7 +23,7 @@ function NewInterview() {
   return (
     <>
       <div className="bg-gray-50 py-4 flex">
-        <div className="CompanyDetails p-4 bg-gray-100 w-1/4">
+        {/* <div className="CompanyDetails p-4 bg-gray-100 w-1/4">
           <div className="flex flex-col items-center justify-center text-center">
             <h2 className="text-2xl font-bold mb-4 font-serif">
               MicroSoft Kuroku Pvt Limited
@@ -38,11 +38,11 @@ function NewInterview() {
               Hrushikesh Ambike
             </div>
           </div>
-        </div>
-        <div className="flex w-2/4">
-          <div className="max-w-2xl mx-auto px-4 ">
-            <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-bold text-gray-800">
+        </div> */}
+        <div className="flex w-2/4 mx-auto">
+          <div className="max-w-2xl mx-auto px-4  ">
+            <div className="flex justify-between items-center mx-auto">
+              <h1 className="text-2xl font-bold text-gray-800 ">
                 New Interview
               </h1>
               <div className="text-right">

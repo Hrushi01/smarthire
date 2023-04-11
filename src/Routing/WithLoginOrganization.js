@@ -1,35 +1,32 @@
-import React from 'react'
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidenaav from '../components/Sidebar/SideNavButton';
-import AddStudent from '../components/AddStudent/AddStudent';
-import NewInterview from '../components/NewInterview/NewInterview';
-function WithLogin() {
+import Sidenaav from "../organization/Sidebar/SideNavButton";
+import AddStudent from "../organization/AddStudent/AddStudent";
+import NewInterview from "../organization/NewInterview/NewInterview";
+import Results from "../organization/Results/Results";
+function WithLogin({ setOrganizationLog, setSignup }) {
+  const [list, setList] = useState([]);
+
   return (
     <div className="App">
       <BrowserRouter>
-      <Sidenaav/>
-      <Routes>
-            <Route
-              path="/"
-              element={<Sidenaav/>}
-            />
-            <Route
-              path="/newinterview"
-              element={<NewInterview/>}
-            />
-            <Route
-              path="/addstudents"
-              element={<AddStudent/>}
-            />
-           
-           <Route
-              path="/viewresults"
-              element={<NewInterview/>}
-            />
-          </Routes>
-    </BrowserRouter>
+        <Sidenaav
+          setOrganizationLog={setOrganizationLog}
+          setSignup={setSignup}
+        />
+        <Routes>
+          <Route path="/" element={<Sidenaav />} />
+          <Route path="/newinterview" element={<NewInterview />} />
+          <Route
+            path="/addstudents"
+            element={<AddStudent list={list} setList={setList} />}
+          />
+
+          <Route path="/viewresults" element={<Results list={list} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default WithLogin
+export default WithLogin;

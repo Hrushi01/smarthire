@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../organization/Footer";
+import Header from "../organization/Header";
 import Logo from "../images/Company-Logo.jpg";
 
 function AboutUs({ setDisplay }) {

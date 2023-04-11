@@ -5,8 +5,8 @@ import { FaBuffer } from "react-icons/fa";
 import Templates from "./pages/Templates";
 import Template1 from "./ResumeTemplates/Template1";
 import Template2 from "./ResumeTemplates/Template2";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../organization/Header";
+import Footer from "../organization/Footer";
 
 function ResumeBuilder({ setDisplay }) {
   const [basicinfo, setBasicInfo] = useState({

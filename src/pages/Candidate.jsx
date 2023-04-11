@@ -1,7 +1,7 @@
 import React from "react";
-import Individual from "../components/Individual";
-import Searchbar from "../components/Searchbar";
-import Tracker from "../components/Tracker";
+import Individual from "../organization/Individual";
+import Searchbar from "../organization/Searchbar";
+import Tracker from "../organization/Tracker";
 
 function Candidate() {
   return (

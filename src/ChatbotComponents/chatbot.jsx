@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { BiBot, BiUser } from "react-icons/bi";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../organization/Header";
+import Footer from "../organization/Footer";
 
 function ChatBot({ setDisplay }) {
   const [chat, setChat] = useState([]);
