@@ -1,17 +1,7 @@
-import "./organization/InterviewCam.css";
-import { useState, useEffect } from "react";
-import WithLoginOrganization from "./Routing/WithLoginOrganization";
-import WithoutLogin from "./Routing/WithoutLogin";
-import WithLoginStudent from "./Routing/WithLoginStudent";
-import Cookies from "universal-cookie";
-import AboutUs from "./pages/AboutUs";
-import LandingPg from "./pages/LandingPg";
-import ChatBot from "./ChatbotComponents/chatbot";
-import ResumeBuilder from "./ResumeBuilder/ResumeBuilder";
-// import Homepage from "./Homepage/Index";
+import React from 'react'
 
-function App() {
-  const [Display, setDisplay] = useState("home");
+export default function Home2() {
+    const [Display, setDisplay] = useState("home");
   const [show, setShow] = useState(false);
   const [status, setStatus] = useState("");
   const [OrganizationLog, setOrganizationLog] = useState(false);
@@ -20,18 +10,12 @@ function App() {
   const [refresher, setRefresher] = useState(true);
   const [signup, setSignup] = useState(false);
   const cookies = new Cookies();
-
-  useEffect(() => {
-    const CheckAlreadyLogin = cookies.get("SmartToken");
-    if (CheckAlreadyLogin) {
-      setIsLoggedIn(true);
-      console.log("0009", CheckAlreadyLogin);
-    }
-  }, [refresher]);
-
   return (
     <div>
-      {/* <Homepage /> */}
+
+
+<div>
+      <Homepage />
       {Display === "home" ? (
         
         <LandingPg setDisplay={setDisplay} />
@@ -90,7 +74,6 @@ function App() {
         <></>
       )}
     </div>
-  );
+    </div>
+  )
 }
-
-export default App;

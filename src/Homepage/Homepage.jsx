@@ -1,6 +1,6 @@
 import React from 'react'
 import "./assets/style-410a9dbc.css"
-function Index() {
+function Homepage() {
   return (
     <div>
 
@@ -667,7 +667,7 @@ function Index() {
 
 
     </div>
-  )
+  );
 }
 
-export default Index
+export default Homepage;
