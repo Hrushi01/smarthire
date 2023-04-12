@@ -12,7 +12,7 @@ import Footer from "../organization/Footer";
 
 function LandingPg({ setDisplay }) {
   return (
-    <div className="bg-gray-100 flex flex-col min-h-screen">
+    <div className="bg-gray-100 flex flex-col min-h-screen marginLeftZero">
       <Header setDisplay={setDisplay} />
 
       <main className="flex-grow">

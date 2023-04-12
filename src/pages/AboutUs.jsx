@@ -6,7 +6,7 @@ import Logo from "../images/Company-Logo.jpg";
 
 function AboutUs({ setDisplay }) {
   return (
-    <div className="bg-white">
+    <div className="bg-white marginLeftZero">
       <Header setDisplay={setDisplay} />
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-wrap justify-between items-center">

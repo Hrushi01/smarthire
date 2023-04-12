@@ -8,6 +8,7 @@ import AboutUs from "./pages/AboutUs";
 import LandingPg from "./pages/LandingPg";
 import ChatBot from "./ChatbotComponents/chatbot";
 import ResumeBuilder from "./ResumeBuilder/ResumeBuilder";
+import Homepage from "./Homepage/Index";
 
 function App() {
   const [Display, setDisplay] = useState("home");
@@ -30,7 +31,9 @@ function App() {
 
   return (
     <div>
+      <Homepage />
       {Display === "home" ? (
+        
         <LandingPg setDisplay={setDisplay} />
       ) : Display === "about" ? (
         <AboutUs setDisplay={setDisplay} />
