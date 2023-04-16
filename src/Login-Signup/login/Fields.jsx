@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import Arrow from "./images/arrow.png";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { RxCross2 } from "react-icons/rx";
+import { Button } from "@mui/material";
 
 function Fields(props) {
   const [typeOfUser, setTypeOfUser] = useState("");
@@ -17,63 +18,65 @@ function Fields(props) {
     candidateLog,
     status,
     setSignup,
+    setCandidateLog,
+    setOrganizationLog,
   } = props;
   console.log("jjj", OrganizationLog, candidateLog);
   const [Error, setError] = useState("");
   const cookies = new Cookies();
-  const { setShow } = props;
-  if (OrganizationLog === true) {
-    setTypeOfUser("Company");
-  } else if (candidateLog === true) {
-    setTypeOfUser("Candidate");
-  }
 
-  const onsubmit = () => {
-    OnClickLogin();
-  };
+  // if (OrganizationLog === true) {
+  //   setTypeOfUser("Company");
+  // } else if (candidateLog === true) {
+  //   setTypeOfUser("Candidate");
+  // }
 
-  // for Snackbar
-  const [open, setOpen] = useState(false);
-  const [snackbarMsg, setSnackbarMsg] = useState();
-  const [snackbarClass, setSnackbarClass] = useState();
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const onsubmit = () => {
+  //   OnClickLogin();
+  // };
 
-  const action = (
-    <button onClick={handleClose}>
-      <RxCross2 />
-    </button>
-  );
+  // // for Snackbar
+  // const [open, setOpen] = useState(false);
+  // const [snackbarMsg, setSnackbarMsg] = useState();
+  // const [snackbarClass, setSnackbarClass] = useState();
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
-  const BASEURL = process.env.REACT_APP_SAMPLE;
-  //Login Api
-  const OnClickLogin = async () => {
-    setOpen(true);
-    setSnackbarMsg("Please Wait ...");
-    setSnackbarClass("default");
-    const Temp = await axios
-      .post(`${BASEURL}/login`, {
-        Res_EmailId: initialValues.name,
-        Res_Password: initialValues.password,
-        Res_TypeOfUser: status,
-      })
-      .then((Data) => {
-        if (Data) {
-          cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
-          setIsLoggedIn(true);
-          setRefresher(!refresher);
-          console.log(refresher);
-        }
-      })
-      .catch((ErrorR) => {
-        setSnackbarClass("invalid");
-        setOpen(true);
-        setError(ErrorR?.response?.data?.message);
-        setSnackbarMsg(ErrorR?.response?.data?.message);
-        console.log("kkkkk", ErrorR);
-      });
-  };
+  // const action = (
+  //   <button onClick={handleClose}>
+  //     <RxCross2 />
+  //   </button>
+  // );
+
+  // const BASEURL = process.env.REACT_APP_SAMPLE;
+  // //Login Api
+  // const OnClickLogin = async () => {
+  //   setOpen(true);
+  //   setSnackbarMsg("Please Wait ...");
+  //   setSnackbarClass("default");
+  //   const Temp = await axios
+  //     .post(`${BASEURL}/login`, {
+  //       Res_EmailId: initialValues.name,
+  //       Res_Password: initialValues.password,
+  //       Res_TypeOfUser: status,
+  //     })
+  //     .then((Data) => {
+  //       if (Data) {
+  //         cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
+  //         setIsLoggedIn(true);
+  //         setRefresher(!refresher);
+  //         console.log(refresher);
+  //       }
+  //     })
+  //     .catch((ErrorR) => {
+  //       setSnackbarClass("invalid");
+  //       setOpen(true);
+  //       setError(ErrorR?.response?.data?.message);
+  //       setSnackbarMsg(ErrorR?.response?.data?.message);
+  //       console.log("kkkkk", ErrorR);
+  //     });
+  // };
 
   const [initialValues, setInitialvalues] = useState({
     name: "",
@@ -84,8 +87,23 @@ function Fields(props) {
     <Formik initialValues={initialValues} onSubmit={onsubmit}>
       {(props) => (
         <Form>
-          <div>
+          <div className="flex pl-5">
             <img src={Arrow} alt="img" height="100" width="100"></img>
+            &nbsp; &nbsp; &nbsp;{" "}
+            <Button
+              variant="contained"
+              type="but"
+              onClick={() => {
+                setCandidateLog(false);
+                setOrganizationLog(false);
+              }}
+              className=" h-12  inline-block py-2 px-4 text-white font-bold rounded-md bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+            >
+              <div className="p-1">
+                <FaArrowLeft />
+              </div>
+              Back
+            </Button>
           </div>
           <div className="pl-10">
             <div>
@@ -123,16 +141,18 @@ function Fields(props) {
             <div className="login text-sm font-semibold">Forgot password?</div>
           </div>
           <div className="ml-24 pl-0 p-5 ">
-            <button
+            <Button
+              variant="contained"
               type="submit"
-              className="w-fit p-3 rounded-lg text-white font-semibold button flex"
+              className="inline-block py-2 px-4 text-white font-bold rounded-md bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+              // className="w-fit p-3 rounded-lg text-white font-semibold button flex"
               onClick={setInitialvalues(props.values)}
             >
               <div className="pr-20 pl-5">Log In</div>
               <div className="p-1">
                 <FaArrowRight />
               </div>
-            </button>
+            </Button>
           </div>
           <div className="h-20">
             <div className="login ml-24 text-xs h-12 flex rounded-full border-gray-400  pr-3 pl-3 round">

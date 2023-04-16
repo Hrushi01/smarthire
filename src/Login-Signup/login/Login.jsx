@@ -14,8 +14,11 @@ function Login(props) {
     setRefresher,
     status,
     setSignup,
+    setCandidateLog,
+    setOrganizationLog,
+    show,
+    setShow,
   } = props;
-  const { show, setShow } = props;
 
   return (
     <div>
@@ -27,8 +30,10 @@ function Login(props) {
           <Fields
             show={show}
             setShow={setShow}
-            setCandidateLog={candidateLog}
-            setOrganizationLog={OrganizationLog}
+            setCandidateLog={setCandidateLog}
+            setOrganizationLog={setOrganizationLog}
+            OrganizationLog={OrganizationLog}
+            candidateLog={candidateLog}
             isLogged={isLogged}
             setIsLoggedIn={setIsLoggedIn}
             refresher={refresher}

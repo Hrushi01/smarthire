@@ -38,8 +38,8 @@ const WithoutLogin = (Props) => {
         ) : (
           <Login
             setDisplay={setDisplay}
-            setCandidateLog={candidateLog}
-            setOrganizationLog={OrganizationLog}
+            setCandidateLog={setCandidateLog}
+            setOrganizationLog={setOrganizationLog}
             setShow={setShow}
             isLogged={isLogged}
             setIsLoggedIn={setIsLoggedIn}
@@ -47,6 +47,8 @@ const WithoutLogin = (Props) => {
             setRefresher={setRefresher}
             status={status}
             setSignup={setSignup}
+            OrganizationLog={OrganizationLog}
+            candidateLog={candidateLog}
           />
         )
       ) : candidateLog ? (
@@ -63,8 +65,10 @@ const WithoutLogin = (Props) => {
         ) : (
           <Login
             setDisplay={setDisplay}
-            setCandidateLog={candidateLog}
-            setOrganizationLog={OrganizationLog}
+            OrganizationLog={OrganizationLog}
+            candidateLog={candidateLog}
+            setCandidateLog={setCandidateLog}
+            setOrganizationLog={setOrganizationLog}
             setShow={setShow}
             isLogged={isLogged}
             setIsLoggedIn={setIsLoggedIn}

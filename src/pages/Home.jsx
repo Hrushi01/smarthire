@@ -11,17 +11,15 @@ import img9 from "../assets/san-3b86301b.jpg";
 import img10 from "../assets/sanjid-2d7a907f.jpg";
 import img11 from "../assets/steph-68f47994.jpg";
 import img12 from "../assets/zak-be2e6aeb.jpg";
-import "../assets/style-410a9dbc.css"
+import "../assets/style-410a9dbc.css";
+import { Button } from "@mui/material";
 
 function Home({ setHome }) {
   return (
     <div>
       <div id="app" className="marginLeftZero">
         <div>
-          <div
-            class="site-content bg-white overflow-hidden"
-            data-testid="site-content"
-          >
+          <div class="site-content  overflow-hidden" data-testid="site-content">
             <section
               id="sc6yawt3xq"
               class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48"
@@ -55,18 +53,19 @@ function Home({ setHome }) {
                     </div>
 
                     <div
-                      class="mt-6 sm:mt-12 sm:mx-auto sm:max-w-lg flex flex-col items-start"
+                      class="mt-6 sm:mt-12 sm:mx-auto sm:max-w-lg flex flex-col items-start "
                       data-v-77b1cd82
                     >
-                      <button
+                      <Button
+                        variant="contained"
                         type="button"
-                        className="bg-blue-700 text-white p-2 rounded"
+                        className="  p-2 rounded"
                         onClick={() => {
                           setHome(false);
                         }}
                       >
                         Get Started
-                      </button>
+                      </Button>
                     </div>
                     <div class="mt-6">
                       <div class="items-center sm:divide-x sm:divide-gray-300 sm:inline-flex">
