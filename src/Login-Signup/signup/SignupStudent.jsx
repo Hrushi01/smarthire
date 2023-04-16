@@ -3,6 +3,9 @@ import * as Yup from "yup";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@mui/material";
+import Cookies from "universal-cookie";
+import axios from "axios";
+import { RxCross2 } from "react-icons/rx";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -27,7 +30,61 @@ const SignupSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-const SignupForm = () => {
+const SignupForm = (props) => {
+  const {setIsLoggedIn,setRefresher,refresher} =props;
+  const [Error, setError] = useState("");
+  const cookies = new Cookies();
+  const BASEURL = process.env.REACT_APP_SAMPLE;
+const SignUpStdudent = async () => {
+  const Temp = await axios
+    .post(`${BASEURL}/SignUp`, {
+      Res_Name: initialValues.username,
+      Res_EmailId: initialValues.email,
+      Res_Password: initialValues.password,
+      Res_TypeOfUser: "Student",
+      Res_PhoneNumber: initialValues.phone,
+      Res_Address: initialValues.address,
+      Res_TechinalSkillsProgrammingLanguage: initialValues.skills.programming,
+      Res_TechnicalSkillsFrameworks: initialValues.skills.frameworks,
+      Res_TechnicalSkillsDatabase: initialValues.skills.databases,
+      Res_PastPerformanceProjectDetails: initialValues.pastPerformance.projects,
+      Res_PastPerformanceInternshipDetails:
+        initialValues.pastPerformance.internships,
+      Res_PastPerformanceHackathonDetails:
+        initialValues.pastPerformance.hackathons,
+      Res_Resume: "None",
+    })
+    .then((Data) => {
+      if (Data) {
+        cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
+        setIsLoggedIn(true);
+        setRefresher(!refresher);
+        console.log(Data.data.data);
+      }
+    })
+    .catch((ErrorR) => {
+      setSnackbarClass("invalid");
+      setOpen(true);
+      setError(ErrorR?.response?.data?.message);
+      setSnackbarMsg(ErrorR?.response?.data?.message);
+      console.log("kkkkk", ErrorR);
+    });
+};
+
+  // for Snackbar
+  const [open, setOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState();
+  const [snackbarClass, setSnackbarClass] = useState();
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const action = (
+    <button onClick={handleClose}>
+      <RxCross2 />
+    </button>
+  );
+
   const [initialValues, setInitialvalues] = useState({
     username: "",
     email: "",
@@ -59,6 +116,7 @@ const SignupForm = () => {
         validationSchema={SignupSchema}
         onSubmit={() => {
           console.log("i", initialValues);
+          SignUpStdudent()
         }}
       >
         {(props) => (
@@ -115,7 +173,7 @@ const SignupForm = () => {
               </div>
               <div className="flex flex-col">
                 <label htmlFor="email" className="font-bold mb-1">
-                  Email:
+                  Confirm Password:
                 </label>
                 <Field
                   type="password"

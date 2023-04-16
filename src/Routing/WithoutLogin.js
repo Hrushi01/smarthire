@@ -58,6 +58,10 @@ const WithoutLogin = (Props) => {
               status={status}
               setSignup={setSignup}
               setDisplay={setDisplay}
+              setIsLoggedIn={setIsLoggedIn}
+              setRefresher={setRefresher}
+              refresher={refresher}
+
             />
           ) : (
             <></>
