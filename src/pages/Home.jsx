@@ -15,7 +15,7 @@ import img12 from "../assets/zak-be2e6aeb.jpg";
 function Home({ setHome }) {
   return (
     <div>
-      <div id="app">
+      <div id="app" className="marginLeftZero">
         <div>
           <div
             class="site-content bg-white overflow-hidden"
