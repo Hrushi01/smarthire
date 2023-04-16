@@ -11,6 +11,7 @@ import img9 from "../assets/san-3b86301b.jpg";
 import img10 from "../assets/sanjid-2d7a907f.jpg";
 import img11 from "../assets/steph-68f47994.jpg";
 import img12 from "../assets/zak-be2e6aeb.jpg";
+import "../assets/style-410a9dbc.css"
 
 function Home({ setHome }) {
   return (
