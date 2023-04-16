@@ -84,7 +84,12 @@ function Fields(props) {
   });
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onsubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={() => {
+        console.log("submited initialvalues", initialValues);
+      }}
+    >
       {(props) => (
         <Form>
           <div className="flex pl-5">

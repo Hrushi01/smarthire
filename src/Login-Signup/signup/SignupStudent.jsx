@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { Button } from "@mui/material";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -26,6 +28,25 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignupForm = () => {
+  const [initialValues, setInitialvalues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    address: "",
+    skills: {
+      programming: "",
+      frameworks: "",
+      databases: "",
+    },
+    pastPerformance: {
+      projects: "",
+      internships: "",
+      hackathons: "",
+    },
+    resume: "",
+  });
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -34,30 +55,13 @@ const SignupForm = () => {
     >
       <h1 className="text-3xl font-bold mb-8 text-center">Student Sign Up</h1>
       <Formik
-        initialValues={{
-          username: "",
-          email: "",
-          phone: "",
-          address: "",
-          skills: {
-            programming: "",
-            frameworks: "",
-            databases: "",
-          },
-          pastPerformance: {
-            projects: "",
-            internships: "",
-            hackathons: "",
-          },
-          password: "",
-          confirmPassword: "",
-        }}
+        initialValues={initialValues}
         validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={() => {
+          console.log("i", initialValues);
         }}
       >
-        {({ errors, touched }) => (
+        {(props) => (
           <Form>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col">
@@ -88,6 +92,40 @@ const SignupForm = () => {
                 />
                 <ErrorMessage
                   name="email"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="email" className="font-bold mb-1">
+                  Password:
+                </label>
+                <Field
+                  type="password"
+                  label="password"
+                  name="password"
+                  placeholder="Password"
+                  className="px-3 py-2 rounded-md outline-none border border-gray-300"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="email" className="font-bold mb-1">
+                  Email:
+                </label>
+                <Field
+                  type="password"
+                  label="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="confirmPassword"
+                  className="px-3 py-2 rounded-md outline-none border border-gray-300"
+                />
+                <ErrorMessage
+                  name="confirmPassword"
                   component="div"
                   className="text-red-500 text-sm"
                 />
@@ -251,12 +289,16 @@ const SignupForm = () => {
                 />
               </div>
               <div className="flex justify-center mt-6">
-                <button
+                <Button
+                  variant="contained"
                   type="submit"
+                  onClick={() => {
+                    setInitialvalues(props.values);
+                  }}
                   className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500 transition-colors"
                 >
                   Register
-                </button>
+                </Button>
               </div>
             </div>
           </Form>
