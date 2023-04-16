@@ -7,7 +7,7 @@ import Conference from "../../images/conference.png";
 import Header from "../../organization/Header";
 import Footer from "../../organization/Footer";
 
-function SignupFields(props) {
+function SignupOrganization(props) {
   const { setSignup, status, setDisplay } = props;
   const onsubmit = () => {
     if (
@@ -121,4 +121,4 @@ function SignupFields(props) {
   );
 }
 
-export default SignupFields;
+export default SignupOrganization;

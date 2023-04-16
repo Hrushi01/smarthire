@@ -1,7 +1,8 @@
 import Decide from "../Login-Signup/login/Decide";
 import Login from "../Login-Signup/login/Login";
 import "./withoutLogin.css";
-import SignupFields from "../Login-Signup/signup/SignupFields";
+import SignupOrganization from "../Login-Signup/signup/SignupOrganization";
+import SignupStudent from "../Login-Signup/signup/SignupStudent";
 
 const WithoutLogin = (Props) => {
   const {
@@ -25,11 +26,15 @@ const WithoutLogin = (Props) => {
     <div className="Login-Parent-Comp">
       {OrganizationLog ? (
         signup ? (
-          <SignupFields
-            status={status}
-            setSignup={setSignup}
-            setDisplay={setDisplay}
-          />
+          status === "Organization" ? (
+            <SignupOrganization
+              status={status}
+              setSignup={setSignup}
+              setDisplay={setDisplay}
+            />
+          ) : (
+            <></>
+          )
         ) : (
           <Login
             setDisplay={setDisplay}
@@ -46,11 +51,15 @@ const WithoutLogin = (Props) => {
         )
       ) : candidateLog ? (
         signup ? (
-          <SignupFields
-            status={status}
-            setSignup={setSignup}
-            setDisplay={setDisplay}
-          />
+          status === "Student" ? (
+            <SignupStudent
+              status={status}
+              setSignup={setSignup}
+              setDisplay={setDisplay}
+            />
+          ) : (
+            <></>
+          )
         ) : (
           <Login
             setDisplay={setDisplay}
