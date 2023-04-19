@@ -4,6 +4,7 @@ import Sidenaav from "../organization/Sidebar/SideNavButton";
 import AddStudent from "../organization/AddStudent/AddStudent";
 import NewInterview from "../organization/NewInterview/NewInterview";
 import Results from "../organization/Results/Results";
+import OrganizationProfile from "../organization/pages/OrganizationProfile";
 function WithLogin({ setOrganizationLog, setSignup }) {
   const [list, setList] = useState([]);
 
@@ -15,7 +16,8 @@ function WithLogin({ setOrganizationLog, setSignup }) {
           setSignup={setSignup}
         />
         <Routes>
-          <Route path="/" element={<Sidenaav />} />
+          <Route path="/" element={<OrganizationProfile />} />
+          <Route path="/profile" element={<OrganizationProfile />} />
           <Route path="/newinterview" element={<NewInterview />} />
           <Route
             path="/addstudents"

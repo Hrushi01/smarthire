@@ -1,28 +1,32 @@
-import React from 'react';
-import * as BsIcons from 'react-icons/bs';
-import * as MdIcons from 'react-icons/md';
+import React from "react";
+import * as BsIcons from "react-icons/bs";
+import * as MdIcons from "react-icons/md";
 import * as RxIcons from "react-icons/rx";
 
-
 export const SidebarData = [
-  
   {
-    title: 'New Interview',
-    path: '/newinterview',
+    title: "Profile",
+    path: "/profile",
     icon: <RxIcons.RxCalendar />,
-    cName: 'nav-text'
+    cName: "nav-text",
   },
   {
-    title: 'Add Students',
-    path: '/addstudents',
+    title: "New Interview",
+    path: "/newinterview",
+    icon: <RxIcons.RxCalendar />,
+    cName: "nav-text",
+  },
+  {
+    title: "Add Students",
+    path: "/addstudents",
     icon: <BsIcons.BsPerson />,
-    cName: 'nav-text'
+    cName: "nav-text",
   },
   {
-    title: 'Results',
-    path: '/viewresults',
+    title: "Results",
+    path: "/viewresults",
     icon: <MdIcons.MdOutlineAssignmentLate />,
-    cName: 'nav-text'
+    cName: "nav-text",
   },
   // {
   //   title: 'Meetings',
