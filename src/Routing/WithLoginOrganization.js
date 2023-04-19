@@ -5,7 +5,8 @@ import AddStudent from "../organization/AddStudent/AddStudent";
 import NewInterview from "../organization/NewInterview/NewInterview";
 import Results from "../organization/Results/Results";
 import OrganizationProfile from "../organization/pages/OrganizationProfile";
-function WithLogin({ setOrganizationLog, setSignup }) {
+
+function WithLoginOrganization({ setOrganizationLog, setSignup }) {
   const [list, setList] = useState([]);
 
   return (
@@ -31,4 +32,4 @@ function WithLogin({ setOrganizationLog, setSignup }) {
   );
 }
 
-export default WithLogin;
+export default WithLoginOrganization;
