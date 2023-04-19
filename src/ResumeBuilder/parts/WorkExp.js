@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { FieldArray } from "formik";
 import { workexpschema } from "../schema/schema";
 import { FaPlus } from "react-icons/fa";
+import { Button } from "@mui/material";
 
 const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
   const onSubmit = () => {
@@ -13,7 +14,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
       <Formik
         initialValues={workinfo}
         onSubmit={onSubmit}
-        validationSchema={workexpschema}>
+        validationSchema={workexpschema}
+      >
         {(props) => (
           <Form className="flex flex-col justify-center text-center align-middle border-2 rounded-lg border-gray-400 w-1/2 p-2">
             <div className="flex flex-col">
@@ -31,7 +33,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
             <div
               role="group"
               aria-labelledby="my-radio-group"
-              className="flex flex-col justify-start">
+              className="flex flex-col justify-start"
+            >
               <div className=" flex justify-start  pl-1 ">
                 Skip Work Experience?{" "}
               </div>
@@ -67,13 +70,15 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                           return (
                             <div
                               className="mt-2  border-solid shadow-xl mb-5 rounded-lg "
-                              key={index}>
+                              key={index}
+                            >
                               {index > 0 && (
                                 <div>
                                   <button
                                     type="button"
                                     className="float-right text-xl "
-                                    onClick={() => arrayhelpers.remove(index)}>
+                                    onClick={() => arrayhelpers.remove(index)}
+                                  >
                                     ❌
                                   </button>
                                 </div>
@@ -91,7 +96,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                     <div className=" flex-col  w-1/2  flex">
                                       <label
                                         className="flex justify-start pl-1"
-                                        htmlFor={`work.${index}.position`}>
+                                        htmlFor={`work.${index}.position`}
+                                      >
                                         Position:
                                       </label>
 
@@ -112,7 +118,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                     <div className="w-1/2 flex flex-col">
                                       <label
                                         className="flex justify-start pl-1"
-                                        htmlFor={`work.${index}.company`}>
+                                        htmlFor={`work.${index}.company`}
+                                      >
                                         Company Name:
                                       </label>
 
@@ -140,7 +147,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                     <div className=" flex-col  w-1/2  flex">
                                       <label
                                         className="flex justify-start pl-1"
-                                        htmlFor={`work.${index}.certificate`}>
+                                        htmlFor={`work.${index}.certificate`}
+                                      >
                                         Certificate Link:
                                       </label>
 
@@ -161,7 +169,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                     <div className="w-1/2 flex flex-col">
                                       <label
                                         className="flex justify-start pl-1"
-                                        htmlFor={`work.${index}.location`}>
+                                        htmlFor={`work.${index}.location`}
+                                      >
                                         Location:
                                       </label>
 
@@ -183,7 +192,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                     <div className=" flex-col  w-1/2  flex">
                                       <label
                                         className="flex justify-start pl-1"
-                                        htmlFor={`work.${index}.start`}>
+                                        htmlFor={`work.${index}.start`}
+                                      >
                                         Start date:
                                       </label>
 
@@ -198,7 +208,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                     <div className="w-1/2 flex flex-col">
                                       <label
                                         className="flex justify-start pl-1"
-                                        htmlFor={`work.${index}.end`}>
+                                        htmlFor={`work.${index}.end`}
+                                      >
                                         End Date:
                                       </label>
 
@@ -214,7 +225,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                                   <div className="flex flex-col justify-start">
                                     <label
                                       className="flex justify-start pl-1"
-                                      htmlFor={`work.${index}.description`}>
+                                      htmlFor={`work.${index}.description`}
+                                    >
                                       Description:
                                     </label>
 
@@ -250,7 +262,8 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
                             description: "",
                           });
                           console.log("gdgd");
-                        }}>
+                        }}
+                      >
                         <div className="p-1 ">
                           <FaPlus />
                         </div>
@@ -262,22 +275,26 @@ const WorkExp = ({ activeStep, setActiveStep, workinfo, setWorkInfo }) => {
               />
               <br />
             </div>
-            <div className="flex justify-center">
-              <button
+            <div className="flex justify-around">
+              <Button
+                variant="contained"
                 type="button"
                 className="bg-gray-600 text-white rounded p-2 w-fit m-2 pr-3 disabled:opacity-50"
                 onClick={() => setActiveStep((step) => step - 1)}
-                disabled={activeStep === 0}>
+                disabled={activeStep === 0}
+              >
                 Back
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="contained"
                 type="submit"
                 onClick={() => {
                   setWorkInfo(props.values);
                 }}
-                className="bg-blue-600 text-white rounded p-2 w-fit m-2 pr-3">
+                className="bg-blue-600 text-white rounded p-2 w-fit m-2 pr-3"
+              >
                 Next
-              </button>
+              </Button>
               {}
             </div>
           </Form>

@@ -4,6 +4,7 @@ import { basicinfoschema } from "../schema/schema";
 
 import { FaCameraRetro } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { Button } from "@mui/material";
 
 const BasicInfo1 = (props) => {
   const {
@@ -228,16 +229,18 @@ const BasicInfo1 = (props) => {
                   ) : null}
                 </div>
               </div>
-              <div className="flex justify-center">
-                <button
+              <div className="flex justify-around">
+                <Button
+                  variant="contained"
                   type="button"
                   className="bg-gray-600 text-white rounded p-2 w-fit m-2 pr-3 disabled:opacity-50"
                   onClick={() => setActiveStep((step) => step - 1)}
                   disabled={activeStep === 0}
                 >
                   Back
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="contained"
                   type="submit"
                   onClick={() => {
                     setBasicInfo(props.values);
@@ -245,7 +248,7 @@ const BasicInfo1 = (props) => {
                   className="bg-blue-600 text-white rounded p-2 w-fit m-2 pr-3"
                 >
                   Next
-                </button>
+                </Button>
               </div>
             </Form>
           )}

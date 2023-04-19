@@ -99,9 +99,9 @@ function ResumeBuilder({ setDisplay }) {
   const [TemNo, setTemNo] = useState(0);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 marginLeftZero">
+    <div className="bg-white shadow-lg rounded-lg  marginLeftZero">
       <Header setDisplay={setDisplay} />
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-around items-center mb-6 ">
         <div className="text-blue-600 flex items-center p-2">
           <FaBuffer className="text-4xl mr-3" />
           <h1 className="text-2xl font-bold">Resume Builder By Smart Hire</h1>
