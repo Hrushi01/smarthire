@@ -1,44 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 
 function TakeSnapFunction(props) {
-  let x = React.useRef(null);
+  const cameraRef = useRef(null);
   let flag = false;
   const [imgURI, setImgUri] = useState("");
   function handleTakePhoto(dataUri) {
-    // Do stuff with the photo...
-    console.log("dataUri", dataUri);
-    setImgUri(dataUri);
+    setTimeout(() => {
+      // console.log("dataUri", dataUri);
+      setImgUri(dataUri);
+    }, 2000);
   }
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     x.current.click();
-  //     flag= true;
-  //   }, 5000);
-  //   // handleTakePhoto(dataUri);
-  //   return () => clearTimeout(timer);
-  // }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const dataUri = "data:image/jpeg;base64,/9j/4AAQSkZJRgA..."; // replace with your dataUri parameter
+      if (cameraRef.current) {
+        cameraRef.current.onTakePhoto(dataUri);
+        console.log(dataUri);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   function handleTakePhotoAnimationDone(dataUri) {
     // Do stuff with the photo...
-    console.log("takePhoto");
+    // console.log("takePhoto");
   }
 
   function handleCameraError(error) {
-    console.log("handleCameraError", error);
+    // console.log("handleCameraError", error);
   }
 
   function handleCameraStart(stream) {
-    console.log("handleCameraStart");
+    // console.log("handleCameraStart");
   }
 
   function handleCameraStop() {
-    console.log("handleCameraStop");
+    // console.log("handleCameraStop");
   }
 
   return (
     <Camera
-      ref={x}
+      ref={cameraRef}
       onTakePhoto={(dataUri) => {
         handleTakePhoto(dataUri);
       }}
