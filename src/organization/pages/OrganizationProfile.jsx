@@ -10,7 +10,7 @@ import {
   faTwitter,
   faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
-import Avatar from "react-avatar";
+// import Avatar from "react-avatar";
 // import Avatar from "./Avatar";
 import { Button } from "@mui/material";
 const OrganizationProfile = () => {
@@ -21,11 +21,11 @@ const OrganizationProfile = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col sm:flex-row justify-between items-center">
               <div className="flex items-center">
-                <Avatar
+                {/* <Avatar
                   size="lg"
                   src="https://picsum.photos/200"
                   alt="Organization Logo"
-                />
+                /> */}
                 <div className="ml-4">
                   <h1 className="text-2xl font-bold text-gray-900">
                     Organization Name
