@@ -13,6 +13,7 @@ import img11 from "../assets/steph-68f47994.jpg";
 import img12 from "../assets/zak-be2e6aeb.jpg";
 import "../assets/style-410a9dbc.css";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Home({ setHome }) {
   return (
@@ -56,16 +57,15 @@ function Home({ setHome }) {
                       class="mt-6 sm:mt-12 sm:mx-auto sm:max-w-lg flex flex-col items-start "
                       data-v-77b1cd82
                     >
-                      <Button
-                        variant="contained"
-                        type="button"
-                        className="  p-2 rounded"
-                        onClick={() => {
-                          setHome(false);
-                        }}
-                      >
-                        Get Started
-                      </Button>
+                      <Link to="/getstarted">
+                        <Button
+                          variant="contained"
+                          type="button"
+                          className="  p-2 rounded"
+                        >
+                          Get Started
+                        </Button>
+                      </Link>
                     </div>
                     <div class="mt-6">
                       <div class="items-center sm:divide-x sm:divide-gray-300 sm:inline-flex">

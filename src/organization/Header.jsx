@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Header({ setDisplay }) {
-  //   console.log("hdhdhd", goto);
+function Header() {
   return (
     <div className="marginLeftZero">
       <header className="bg-white shadow">
@@ -10,30 +10,21 @@ function Header({ setDisplay }) {
             <h1 className="text-2xl font-bold text-gray-900">Smart Hire</h1>
           </div>
           <div>
-            <button
-              onClick={() => {
-                setDisplay("home");
-              }}
-              to="/"
-              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => {
-                setDisplay("about");
-              }}
-              to="/about"
-              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              About
-            </button>
-            <button
-              to="/contact"
-              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Contact
-            </button>
+            <Link to="/">
+              <button className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                Home
+              </button>
+            </Link>
+            <Link to="/about">
+              <button className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                About
+              </button>
+            </Link>
+            <Link to="/contact">
+              <button className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                Contact
+              </button>
+            </Link>
           </div>
         </div>
       </header>
