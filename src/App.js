@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Features from "./pages/Features";
-import Home from "./pages/Home";
 import { BrowserRouter } from "react-router-dom";
 import WithoutLogin from "./Routing/WithoutLogin.jsx";
 import WithLogin from "./Routing/WithLogin";

@@ -5,6 +5,9 @@
     font-size: 16px;
     --sidebar: #281a63;
     font-family: Poppins;
+    --main-color: #f3f6fd;
+    --message-box-hover: #fafcff;
+    --message-box-border: #e9ebf0;
   }
   * {
     box-sizing: border-box;
@@ -12,6 +15,7 @@
     padding: 0;
   }
   body {
+    background-color: var(--main-color);
     margin-left: 7rem;
     transition: 0.5s ease-in;
   }
@@ -28,4 +32,26 @@
   
 .marginLeftZero{
   margin-left: -7rem;
+}
+
+.borderBottom{
+  border-bottom: solid 1.2px #e9ebf0 !important;
+}
+
+.flexRowReverse{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: start;
+  justify-content: flex-start;
+}
+
+.width30{
+  max-width: 30% !important;
+}
+
+.buttonBlack{
+  background-color: #111;
+}
+.buttonBlack:hover{
+  background-color: #c3cff4;
 }
