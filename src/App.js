@@ -2,22 +2,24 @@ import { useState } from "react";
 import Features from "./pages/Features";
 import Home from "./pages/Home";
 import { BrowserRouter } from "react-router-dom";
+import WithoutLogin from "./Routing/WithoutLogin.jsx";
+import WithLogin from "./Routing/WithLogin";
 
 function App() {
   const [home, setHome] = useState(true);
   const [isLogged, setIsLoggedIn] = useState(true);
+  const [status, setStatus] = useState("org");
+
   return (
     <>
-      <div>{home ? <Home setHome={setHome} /> : <Features />}</div>
+      {/* <div>{home ? <Home setHome={setHome} /> : <Features />}</div> */}
       <BrowserRouter>
-      
         {isLogged ? (
-          <WithLogin refresher={refresher} setRefresher={setRefresher}/>
+          <WithLogin setStatus={setStatus} status={status} />
         ) : (
-          <WithoutLogin isLogged={isLogged} setIsLoggedIn={setIsLoggedIn} />
+          <WithoutLogin setStatus={setStatus} status={status} />
         )}
-    
-    </BrowserRouter>
+      </BrowserRouter>
     </>
   );
 }

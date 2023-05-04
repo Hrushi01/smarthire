@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComments,
@@ -41,60 +41,51 @@ function LandingPg({ setDisplay }) {
 
           <div className="mt-10">
             <div className="flex justify-evenly items-center">
-              <button
-                onClick={() => {
-                  setDisplay("chatbot");
-                }}
-                to="/chatbot"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 2 }}
-                  className="w-48 h-48 bg-blue-500 rounded-full flex justify-center items-center shadow-lg mr-8 hover:bg-blue-600"
-                >
-                  <FontAwesomeIcon
-                    icon={faComments}
-                    className="text-white text-4xl"
-                  />
-                </motion.div>
-              </button>
-              <button
-                onClick={() => {
-                  setDisplay("resumebuilder");
-                }}
-                to="/resume-builder"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 2 }}
-                  className="w-48 h-48 bg-green-500 rounded-full flex justify-center items-center shadow-lg hover:bg-green-600"
-                >
-                  <FontAwesomeIcon
-                    icon={faFileAlt}
-                    className="text-white text-4xl"
-                  />
-                </motion.div>
-              </button>
-              <button
-                to="/interview-generator"
-                onClick={() => {
-                  setDisplay("interview");
-                }}
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 2 }}
-                  className="w-48 h-48 bg-yellow-500 rounded-full flex justify-center items-center shadow-lg ml-8 hover:bg-yellow-600"
-                >
-                  <FontAwesomeIcon
-                    icon={faVideo}
-                    className="text-white text-4xl"
-                  />
-                </motion.div>
-              </button>
+              <Link to="/chat">
+                <button>
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 2 }}
+                    className="w-48 h-48 bg-blue-500 rounded-full flex justify-center items-center shadow-lg mr-8 hover:bg-blue-600"
+                  >
+                    <FontAwesomeIcon
+                      icon={faComments}
+                      className="text-white text-4xl"
+                    />
+                  </motion.div>
+                </button>
+              </Link>
+              <Link to="/resume">
+                <button>
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 2 }}
+                    className="w-48 h-48 bg-green-500 rounded-full flex justify-center items-center shadow-lg hover:bg-green-600"
+                  >
+                    <FontAwesomeIcon
+                      icon={faFileAlt}
+                      className="text-white text-4xl"
+                    />
+                  </motion.div>
+                </button>
+              </Link>
+              <Link to="/user">
+                <button>
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 2 }}
+                    className="w-48 h-48 bg-yellow-500 rounded-full flex justify-center items-center shadow-lg ml-8 hover:bg-yellow-600"
+                  >
+                    <FontAwesomeIcon
+                      icon={faVideo}
+                      className="text-white text-4xl"
+                    />
+                  </motion.div>
+                </button>
+              </Link>
             </div>
             <div className="flex justify-evenly items-center mt-8">
               <button
