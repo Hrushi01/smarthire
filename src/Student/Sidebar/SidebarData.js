@@ -11,17 +11,12 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "New Interview",
-    path: "/newinterview",
+    title: "Interview Show",
+    path: "/interview",
     icon: <RxIcons.RxCalendar />,
     cName: "nav-text",
   },
-  {
-    title: "Add Students",
-    path: "/addstudents",
-    icon: <BsIcons.BsPerson />,
-    cName: "nav-text",
-  },
+
   {
     title: "Results",
     path: "/viewresults",

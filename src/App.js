@@ -4,18 +4,25 @@ import WithoutLogin from "./Routing/WithoutLogin.jsx";
 import WithLogin from "./Routing/WithLogin";
 
 function App() {
-  const [home, setHome] = useState(true);
   const [isLogged, setIsLoggedIn] = useState(true);
-  const [status, setStatus] = useState("org");
+
+  const [status, setStatus] = useState("student");
 
   return (
     <>
-      {/* <div>{home ? <Home setHome={setHome} /> : <Features />}</div> */}
       <BrowserRouter>
         {isLogged ? (
-          <WithLogin setStatus={setStatus} status={status} />
+          <WithLogin
+            setStatus={setStatus}
+            status={status}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         ) : (
-          <WithoutLogin setStatus={setStatus} status={status} />
+          <WithoutLogin
+            setStatus={setStatus}
+            status={status}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         )}
       </BrowserRouter>
     </>

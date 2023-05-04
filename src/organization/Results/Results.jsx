@@ -62,7 +62,7 @@ function Results({ list }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {list.map((student, index) => (
+              {list?.map((student, index) => (
                 <TableRow key={index}>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.email}</TableCell>

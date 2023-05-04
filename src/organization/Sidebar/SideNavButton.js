@@ -2,32 +2,28 @@ import React, { useState } from "react";
 import { Sling as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import "./navbar.css";
 import { IconContext } from "react-icons";
 import * as FiIcons from "react-icons/fi";
 
-function Navbar(props) {
-  const { setOrganizationLog, setSignup } = props;
+function SidebarOrg(props) {
+  const { setIsLoggedIn } = props;
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => {
-    setSidebar(!sidebar); //for hamburger
-    if (sidebar) {
-      document.body.style.marginLeft = "7rem";
-    } else {
-      document.body.style.marginLeft = "7rem";
-    }
+    setSidebar(!sidebar);
   };
   const closeSidebar = () => {
-    setSidebar(false); // for items
-    document.body.style.marginLeft = "7rem";
+    setSidebar(false);
   };
 
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
-        <div className="navbar">
-          <Link to="#">
-            <button onClick={showSidebar} className="hamburger">
+        <div className="fixed top-0 left-0 w-full bg-gray-900">
+          <div className="flex justify-between items-center py-4 px-6">
+            <Link to="/">
+              <h1 className="text-lg font-bold text-white">Your Logo Here</h1>
+            </Link>
+            <button onClick={showSidebar}>
               <Hamburger
                 direction="right"
                 duration={0.6}
@@ -36,48 +32,53 @@ function Navbar(props) {
                 rounded
               />
             </button>
-          </Link>
+          </div>
         </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="nav-menu-items" onClick={closeSidebar}>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link
-                    to={item.path}
-                    className={sidebar ? "nav-block active" : "nav-block"}
-                  >
-                    {item.icon}
-                    <span
-                      className={sidebar ? "nav-title active" : "nav-title"}
+        <nav
+          className={`${
+            sidebar ? "translate-x-0" : "-translate-x-full"
+          } fixed top-0 left-0 h-full w-60 z-20 bg-gray-900 text-white transition-transform ease-in-out duration-300`}
+        >
+          <div className="pt-16">
+            <ul>
+              {SidebarData.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <Link
+                      to={item.path}
+                      className="block py-2 px-6 hover:bg-gray-800"
+                      onClick={closeSidebar}
                     >
-                      {item.title}
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-          <ul className="nav-menu-items2">
-            <li className="nav-text">
-              <Link
-                className={sidebar ? "nav-block active" : "nav-block"}
-                onClick={() => {
-                  setOrganizationLog(false);
-                  setSignup("");
-                }}
-              >
-                <FiIcons.FiLogOut />
-                <span className={sidebar ? "nav-title active" : "nav-title"}>
-                  Logout
-                </span>
-              </Link>
-            </li>
-          </ul>
+                      <span className="mr-3">{item.icon}</span>
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="absolute bottom-0 w-full">
+            <ul className="pb-6">
+              <li>
+                <Link
+                  to="/"
+                  className="block py-2 px-6 hover:bg-gray-800"
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                  }}
+                >
+                  <span className="mr-3">
+                    <FiIcons.FiLogOut />
+                  </span>
+                  <span>Logout</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </nav>
       </IconContext.Provider>
     </>
   );
 }
 
-export default Navbar;
+export default SidebarOrg;
