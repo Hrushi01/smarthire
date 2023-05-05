@@ -13,24 +13,33 @@ function NewInterview({ UserDataData }) {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
 
+  function generateRandomNumber() {
+    const min = 100000; // minimum value
+    const max = 999999; // maximum value
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    return randomNumber;
+  }
+;
   const createNewInterview = async () => {
+    console.log("wewewe");
     const Temp = await axios
       .post(`${BASEURL}/AddNewInterview`, {
         Res_Company_Name: userData.Name,
-        Res_Description: "",
-        Res_HR_Name: "",
-        Res_Instruction: "",
-        Res_Name_Technology: "",
-        Res_Interview_ID: "",
-        Res_Number_Of_Questions: "",
-        Res_Time_Duration: "",
-        Res_Time_Of_Interview: "",
-        Res_Date_Of_Interview: "",
-        Res_Question_Arrays: [],
-        Res_Answer_Arrays: [],
-        Res_Email_Arrays: [],
+        Res_Description: initialValues.technologyName,
+        Res_HR_Name: initialValues.hrName,
+        Res_Instruction: initialValues.instructionD,
+        Res_Name_Technology: initialValues.descriptionD,
+        Res_Interview_ID: generateRandomNumber(),
+        Res_Number_Of_Questions: initialValues.noQuestions,
+        Res_Time_Duration: initialValues.interviewDuration,
+        Res_Time_Of_Interview: (initialValues.interviewTime).toString(),
+        Res_Date_Of_Interview: initialValues.interviewDate,
+        Res_Question_Arrays:  initialValues.questions,
+        Res_Answer_Arrays: initialValues.answers,
+        Res_Email_Arrays: initialValues.emails,
       })
       .then((Data) => {
+        console.log("Data--->",Data)
         if (Data.data.message === "Interview added successfully !") {
           alert("Interview created successfully !");
         }
@@ -38,6 +47,7 @@ function NewInterview({ UserDataData }) {
       .catch((ErrorR) => {
         console.log("kkkkk", ErrorR);
       });
+
   };
 
   useEffect(() => {
@@ -47,9 +57,11 @@ function NewInterview({ UserDataData }) {
       console.log(userData);
     }
   }, [loading]);
-
   const initialVal = {
+    descriptionD:"",
+    instructionD:"",
     technologyName: "",
+    hrName:"",
     noQuestions: 0,
     interviewDate: "",
     interviewTime: "",
@@ -60,8 +72,8 @@ function NewInterview({ UserDataData }) {
     emails: [],
   };
 
-  const handleSubmitInterview = {
-    // fucntion
+  const handleSubmitInterview =()=> {
+    createNewInterview();
   };
 
   return (
@@ -114,7 +126,7 @@ function NewInterview({ UserDataData }) {
                     }
                     return errors;
                   }}
-                  onSubmit={handleSubmitInterview}
+                  onSubmit={()=>{createNewInterview();}}
                 >
                   {({ values, setFieldValue, errors }) => (
                     <Form>
@@ -130,6 +142,38 @@ function NewInterview({ UserDataData }) {
                           id="technologyName"
                           name="technologyName"
                           placeholder="Enter technology name"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="descriptionD"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                         Detailed Description
+                        </label>
+                        <Field
+                          type="text"
+                          id="descriptionD"
+                          name="descriptionD"
+                          placeholder="Enter the Descrition about Interview !"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="instructionD"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Instruction for Interview 
+                        </label>
+                        <Field
+                          type="text"
+                          id="instructionD"
+                          name="instructionD"
+                          placeholder="Enter the Instructions / warnings !"
                           required
                           className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
                         />
