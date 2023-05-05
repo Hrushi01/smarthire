@@ -9,6 +9,7 @@ import Cookies from "universal-cookie";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import Results from "../organization/Results/Results";
 function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
   const [switchWindow, setSwitchWindow] = useState(true);
   const [camRefresh, setCamREfresh] = useState(false);
@@ -442,7 +443,7 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
             </div>
           </div>
         ) : (
-          <StudentResult />
+          <Results />
         )}
       </>
     </>
