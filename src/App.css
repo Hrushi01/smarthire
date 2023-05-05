@@ -48,6 +48,9 @@
 .width30{
   max-width: 30% !important;
 }
+.width80{
+  max-width: 80%;
+}
 
 .buttonBlack{
   background-color: #111;

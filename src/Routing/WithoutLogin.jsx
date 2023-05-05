@@ -10,6 +10,7 @@ import LandingPg from "../pages/LandingPg";
 import ChatBot from "../ChatbotComponents/chatbot";
 import ResumeBuilder from "../ResumeBuilder/ResumeBuilder";
 import AboutUs from "../pages/AboutUs";
+import Contact from "../pages/Contact";
 
 const WithoutLogin = (Props) => {
   const {
@@ -33,7 +34,7 @@ const WithoutLogin = (Props) => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/getstarted" element={<LandingPg />} />
         <Route path="/chat" element={<ChatBot />} />
@@ -41,8 +42,7 @@ const WithoutLogin = (Props) => {
         <Route path="/user" element={<Decide />} />
         <Route path="/org-login" element={<Login />} />
         <Route path="/student-login" element={<Login />} />
-        <Route path="/signup" element={<SignupOrganization />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="/signup" element={<SignupStudent />} />
 
         {/* <Route path="/getstarted" element={<Features />} /> */}
         {/* <Route path="/features" element={<Features />} /> */}
