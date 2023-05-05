@@ -1,43 +1,38 @@
 import React, { useEffect } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FieldArray } from "formik";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { Button } from "@mui/material";
 
 function NewInterview({ UserDataData }) {
   const BASEURL = process.env.REACT_APP_SAMPLE;
   const cookies = new Cookies();
-  const [technologyName, setTechnologyName] = useState("");
-  const [noQuestions, setNoQuestions] = useState("");
-  const [interviewDate, setInterviewDate] = useState("");
-  const [interviewTime, setInterviewTime] = useState("");
-  const [interviewDuration, setInterviewDuration] = useState("");
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [initialValues, setInitialValues] = useState({});
+  console.log("Hru", initialValues);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
- 
+
   const createNewInterview = async () => {
-    
     const Temp = await axios
       .post(`${BASEURL}/AddNewInterview`, {
-        Res_Company_Name:userData.Name,
+        Res_Company_Name: userData.Name,
         Res_Description: "",
-        Res_HR_Name:"",
-        Res_Instruction:"",
-        Res_Name_Technology:"",
+        Res_HR_Name: "",
+        Res_Instruction: "",
+        Res_Name_Technology: "",
         Res_Interview_ID: "",
-        Res_Number_Of_Questions:"",
+        Res_Number_Of_Questions: "",
         Res_Time_Duration: "",
         Res_Time_Of_Interview: "",
-        Res_Date_Of_Interview:"",
+        Res_Date_Of_Interview: "",
         Res_Question_Arrays: [],
         Res_Answer_Arrays: [],
-        Res_Email_Arrays: []
+        Res_Email_Arrays: [],
       })
       .then((Data) => {
-        if (Data.data.message==="Interview added successfully !") {
-          alert("Interview created successfully !")
+        if (Data.data.message === "Interview added successfully !") {
+          alert("Interview created successfully !");
         }
       })
       .catch((ErrorR) => {
@@ -53,15 +48,22 @@ function NewInterview({ UserDataData }) {
     }
   }, [loading]);
 
+  const initialVal = {
+    technologyName: "",
+    noQuestions: 0,
+    interviewDate: "",
+    interviewTime: "",
+    interviewDuration: 0,
+    questions: [],
+    answers: [],
+    noStudents: 0,
+    emails: [],
+  };
+
   const handleSubmitInterview = {
     // fucntion
   };
-  // const handleSubmitQuestions = {
-  //   // fucntion
-  // };
-  const addQuestionField = {
-    // add question flied
-  };
+
   return (
     <>
       {loading ? (
@@ -70,22 +72,6 @@ function NewInterview({ UserDataData }) {
         <>
           {" "}
           <div className="bg-gray-50 py-4 flex">
-            {/* <div className="CompanyDetails p-4 bg-gray-100 w-1/4">
-        <div className="flex flex-col items-center justify-center text-center">
-          <h2 className="text-2xl font-bold mb-4 font-serif">
-            MicroSoft Kuroku Pvt Limited
-          </h2>
-          <div className="mb-4">
-            <span className="italic font-bold">Description:</span>&nbsp;
-            Software Consulting Company Deals with all the trending
-            technologies
-          </div>
-          <div>
-            <span className="italic font-bold">HR Name:</span> &nbsp;
-            Hrushikesh Ambike
-          </div>
-        </div>
-      </div> */}
             <div className="flex w-2/4 mx-auto">
               <div className="max-w-2xl mx-auto px-4  ">
                 <div className="flex justify-between items-center mx-auto">
@@ -113,179 +99,294 @@ function NewInterview({ UserDataData }) {
             <div className="max-w-2xl mx-auto px-4">
               <div className="bg-white shadow-md rounded-md p-4">
                 <h2 className="text-xl font-bold mb-4">Interview Details</h2>
-                <Formik>
-                  <Form onSubmit={handleSubmitInterview}>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="technologyName"
-                        className="block text-gray-700 font-bold mb-2"
-                      >
-                        Technology Name
-                      </label>
-                      <Field
-                        type="text"
-                        id="technologyName"
-                        name="technologyName"
-                        value={technologyName}
-                        placeholder="Enter technology name"
-                        required
-                        onChange={(Event) => {
-                          setTechnologyName(Event.target.value);
-                        }}
-                        className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                      />
-                    </div>
-
-                    <div className="mb-4">
-                      <label
-                        htmlFor="noQuestions"
-                        className="block text-gray-700 font-bold mb-2"
-                      >
-                        Number of Questions
-                      </label>
-                      <Field
-                        type="number"
-                        id="noQuestions"
-                        name="noQuestions"
-                        value={noQuestions}
-                        placeholder="Enter number of questions"
-                        required
-                        onChange={(Event) => {
-                          setNoQuestions(Event.target.value);
-                        }}
-                        className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                      />
-                    </div>
-
-                    <div className="mb-4">
-                      <label
-                        htmlFor="interviewDate"
-                        className="block text-gray-700 font-bold mb-2"
-                      >
-                        Interview Date
-                      </label>
-                      <Field
-                        type="date"
-                        id="interviewDate"
-                        name="interviewDate"
-                        value={interviewDate}
-                        placeholder="Enter interview date"
-                        required
-                        onChange={(Event) => {
-                          setInterviewDate(Event.target.value);
-                        }}
-                        className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                      />
-                    </div>
-
-                    <div className="mb-4">
-                      <label
-                        htmlFor="interviewTime"
-                        className="block text-gray-700 font-bold mb-2"
-                      >
-                        Interview Time
-                      </label>
-                      <Field
-                        type="time"
-                        id="interviewTime"
-                        name="interviewTime"
-                        value={interviewTime}
-                        placeholder="Enter interview time"
-                        required
-                        onChange={(Event) => {
-                          setInterviewTime(Event.target.value);
-                        }}
-                        className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                      />
-                    </div>
-
-                    <div className="mb-4">
-                      <label
-                        htmlFor="interviewDuration"
-                        className="block text-gray-700 font-bold mb-2"
-                      >
-                        Interview Duration
-                      </label>
-                      <Field
-                        type="number"
-                        id="interviewDuration"
-                        name="interviewDuration"
-                        value={interviewDuration}
-                        placeholder="Enter interview duration in minutes"
-                        required
-                        onChange={(Event) => {
-                          setInterviewDuration(Event.target.value);
-                        }}
-                        className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                      />
-                    </div>
-
-                    <h2 className="text-xl font-bold mb-4">Questions</h2>
-                    {[...Array(Number(noQuestions))].map((value, index) => {
-                      return (
-                        <div key={index}>
-                          <div className="mb-4">
-                            <label
-                              htmlFor="question"
-                              className="block text-gray-700 font-bold mb-2"
-                            >
-                              Question {index + 1}
-                            </label>
-                            <Field
-                              type="text"
-                              id={`question${index}`}
-                              name={`question${index}`}
-                              value={question}
-                              placeholder="Enter question"
-                              required
-                              onChange={(Event) => {
-                                setQuestion(Event.target.value);
-                              }}
-                              className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                            />
-                          </div>
-
-                          <div className="mb-4">
-                            <label
-                              htmlFor="answer"
-                              className="block text-gray-700 font-bold mb-2"
-                            >
-                              Answer {index + 1}
-                            </label>
-                            <Field
-                              type="text"
-                              id={`answer${index}`}
-                              name={`answer${index}`}
-                              value={answer}
-                              placeholder="Enter answer"
-                              required
-                              onChange={(Event) => {
-                                setAnswer(Event.target.value);
-                              }}
-                              className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
-                    <button
-                      type="submit"
-                      className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
-                      onClick={()=>{
-                        createNewInterview();
-                      }}
-                    >
-                      Save Interview
-                    </button>
-                  </Form>
-                </Formik>
-                <button
-                  type="button"
-                  onClick={addQuestionField}
-                  className="mt-4 px-4 py-2 rounded-md bg-gray-600 text-white hover:bg-gray-700"
+                <Formik
+                  initialValues={initialVal}
+                  validate={(values) => {
+                    const errors = {};
+                    if (values.questions.length !== values.noQuestions) {
+                      errors.questions = `Please enter ${values.noQuestions} questions`;
+                    }
+                    if (values.answers.length !== values.noQuestions) {
+                      errors.answers = `Please enter ${values.noQuestions} answers`;
+                    }
+                    if (values.emails.length !== values.noStudents) {
+                      errors.emails = `Please enter ${values.noStudents} Emails`;
+                    }
+                    return errors;
+                  }}
+                  onSubmit={handleSubmitInterview}
                 >
-                  Add Question Field
-                </button>
+                  {({ values, setFieldValue, errors }) => (
+                    <Form>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="technologyName"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Technology Name
+                        </label>
+                        <Field
+                          type="text"
+                          id="technologyName"
+                          name="technologyName"
+                          placeholder="Enter technology name"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="interviewDate"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Interview Date
+                        </label>
+                        <Field
+                          type="date"
+                          id="interviewDate"
+                          name="interviewDate"
+                          placeholder="Enter interview date"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div className="mb-4">
+                        <label
+                          htmlFor="interviewTime"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Interview Time
+                        </label>
+                        <Field
+                          type="time"
+                          id="interviewTime"
+                          name="interviewTime"
+                          placeholder="Enter interview time"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="interviewDuration"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Interview Duration (minutes)
+                        </label>
+                        <Field
+                          type="number"
+                          id="interviewDuration"
+                          name="interviewDuration"
+                          placeholder="Enter interview duration in minutes"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="noQuestions"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Number of Questions
+                        </label>
+                        <Field
+                          type="number"
+                          id="noQuestions"
+                          name="noQuestions"
+                          placeholder="Enter number of questions"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div className="mb-4">
+                        <div className="border-2 border-black p-5">
+                          <label
+                            htmlFor="questions"
+                            className="block text-gray-700 font-bold mb-2"
+                          >
+                            Questions
+                          </label>
+
+                          <FieldArray name="questions">
+                            {({ push, remove }) => (
+                              <>
+                                {values.questions?.map((q, index) => (
+                                  <div key={index} className="mb-2">
+                                    <Field
+                                      name={`questions.${index}`}
+                                      placeholder={`Enter question.${
+                                        index + 1
+                                      }`}
+                                      className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                                    />
+                                    <Button
+                                      variant="contained"
+                                      color="error"
+                                      className=" text-white font-bold py-2 px-4 rounded"
+                                      type="button"
+                                      onClick={() => remove(index)}
+                                    >
+                                      Remove
+                                    </Button>
+                                  </div>
+                                ))}
+                                {errors.questions && (
+                                  <div className="text-red-600">
+                                    {errors.questions}
+                                  </div>
+                                )}
+                                {values.questions?.length <
+                                  values.noQuestions && (
+                                  <Button
+                                    variant="contained"
+                                    className=" text-white font-bold py-2 px-4 rounded"
+                                    type="button"
+                                    onClick={() => push("")}
+                                  >
+                                    Add Question
+                                  </Button>
+                                )}
+                              </>
+                            )}
+                          </FieldArray>
+                        </div>
+                      </div>
+
+                      <div className="mb-4">
+                        <div className="border-2 border-black p-5">
+                          <label
+                            htmlFor="answers"
+                            className="block text-gray-700 font-bold mb-2"
+                          >
+                            Answers
+                          </label>
+
+                          <FieldArray name="answers">
+                            {({ push, remove }) => (
+                              <>
+                                {values.answers?.map((a, index) => (
+                                  <div key={index} className="mb-2">
+                                    <Field
+                                      name={`answers.${index}`}
+                                      placeholder={`Enter Answer.${index + 1}`}
+                                      className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                                    />
+                                    <Button
+                                      variant="contained"
+                                      color="error"
+                                      className=" text-white font-bold py-2 px-4 rounded"
+                                      type="button"
+                                      onClick={() => remove(index)}
+                                    >
+                                      Remove
+                                    </Button>
+                                  </div>
+                                ))}
+                                {errors.answers && (
+                                  <div className="text-red-600">
+                                    {errors.answers}
+                                  </div>
+                                )}
+                                {values.answers.length < values.noQuestions && (
+                                  <Button
+                                    variant="contained"
+                                    className=" text-white font-bold py-2 px-4 rounded"
+                                    type="button"
+                                    onClick={() => push("")}
+                                  >
+                                    Add Answer
+                                  </Button>
+                                )}
+                              </>
+                            )}
+                          </FieldArray>
+                        </div>
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="noStudents"
+                          className="block text-gray-700 font-bold mb-2"
+                        >
+                          Number of Candidates
+                        </label>
+                        <Field
+                          type="number"
+                          id="noStudents"
+                          name="noStudents"
+                          placeholder="Enter number of Candidates"
+                          required
+                          className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div className="mb-4">
+                        <div className="border-2 border-black p-5">
+                          <label
+                            htmlFor="emails"
+                            className="block text-gray-700 font-bold mb-2"
+                          >
+                            Emails
+                          </label>
+
+                          <FieldArray name="emails">
+                            {({ push, remove }) => (
+                              <>
+                                {values.emails?.map((q, index) => (
+                                  <div key={index} className="mb-2">
+                                    <Field
+                                      name={`emails.${index}`}
+                                      placeholder={`Enter email-${index + 1}`}
+                                      className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+                                    />
+                                    <Button
+                                      variant="contained"
+                                      color="error"
+                                      className=" text-white font-bold py-2 px-4 rounded"
+                                      type="button"
+                                      onClick={() => remove(index)}
+                                    >
+                                      Remove
+                                    </Button>
+                                  </div>
+                                ))}
+                                {errors.emails && (
+                                  <div className="text-red-600">
+                                    {errors.emails}
+                                  </div>
+                                )}
+                                {values.emails?.length < values.noStudents && (
+                                  <Button
+                                    variant="contained"
+                                    className=" text-white font-bold py-2 px-4 rounded"
+                                    type="button"
+                                    onClick={() => push("")}
+                                  >
+                                    Add Email
+                                  </Button>
+                                )}
+                              </>
+                            )}
+                          </FieldArray>
+                        </div>
+                      </div>
+
+                      <div className="mt-8">
+                        <Button
+                          variant="contained"
+                          onClick={() => {
+                            setInitialValues(values);
+                          }}
+                          type="submit"
+                          className=" text-white font-bold py-2 px-4 rounded"
+                        >
+                          Save Interview
+                        </Button>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </div>
