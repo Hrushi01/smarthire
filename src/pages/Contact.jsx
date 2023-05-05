@@ -15,10 +15,7 @@ function contact() {
         <div class="img"></div>
         <span>Rahat Sayyed</span>
         <p class="info">
-          I’m Walter, a multidisciplinary designer who focuses on telling my
-          clients’ stories visually, through enjoyable and meaningful
-          experiences. I specialize in responsive websites and functional user
-          interfaces.
+          I’m Rahat, I build & learn things that are on the web.
         </p>
         <div class="share">
           <a href="">
