@@ -47,7 +47,7 @@ function AddStudent({ list, setList }) {
         </div>
         <div className="flexRowReverse">
           <Formik>
-            <Form className="card width30 max-h-[300px]">
+            <Form className="card cardStudent width30 max-h-[300px]">
               <h2 className="w-full text-lg font-bold mb-4 borderBottom">
                 Add Candidate
               </h2>

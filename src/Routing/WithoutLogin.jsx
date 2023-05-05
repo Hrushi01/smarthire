@@ -41,6 +41,8 @@ const WithoutLogin = (Props) => {
         <Route path="/user" element={<Decide />} />
         <Route path="/org-login" element={<Login />} />
         <Route path="/student-login" element={<Login />} />
+        <Route path="/signup" element={<SignupOrganization />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
 
         {/* <Route path="/getstarted" element={<Features />} /> */}
         {/* <Route path="/features" element={<Features />} /> */}

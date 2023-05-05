@@ -8,7 +8,6 @@ import AddStudent from "../organization/AddStudent/AddStudent";
 import Results from "../organization/Results/Results";
 import StudentProfilePage from "../Student/pages/StudentProfilePage";
 import InterviewShow from "../Student/InterviewShow";
-
 function WithLogin({ status, setStatus, setIsLoggedIn }) {
   return (
     <div>

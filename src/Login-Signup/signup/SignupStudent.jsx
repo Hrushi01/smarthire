@@ -120,9 +120,11 @@ const SignUpStdudent = async () => {
         }}
       >
         {(props) => (
-          <Form>
-            <div className="flex flex-col space-y-4">
-              <div className="flex flex-col">
+          <Form className="">
+            <div className=" pt-8 pb-2 flex-col space-y-4 card mx-auto w-2/4 items-center">
+
+              <div className="flex w-10/12">
+              <div className="flex flex-col mr-2  w-6/12">
                 <label htmlFor="username" className="font-bold mb-1">
                   Username:
                 </label>
@@ -138,7 +140,7 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col  w-6/12">
                 <label htmlFor="email" className="font-bold mb-1">
                   Email:
                 </label>
@@ -154,7 +156,10 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              </div>
+
+              <div className="flex w-10/12">
+              <div className="flex flex-col mr-2  w-6/12">
                 <label htmlFor="email" className="font-bold mb-1">
                   Password:
                 </label>
@@ -171,7 +176,7 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-6/12">
                 <label htmlFor="email" className="font-bold mb-1">
                   Confirm Password:
                 </label>
@@ -188,7 +193,10 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              </div>
+
+              <div className="flex w-10/12">
+              <div className="flex flex-col mr-2  w-6/12">
                 <label htmlFor="phone" className="font-bold mb-1">
                   Phone Number:
                 </label>
@@ -204,12 +212,7 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
-                <label htmlFor="address" className="font-bold mb-1">
-                  Address:
-                </label>
-              </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col  w-6/12">
                 <label htmlFor="address" className="font-bold mb-1">
                   Address:
                 </label>
@@ -225,7 +228,10 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              </div>
+
+               <div className="flex w-10/12">
+              <div className="flex flex-col mr-2  w-6/12">
                 <label htmlFor="skills.programming" className="font-bold mb-1">
                   Technical Skills - Programming Languages:
                 </label>
@@ -241,7 +247,7 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col  w-6/12">
                 <label htmlFor="skills.frameworks" className="font-bold mb-1">
                   Technical Skills - Frameworks and Libraries:
                 </label>
@@ -257,7 +263,10 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              </div>
+
+               <div className="flex w-10/12">
+              <div className="flex flex-col mr-2  w-6/12">
                 <label htmlFor="skills.databases" className="font-bold mb-1">
                   Technical Skills - Database Technologies:
                 </label>
@@ -273,7 +282,7 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col  w-6/12">
                 <label
                   htmlFor="pastPerformance.projects"
                   className="font-bold mb-1"
@@ -292,7 +301,10 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              </div>
+
+               <div className="flex w-10/12">
+              <div className="flex flex-col mr-2  w-6/12">
                 <label
                   htmlFor="pastPerformance.internships"
                   className="font-bold mb-1"
@@ -311,7 +323,7 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col  w-6/12">
                 <label
                   htmlFor="pastPerformance.hackathons"
                   className="font-bold mb-1"
@@ -330,7 +342,10 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              <div className="flex flex-col">
+              </div> 
+
+
+              <div className="flex flex-col  w-6/12">
                 <label htmlFor="resume" className="font-bold mb-1">
                   Resume:
                 </label>
@@ -346,6 +361,8 @@ const SignUpStdudent = async () => {
                   className="text-red-500 text-sm"
                 />
               </div>
+
+
               <div className="flex justify-center mt-6">
                 <Button
                   variant="contained"

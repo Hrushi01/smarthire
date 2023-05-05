@@ -4,7 +4,7 @@ import WithoutLogin from "./Routing/WithoutLogin.jsx";
 import WithLogin from "./Routing/WithLogin";
 
 function App() {
-  const [isLogged, setIsLoggedIn] = useState(true);
+  const [isLogged, setIsLoggedIn] = useState(false);
 
   const [status, setStatus] = useState("student");
 
