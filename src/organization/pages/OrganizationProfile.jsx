@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBriefcase,
@@ -13,10 +13,20 @@ import {
 // import Avatar from "react-avatar";
 // import Avatar from "./Avatar";
 import { Button } from "@mui/material";
-const OrganizationProfile = () => {
+const OrganizationProfile = ({UserDataData}) => {
+  const [OrgData, setOrgData] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setOrgData(UserDataData);
+    console.log("Org",OrgData);
+    if(OrgData){
+      setLoading(false);
+    }
+  }, [loading]);
   return (
-    <>
-      <div className="bg-gray-100">
+    <>{
+      loading ? (<>Loading</>) :(<>
+            <div className="bg-gray-100">
         <div className="bg-white shadow-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col sm:flex-row justify-between items-center">
@@ -214,6 +224,9 @@ const OrganizationProfile = () => {
           </div>
         </div>
       </div>
+      </>)
+    }
+
     </>
   );
 };

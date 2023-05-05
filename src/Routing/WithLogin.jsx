@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SidebarOrg from "../organization/Sidebar/SideNavButton";
 import SidebarStudent from "../Student/Sidebar/SideNavButton";
@@ -8,36 +8,80 @@ import AddStudent from "../organization/AddStudent/AddStudent";
 import Results from "../organization/Results/Results";
 import StudentProfilePage from "../Student/pages/StudentProfilePage";
 import InterviewShow from "../Student/InterviewShow";
+import SwitchInterviewWindow from "../Student/SwitchInterviewWindow";
+import axios from "axios";
+import Cookies from "universal-cookie";
+
 function WithLogin({ status, setStatus, setIsLoggedIn }) {
+  const [UserDataData, setUserData] = useState({});
+  const BASEURL = process.env.REACT_APP_SAMPLE;
+  const cookies = new Cookies();
+
+  const UserTypeFunction = async () => {
+    const UserData = await axios.post(
+      `${BASEURL}/FindUser`,
+      {},
+      {
+        headers: {
+          Authorization: cookies.get("SmartToken"),
+        },
+      }
+    );
+    if (UserData) {
+      console.log("UserData", UserDataData);
+      setUserData(UserData.data.GotUser);
+      setStatus(UserData.data.GotUser.TypeofUser);
+      setLoading(false);
+    }
+  };
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    UserTypeFunction();
+  }, [loading]);
+
   return (
-    <div>
-      {status === "org" ? (
-        <>
-          <SidebarOrg setIsLoggedIn={setIsLoggedIn} />
-          <Routes>
-            <Route path="/" element={<OrganizationProfile />} />
-            <Route path="/profile" element={<OrganizationProfile />} />
-            <Route path="/newinterview" element={<NewInterview />} />
-            <Route path="/addstudents" element={<AddStudent />} />
-            <Route path="/viewresults" element={<Results />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
-          </Routes>
-        </>
-      ) : status === "student" ? (
-        <>
-          <SidebarStudent setIsLoggedIn={setIsLoggedIn} />
-          <Routes>
-            <Route path="/" element={<StudentProfilePage />} />
-            <Route path="/profile" element={<StudentProfilePage />} />
-            <Route path="/interview" element={<InterviewShow />} />
-            <Route path="/viewresults" element={<Results />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
-          </Routes>
-        </>
+    <>
+      {loading ? (
+        <>Loading</>
       ) : (
-        <>Somthing went wrong...</>
+        <>
+          {" "}
+          <div>
+            {status === "org" ? (
+              <>
+                <SidebarOrg setIsLoggedIn={setIsLoggedIn} />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <OrganizationProfile UserDataData={UserDataData} />
+                    }
+                  />
+                  <Route path="/profile" element={<OrganizationProfile UserDataData={UserDataData}/>} />
+                  <Route path="/newinterview" element={<NewInterview UserDataData={UserDataData}/>} />
+                  <Route path="/addstudents" element={<AddStudent UserDataData={UserDataData}/>} />
+                  <Route path="/viewresults" element={<Results UserDataData={UserDataData}/>} />
+                  <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+              </>
+            ) : status === "student" ? (
+              <>
+                <SidebarStudent setIsLoggedIn={setIsLoggedIn} />
+                <Routes>
+                  <Route path="/" element={<StudentProfilePage UserDataData={UserDataData}/>} />
+                  <Route path="/profile" element={<StudentProfilePage UserDataData={UserDataData}/>} />
+                  <Route path="/interview" element={<SwitchInterviewWindow UserDataData={UserDataData}/>} />
+                  <Route path="/viewresults" element={<Results UserDataData={UserDataData}/>} />
+                  <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+              </>
+            ) : (
+              <>Somthing went wrong...</>
+            )}
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 }
 
