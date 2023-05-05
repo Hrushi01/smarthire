@@ -4,8 +4,12 @@ import * as Yup from "yup";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import Cookies from "universal-cookie";
+import axios from "axios";
+import { RxCross2 } from "react-icons/rx";
 
-function SignupOrganization({ status }) {
+
+function SignupOrganization({ status ,setIsLoggedIn}) {
   const [initialValues, setInitialvalues] = useState({
     orgName: "",
     industry: "",
@@ -22,8 +26,67 @@ function SignupOrganization({ status }) {
     email: "",
     phone: "",
     linkedin: "",
+    password:""
   });
-  console.log("Values", initialValues);
+  console.log("Values", initialValues.orgName);
+  const [Error, setError] = useState("");
+  const cookies = new Cookies();
+  const BASEURL = process.env.REACT_APP_SAMPLE;
+
+  const SignUpOrg = async () => {
+    const Temp = await axios
+      .post(`${BASEURL}/SignUp`, {
+        Res_Name: initialValues.orgName,
+        Res_EmailId: initialValues.email,
+        Res_Password: initialValues.password,
+        Res_TypeOfUser: "org",
+        Res_PhoneNumber: initialValues.phone,
+        Res_Address: initialValues.location,
+        Res_industry: initialValues.industry,
+        Res_founded: initialValues.founded,
+        Res_website: initialValues.website,
+        Res_size:
+          initialValues.size,
+        Res_specialities:
+          initialValues.specialities,
+        Res_mission:
+          initialValues.mission,
+        Res_projects: initialValues.projects,
+        Res_technologies: initialValues.technologies,
+        Res_openPositions: initialValues.openPositions,
+        Res_description: initialValues.description,
+        Res_linkedin: initialValues.linkedin,
+      })
+      .then((Data) => {
+        if (Data) {
+          cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
+          setIsLoggedIn(true);
+          console.log(Data.data.data);
+        }
+      })
+      .catch((ErrorR) => {
+        setSnackbarClass("invalid");
+        setOpen(true);
+        setError(ErrorR?.response?.data?.message);
+        setSnackbarMsg(ErrorR?.response?.data?.message);
+        console.log("kkkkk", ErrorR);
+      });
+  };
+
+  
+  // for Snackbar
+  const [open, setOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState();
+  const [snackbarClass, setSnackbarClass] = useState();
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const action = (
+    <button onClick={handleClose}>
+      <RxCross2 />
+    </button>
+  );
 
   const validationSchema = Yup.object({
     orgName: Yup.string().required("Required"),
@@ -46,7 +109,7 @@ function SignupOrganization({ status }) {
   const handleSubmit = (values, { setSubmitting }) => {
     // TODO: Handle form submission here
     setInitialvalues(values);
-
+    SignUpOrg();
     setSubmitting(false);
   };
 
@@ -304,6 +367,23 @@ function SignupOrganization({ status }) {
                   component="div"
                   className="text-red-500 text-sm"
                 />
+                {/* -------------- */}
+                <label htmlFor="Password" className="font-bold mb-1 block">
+                  Password<span className="text-red-500">*</span>
+                </label>
+                <Field
+                  type="password"
+                  name="Password"
+                  className="form-input w-full px-3 py-2 rounded-md border border-gray-300"
+                />
+                 <ErrorMessage
+                  name="Password"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+                                {/* -------------- */}
+                                
+
               </div>
               <div className="flex justify-center w-6/12 items-end pb-3 ">
                 <button

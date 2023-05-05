@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 
 function Fields(props) {
   const [typeOfUser, setTypeOfUser] = useState("");
-
   const [loading, setLoading] = useState(true);
   const {
     setIsLoggedIn,
@@ -20,23 +19,21 @@ function Fields(props) {
     OrganizationLog,
     candidateLog,
     status,
-
     // setCandidateLog,
     // setOrganizationLog,
   } = props;
-  console.log("jjj", OrganizationLog, candidateLog);
   const [Error, setError] = useState("");
   const cookies = new Cookies();
 
-  useEffect(() => {
-    if (OrganizationLog === true) {
-      setTypeOfUser("Company");
-      setLoading(false);
-    } else if (candidateLog === true) {
-      setTypeOfUser("Candidate");
-      setLoading(false);
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   if (OrganizationLog === true) {
+  //     setTypeOfUser("Company");
+  //     setLoading(false);
+  //   } else if (candidateLog === true) {
+  //     setTypeOfUser("Candidate");
+  //     setLoading(false);
+  //   }
+  // }, [loading]);
 
   const onsubmit = () => {
     OnClickLogin();
@@ -59,6 +56,7 @@ function Fields(props) {
   const BASEURL = process.env.REACT_APP_SAMPLE;
   //Login Api
   const OnClickLogin = async () => {
+    console.log("initialValues",initialValues);
     setOpen(true);
     setSnackbarMsg("Please Wait ...");
     setSnackbarClass("default");

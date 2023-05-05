@@ -40,18 +40,16 @@ const WithoutLogin = (Props) => {
         <Route path="/chat" element={<ChatBot />} />
         <Route path="/resume" element={<ResumeBuilder />} />
         <Route path="/user" element={<Decide setStatus={setStatus} />} />
-        <Route path="/org-login" element={<Login status={status} />} />
-        <Route path="/org-signup" element={<Login status={status} />} />
-        <Route path="/student-login" element={<Login status={status} />} />
-        <Route path="/student-signup" element={<Login status={status} />} />
+        <Route path="/org-login" element={<Login status={status} setIsLoggedIn={setIsLoggedIn}/>} />
+        <Route path="/student-login" element={<Login status={status} setIsLoggedIn={setIsLoggedIn}/>} />
         {console.log("Hrushiii", status)}
         <Route
           path="/signup"
           element={
             status === "org" ? (
-              <SignupOrganization status={status} />
+              <SignupOrganization status={status} setIsLoggedIn={setIsLoggedIn}/>
             ) : status === "student" ? (
-              <SignupStudent status={status} />
+              <SignupStudent status={status} setIsLoggedIn={setIsLoggedIn}/>
             ) : (
               <>
                 <h1>404 Not Found</h1>
