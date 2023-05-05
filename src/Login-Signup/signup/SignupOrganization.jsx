@@ -366,16 +366,16 @@ function SignupOrganization({ status, setIsLoggedIn }) {
                   className="text-red-500 text-sm"
                 />
                 {/* -------------- */}
-                <label htmlFor="Password" className="font-bold mb-1 block">
+                <label htmlFor="password" className="font-bold mb-1 block">
                   Password<span className="text-red-500">*</span>
                 </label>
                 <Field
                   type="password"
-                  name="Password"
+                  name="password"
                   className="form-input w-full px-3 py-2 rounded-md border border-gray-300"
                 />
                 <ErrorMessage
-                  name="Password"
+                  name="password"
                   component="div"
                   className="text-red-500 text-sm"
                 />
