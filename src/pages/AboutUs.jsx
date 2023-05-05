@@ -6,14 +6,13 @@ import Logo from "../images/Company-Logo.jpg";
 
 function AboutUs({ setDisplay }) {
   return (
-    <div className="bg-white marginLeftZero">
+    <div className="bg-white">
       <Header setDisplay={setDisplay} />
       <div className="container mx-auto px-4 py-16">
-        <div className="flex flex-wrap justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center text-center">
           <div className="w-full md:w-1/2 lg:w-2/3 mb-8 md:mb-0">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-              About Us
-            </h1>
+           
+            <h1 className="text-5xl font-bold text-center pb-5">About Us</h1>
             <p className="text-gray-600 leading-relaxed text-lg mb-8">
               Recruiting the right candidate for a job role is a crucial and
               time-consuming task for any company. Interviews require a lot of

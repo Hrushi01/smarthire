@@ -10,6 +10,7 @@ import LandingPg from "../pages/LandingPg";
 import ChatBot from "../ChatbotComponents/chatbot";
 import ResumeBuilder from "../ResumeBuilder/ResumeBuilder";
 import AboutUs from "../pages/AboutUs";
+import Contact from "../pages/Contact";
 
 const WithoutLogin = (Props) => {
   const {
@@ -33,7 +34,7 @@ const WithoutLogin = (Props) => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/getstarted" element={<LandingPg />} />
         <Route path="/chat" element={<ChatBot />} />
