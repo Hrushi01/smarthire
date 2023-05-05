@@ -20,9 +20,9 @@ function Fields(props) {
     OrganizationLog,
     candidateLog,
     status,
-    setSignup,
-    setCandidateLog,
-    setOrganizationLog,
+
+    // setCandidateLog,
+    // setOrganizationLog,
   } = props;
   console.log("jjj", OrganizationLog, candidateLog);
   const [Error, setError] = useState("");
@@ -111,10 +111,6 @@ function Fields(props) {
                 <Button
                   variant="contained"
                   type="but"
-                  onClick={() => {
-                    setCandidateLog(false);
-                    setOrganizationLog(false);
-                  }}
                   className=" h-12  inline-block py-2 px-4 text-white font-bold rounded-md bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
                 >
                   <div className="p-1">
@@ -180,14 +176,11 @@ function Fields(props) {
             <div className="h-20">
               <div className="login ml-24 text-xs h-12 flex rounded-full border-gray-400  pr-3 pl-3 round">
                 <div className="pl-9 pt-4">don’t have an account yet?</div>
-                <div
-                  className="font-semibold  pt-4 pl-2 underline hover:cursor-pointer"
-                  onClick={() => {
-                    setSignup(true);
-                  }}
-                >
-                  Sign up
-                </div>
+                <Link to="/signup">
+                  <div className="font-semibold  pt-4 pl-2 underline hover:cursor-pointer">
+                    Sign up
+                  </div>
+                </Link>
               </div>
             </div>
           </Form>

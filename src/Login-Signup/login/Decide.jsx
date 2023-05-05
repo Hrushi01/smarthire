@@ -40,7 +40,7 @@ function Decide(props) {
                 type="button"
                 className="flex items-center justify-center space-x-2 text-lg font-medium text-gray-900 hover:text-gray-700 py-3"
                 onClick={() => {
-                  setStatus("Organization");
+                  setStatus("org");
                   setOrganizationLog(true);
                   setCandidateLog(false);
                 }}
@@ -56,7 +56,7 @@ function Decide(props) {
                 type="button"
                 className="flex items-center justify-center space-x-2 text-lg font-medium text-gray-900 hover:text-gray-700 py-3"
                 onClick={() => {
-                  setStatus("Student");
+                  setStatus("student");
                   setOrganizationLog(false);
                   setCandidateLog(true);
                 }}
@@ -69,18 +69,22 @@ function Decide(props) {
         </div>
       </div>
 
-
-      
-<div className=" h-full mx-auto max-w-lg text-center">
-      {quote && (
-        <p className="text-center font-bold inline text-xl">
-          {" "}
-          <FontAwesomeIcon icon={faQuoteLeft} className="text-black inline mr-1" />
-          {quote}
-          <FontAwesomeIcon icon={faQuoteRight} className="text-black inline ml-1" />
-        </p>
-      )}
-      {author && <p className="text-center">~ {author}</p>}
+      <div className=" h-full mx-auto max-w-lg text-center">
+        {quote && (
+          <p className="text-center font-bold inline text-xl">
+            {" "}
+            <FontAwesomeIcon
+              icon={faQuoteLeft}
+              className="text-black inline mr-1"
+            />
+            {quote}
+            <FontAwesomeIcon
+              icon={faQuoteRight}
+              className="text-black inline ml-1"
+            />
+          </p>
+        )}
+        {author && <p className="text-center">~ {author}</p>}
       </div>
 
       <div className="mt-auto">
