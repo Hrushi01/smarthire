@@ -36,9 +36,8 @@ function NewInterview({ UserDataData }) {
         Res_Email_Arrays: []
       })
       .then((Data) => {
-        if (Data) {
-          console.log(Data);
-          setLoading(false);
+        if (Data.data.message==="Interview added successfully !") {
+          alert("Interview created successfully !")
         }
       })
       .catch((ErrorR) => {
