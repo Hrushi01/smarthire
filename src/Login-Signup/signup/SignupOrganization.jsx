@@ -8,8 +8,7 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
 
-
-function SignupOrganization({ status ,setIsLoggedIn}) {
+function SignupOrganization({ status, setIsLoggedIn }) {
   const [initialValues, setInitialvalues] = useState({
     orgName: "",
     industry: "",
@@ -26,9 +25,9 @@ function SignupOrganization({ status ,setIsLoggedIn}) {
     email: "",
     phone: "",
     linkedin: "",
-    password:""
+    password: "",
   });
-  console.log("Values", initialValues.orgName);
+  console.log("Values", initialValues);
   const [Error, setError] = useState("");
   const cookies = new Cookies();
   const BASEURL = process.env.REACT_APP_SAMPLE;
@@ -45,12 +44,9 @@ function SignupOrganization({ status ,setIsLoggedIn}) {
         Res_industry: initialValues.industry,
         Res_founded: initialValues.founded,
         Res_website: initialValues.website,
-        Res_size:
-          initialValues.size,
-        Res_specialities:
-          initialValues.specialities,
-        Res_mission:
-          initialValues.mission,
+        Res_size: initialValues.size,
+        Res_specialities: initialValues.specialities,
+        Res_mission: initialValues.mission,
         Res_projects: initialValues.projects,
         Res_technologies: initialValues.technologies,
         Res_openPositions: initialValues.openPositions,
@@ -58,7 +54,7 @@ function SignupOrganization({ status ,setIsLoggedIn}) {
         Res_linkedin: initialValues.linkedin,
       })
       .then((Data) => {
-        if (Data) {
+        if (Data.data.message==="User found Successfully!") {
           cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
           setIsLoggedIn(true);
           console.log(Data.data.data);
@@ -73,7 +69,6 @@ function SignupOrganization({ status ,setIsLoggedIn}) {
       });
   };
 
-  
   // for Snackbar
   const [open, setOpen] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState();
@@ -122,7 +117,10 @@ function SignupOrganization({ status ,setIsLoggedIn}) {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={() => {
+          console.log("Values----------->", initialValues);
+          SignUpOrg();
+        }}
       >
         {(props) => (
           <Form className="pt-8 pb-2 flex-col space-y-4 card mx-auto w-2/4 items-center">
@@ -376,19 +374,20 @@ function SignupOrganization({ status ,setIsLoggedIn}) {
                   name="Password"
                   className="form-input w-full px-3 py-2 rounded-md border border-gray-300"
                 />
-                 <ErrorMessage
+                <ErrorMessage
                   name="Password"
                   component="div"
                   className="text-red-500 text-sm"
                 />
-                                {/* -------------- */}
-                                
-
+                {/* -------------- */}
               </div>
               <div className="flex justify-center w-6/12 items-end pb-3 ">
                 <button
                   type="submit"
                   className="w-40 h-10 buttonBlack rounded text-white"
+                  onClick={() => {
+                    setInitialvalues(props.values);
+                  }}
                 >
                   Submit
                 </button>

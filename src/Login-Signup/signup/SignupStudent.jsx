@@ -58,11 +58,11 @@ const SignupForm = (props) => {
         Res_Resume: "None",
       })
       .then((Data) => {
-        if (Data) {
+        if (Data.data.message==="User found Successfully!") {
           cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
           setIsLoggedIn(true);
           setRefresher(!refresher);
-          console.log(Data.data.data);
+          console.log(Data.data.message);
         }
       })
       .catch((ErrorR) => {
