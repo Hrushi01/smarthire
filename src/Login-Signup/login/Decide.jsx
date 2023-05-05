@@ -28,7 +28,7 @@ function Decide(props) {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Header setDisplay={setDisplay} />
 
-      <div className=" max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className=" max-w-7xl mx-auto pb-20 pt-12 px-4 sm:px-6 lg:px-8 ">
         <h1 className="text-3xl font-bold text-gray-900 bg-slate-200 items-center flex justify-center p-2 rounded-lg">
           Select User Type
         </h1>
