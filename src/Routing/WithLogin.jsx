@@ -8,6 +8,7 @@ import AddStudent from "../organization/AddStudent/AddStudent";
 import Results from "../organization/Results/Results";
 import StudentProfilePage from "../Student/pages/StudentProfilePage";
 import InterviewShow from "../Student/InterviewShow";
+import InterviewList from "../Student/pages/InterviewList";
 function WithLogin({ status, setStatus, setIsLoggedIn }) {
   return (
     <div>
@@ -30,6 +31,7 @@ function WithLogin({ status, setStatus, setIsLoggedIn }) {
             <Route path="/" element={<StudentProfilePage />} />
             <Route path="/profile" element={<StudentProfilePage />} />
             <Route path="/interview" element={<InterviewShow />} />
+            <Route path="/interviewList" element={<InterviewList />} />
             <Route path="/viewresults" element={<Results />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
