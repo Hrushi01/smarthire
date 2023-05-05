@@ -111,7 +111,7 @@ function AddStudent({ list, setList }) {
                     <TableRow>
                       <TableCell className="font-bold">Name</TableCell>
                       <TableCell className="font-bold">Email</TableCell>
-                      <TableCell className="font-bold">Send Mail</TableCell>
+                      <TableCell className="font-bold" >Send Mail</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

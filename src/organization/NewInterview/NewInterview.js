@@ -31,9 +31,9 @@ function NewInterview({ UserDataData }) {
         Res_Time_Duration: "",
         Res_Time_Of_Interview: "",
         Res_Date_Of_Interview:"",
-        Res_Question_Arrays: "",
-        Res_Answer_Arrays: "",
-        Res_Email_Arrays: ""
+        Res_Question_Arrays: [],
+        Res_Answer_Arrays: [],
+        Res_Email_Arrays: []
       })
       .then((Data) => {
         if (Data) {
@@ -272,6 +272,9 @@ function NewInterview({ UserDataData }) {
                     <button
                       type="submit"
                       className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                      onClick={()=>{
+                        createNewInterview();
+                      }}
                     >
                       Save Interview
                     </button>
