@@ -10,12 +10,12 @@ export const SidebarData = [
     icon: <RxIcons.RxCalendar />,
     cName: "nav-text",
   },
-  {
-    title: "Interview Show",
-    path: "/interview",
-    icon: <RxIcons.RxCalendar />,
-    cName: "nav-text",
-  },
+  // {
+  //   title: "Interview Show",
+  //   path: "/interview",
+  //   icon: <RxIcons.RxCalendar />,
+  //   cName: "nav-text",
+  // },
   {
     title: "Interviews List",
     path: "/interviewList",

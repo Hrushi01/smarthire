@@ -2,7 +2,6 @@ import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import WithoutLogin from "./Routing/WithoutLogin.jsx";
 import WithLogin from "./Routing/WithLogin";
-import NewInterview from "./organization/NewInterview/NewInterview.js";
 
 function App() {
   const [isLogged, setIsLoggedIn] = useState(false);

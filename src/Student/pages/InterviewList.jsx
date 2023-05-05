@@ -1,7 +1,7 @@
 import React from "react";
 import CardList from "./CardList";
 
-function InterviewList() {
+function InterviewList({ setItrId, UserDataData }) {
   const cards = [
     {
       organization: "Acme Inc.",
@@ -24,7 +24,9 @@ function InterviewList() {
             Upcoming Interviews
           </div>
         </div>
-        <CardList cards={cards} />
+        <div>
+          <CardList cards={cards} />
+        </div>
       </div>
       <hr />
       <hr />
