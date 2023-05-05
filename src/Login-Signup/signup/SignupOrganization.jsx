@@ -25,7 +25,7 @@ function SignupOrganization({ status, setIsLoggedIn }) {
     email: "",
     phone: "",
     linkedin: "",
-    password: "",
+    Password: "",
   });
   console.log("Values", initialValues);
   const [Error, setError] = useState("");
@@ -37,7 +37,7 @@ function SignupOrganization({ status, setIsLoggedIn }) {
       .post(`${BASEURL}/SignUp`, {
         Res_Name: initialValues.orgName,
         Res_EmailId: initialValues.email,
-        Res_Password: initialValues.password,
+        Res_Password: initialValues.Password,
         Res_TypeOfUser: "org",
         Res_PhoneNumber: initialValues.phone,
         Res_Address: initialValues.location,
@@ -366,16 +366,16 @@ function SignupOrganization({ status, setIsLoggedIn }) {
                   className="text-red-500 text-sm"
                 />
                 {/* -------------- */}
-                <label htmlFor="password" className="font-bold mb-1 block">
+                <label htmlFor="Password" className="font-bold mb-1 block">
                   Password<span className="text-red-500">*</span>
                 </label>
                 <Field
                   type="password"
-                  name="password"
+                  name="Password"
                   className="form-input w-full px-3 py-2 rounded-md border border-gray-300"
                 />
                 <ErrorMessage
-                  name="password"
+                  name="Password"
                   component="div"
                   className="text-red-500 text-sm"
                 />
