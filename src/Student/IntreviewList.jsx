@@ -1,39 +1,40 @@
 
-import React,from "react";
+// import React, from "react";
 
-const IntreviewList = ({ setItrId, setSwitchD, UserDataData }) => {
+// const IntreviewList = ({ setItrId, setSwitchD, UserDataData }) => {
  
 
-  return (
-    <>
+//   return (
+//     <>
       
-          {IntrList.map((Item) => {
-            console.log(Item);
-            return (
-              <div
-                onClick={() => {
-                  setItrId(Item.Interview_ID);
-                  setSwitchD(false);
-                }}
-              >
-                {/* <div>{Item.Interview_ID}</div> */}
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <div>wee</div>
-                <br />
-              </div>
-            );
-          })}
-        </>
-      )}
-    </>
-  );
-};
-export default IntreviewList;
+//           {IntrList.map((Item) => {
+//             console.log(Item);
+//             return (
+//               <div
+//                 onClick={() => {
+//                   setItrId(Item.Interview_ID);
+//                   setSwitchD(false);
+//                 }}
+//               >
+//                 {/* <div>{Item.Interview_ID}</div> */}
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <div>wee</div>
+//                 <br />
+//               </div>
+//             );
+//           })}
+//         </>
+//       )}
+//     </>
+//   );
+// };
+// export default IntreviewList;
+

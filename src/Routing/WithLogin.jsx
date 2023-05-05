@@ -14,6 +14,8 @@ import Cookies from "universal-cookie";
 import InterviewList from "../Student/pages/InterviewList";
 
 function WithLogin({ status, setStatus, setIsLoggedIn }) {
+  const [ItrId, setItrId] = useState(0);
+
   const [UserDataData, setUserData] = useState({});
   const BASEURL = process.env.REACT_APP_SAMPLE;
   const cookies = new Cookies();
@@ -88,11 +90,11 @@ function WithLogin({ status, setStatus, setIsLoggedIn }) {
               />
               <Route
                 path="interview"
-                element={<SwitchInterviewWindow UserDataData={UserDataData} />}
+                element={<SwitchInterviewWindow UserDataData={UserDataData} ItrId={ItrId} setItrId={setItrId}/>}
               />
               <Route
                 path="/interviewList"
-                element={<InterviewList UserDataData={UserDataData} />}
+                element={<InterviewList UserDataData={UserDataData} setItrId={setItrId}/>}
               />
               <Route
                 path="/viewresults"

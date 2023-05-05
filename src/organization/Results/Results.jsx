@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Results({ list }) {
+function Results({ result1,result2 }) {
   const classes = useStyles();
   const [students, setStudents] = useState([
     {
@@ -45,32 +45,33 @@ function Results({ list }) {
   ]);
 
   // Sort students by score in descending order
-  const sortedStudents = [...students].sort((a, b) => b.score - a.score);
-
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
-        <CardHeader title="Student List" />
+        <CardHeader title="Your Final Scoring !" />
         <Divider />
         <CardContent>
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Score (%)</TableCell>
+                {/* <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell> */}
+                <TableCell>Performance Score (%)</TableCell>
+                <TableCell>Time Score (%)</TableCell>
+
               </TableRow>
             </TableHead>
             <TableBody>
-              {list?.map((student, index) => (
-                <TableRow key={index}>
-                  <TableCell>{student.name}</TableCell>
-                  <TableCell>{student.email}</TableCell>
+                <TableRow>
+                  {/* <TableCell>{student.name}</TableCell>
+                  <TableCell>{student.email}</TableCell> */}
                   <TableCell>
-                    <Typography variant="body1">{student.score}%</Typography>
+                    <Typography variant="body1">{result1}%</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body1">{result2}%</Typography>
                   </TableCell>
                 </TableRow>
-              ))}
             </TableBody>
           </Table>
         </CardContent>

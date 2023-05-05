@@ -4,36 +4,11 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 function InterviewList({ setItrId, UserDataData }) {
-  const [testEmail, setTestEmail] = useState("");
-  const [IntrList, setIntrList] = useState([]);
-  const BASEURL = process.env.REACT_APP_SAMPLE;
-  const cookies = new Cookies();
-  const [loading, setLoading] = useState(true);
 
   // const setterF = (Obj) => {
   //   setSwitchD(false);
   // };
-  const findInterviewList = async () => {
-    const viewData = await axios
-      .post(`${BASEURL}/ViewInterviewList`, {
-        Res_Interviewer_Email: testEmail,
-      })
-      .then((Data) => {
-        setIntrList(Data.data.data1);
-      })
-      .catch((ErrorR) => {
-        console.log("kkkkk", ErrorR);
-      });
-  };
-  useEffect(() => {
-    setTestEmail(UserDataData.emailId);
-    findInterviewList();
-    // console.log("Org", OrgData);
-    if (IntrList[0] && testEmail) {
-      setLoading(false);
-      console.log("kkkkk=====", loading);
-    }
-  }, [loading]);
+
 
   const cards = [
     {
@@ -50,10 +25,10 @@ function InterviewList({ setItrId, UserDataData }) {
     },
   ];
   return (
-    <>
-      {loading ? (
-        <></>
-      ) : (
+    // <>
+    //   {loading ? (
+    //     <></>
+    //   ) : (
         <>
           <div>
             <div className="flex justify-center">
@@ -62,7 +37,7 @@ function InterviewList({ setItrId, UserDataData }) {
               </div>
             </div>
             <div>
-              <CardList cards={cards} />
+              <CardList cards={cards} UserDataData={UserDataData} setItrId={setItrId}/>
             </div>
           </div>
           <hr />
@@ -75,12 +50,12 @@ function InterviewList({ setItrId, UserDataData }) {
                   Previous Interviews
                 </div>
               </div>
-              <CardList cards={cards} />
+              <CardList cards={cards} UserDataData={UserDataData}/>
             </div>
           </div>
         </>
-      )}
-    </>
+    //   )}
+    // </>
   );
 }
 

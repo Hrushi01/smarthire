@@ -10,7 +10,9 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import Results from "../organization/Results/Results";
-function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
+import "./InterviewShow.css";
+function InterviewShow({ ItrId, UserDataData }) {
+  const [tempData, setTEmpData] = useState({});
   const [switchWindow, setSwitchWindow] = useState(true);
   const [camRefresh, setCamREfresh] = useState(false);
   const recordWebcam = useRecordWebcam({ frameRate: 60 });
@@ -28,6 +30,9 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
   const [interviewData, setInterviewData] = useState({});
   const [loading, setLoading] = useState(true);
   const [questionArray, setQuestionArray] = useState([]);
+  //Result State
+  const [result1 ,setResult1]= useState(0);
+  const [result2 ,setResult2]= useState(0);
   // console.log("nnn",recordWebcam.status);
   const countIncrement = () => {
     let counter = parseInt(localStorage.getItem("Counter"));
@@ -83,6 +88,7 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
       });
   };
   useEffect(() => {
+    setTEmpData(UserDataData);
     fetchInterview();
   }, [loading]);
 
@@ -97,7 +103,6 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
     }
     return () => {
       clearInterval(interval);
-      setSwitchD(true);
     };
   }, [isActive, camRefresh]);
 
@@ -153,6 +158,39 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
       .padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
+  const addNewResult = async () => {
+    const ArrayFromCookieT = cookies.get("AnswerArray");
+    const newSpreadedArrayT = [...ArrayFromCookieT];
+
+    console.log("ooooo-->", tempData);
+    const submitInterviewResult = await axios
+      .post(`${BASEURL}/AddNewResult`, {
+        Res_Candidate_Name: tempData.Name,
+        Res_Candidate_Email: tempData.emailId,
+        Res_Company_Name: interviewData.Company_Name,
+        Res_HR_Name: interviewData.HR_Name,
+        Res_Name_Technology: interviewData.Name_Technology,
+        Res_Number_Of_Questions: interviewData.Number_Of_Questions,
+        Res_Time_Duration: interviewData.Time_Duration,
+        Res_Time_Of_Interview: interviewData.Time_Of_Interview,
+        Res_Date_Of_Interview: interviewData.Date_Of_Interview,
+        Res_Question_Arrays: interviewData.Question_Arrays,
+        Res_Answer_Arrays: newSpreadedArrayT,
+        Res_Performance_Array:[result1,result1],
+        Res_Text_Percentage:result1,
+        Res_Time_Percentage:result2,
+        Res_confidence_Percentage:0,
+        Res_Overall_Percentage:((result1+result2)/200)*100,
+      })
+      .then((Data) => {
+        if (Data.data.message === "Interview result added successfully !") {
+          alert("Result submitted to Company !")
+        }
+      })
+      .catch((ErrorR) => {
+        console.log("kkkkk", ErrorR);
+      });
+  };
 
   const handleAPIRecording = async () => {
     const ArrayFromCookie = cookies.get("AnswerArray");
@@ -165,10 +203,12 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
           secondCounter(firstTime) - secondCounter(formatTime(time)),
       })
       .then((Data) => {
-        console.log("ooooo-->", Data);
+        setResult1(Data.data.data1Text);
+        setResult2(Data.data.data2Time);
         if (Data.data.message === "Result found successfully !") {
           setSwitchWindow(false);
           setIsActive(false);
+          addNewResult();
         }
       })
       .catch((ErrorR) => {
@@ -202,6 +242,15 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
         {switchWindow ? (
           <div className="flex flex-col md:flex-row h-screen">
             <div className="bg-gray-200 w-full md:w-1/2 h-100 md:h-auto flex items-center justify-center">
+              <div class="watermark1">
+                {interviewData.Company_Name} Confidential{" "}
+              </div>
+              <div class="watermark2">
+                {interviewData.Company_Name} Confidential{" "}
+              </div>
+              <div class="watermark3">
+                {interviewData.Company_Name} Confidential{" "}
+              </div>
               {/* Left side interview section */}
               {/* Left side webcam section start */}
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -443,7 +492,7 @@ function InterviewShow({ setItrId, setSwitchD, UserDataData, ItrId, switchD }) {
             </div>
           </div>
         ) : (
-          <Results />
+          <Results result1={result1} result2={result2} />
         )}
       </>
     </>

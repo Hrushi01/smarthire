@@ -1,11 +1,8 @@
 import InterviewShow from "./InterviewShow";
 import React, { useState } from "react";
 
-const SwitchInterviewWindow = ({ UserDataData }) => {
+const SwitchInterviewWindow = ({ UserDataData ,ItrId,setItrId}) => {
   //Swithcing
-
-  const [ItrId, setItrId] = useState(0);
-
   return (
     <>
       <InterviewShow
