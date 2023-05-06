@@ -1,5 +1,3 @@
-import StudentResult from "./studentResult/studentResult";
-import IntreviewList from "./IntreviewList";
 // import BlobToVideo from "../TestingAssets/BlobHelpingFunction";
 import React, { useState, useEffect } from "react";
 import { useRecordWebcam } from "react-record-webcam";
@@ -9,7 +7,8 @@ import Cookies from "universal-cookie";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import Results from "../organization/pages/ResultsList/Results";
+
+import Result from "../Student/pages/Result";
 import "./InterviewShow.css";
 function InterviewShow({ ItrId, UserDataData }) {
   const [tempData, setTEmpData] = useState({});
@@ -492,7 +491,7 @@ function InterviewShow({ ItrId, UserDataData }) {
             </div>
           </div>
         ) : (
-          <Results result1={result1} result2={result2} />
+          <Result result1={result1} result2={result2} />
         )}
       </>
     </>
