@@ -5,13 +5,13 @@ import SidebarStudent from "../Student/Sidebar/SideNavButton";
 import OrganizationProfile from "../organization/pages/OrganizationProfile";
 import NewInterview from "../organization/NewInterview/NewInterview";
 import AddStudent from "../organization/AddStudent/AddStudent";
-import Results from "../organization/Results/Results";
+import Results from "../organization/pages/ResultsList/Results";
 import StudentProfilePage from "../Student/pages/StudentProfilePage";
-import InterviewShow from "../Student/InterviewShow";
 import SwitchInterviewWindow from "../Student/SwitchInterviewWindow";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import InterviewList from "../Student/pages/InterviewList";
+import Result from "../Student/pages/Result";
 
 function WithLogin({ status, setStatus, setIsLoggedIn }) {
   const [ItrId, setItrId] = useState(0);
@@ -90,15 +90,26 @@ function WithLogin({ status, setStatus, setIsLoggedIn }) {
               />
               <Route
                 path="interview"
-                element={<SwitchInterviewWindow UserDataData={UserDataData} ItrId={ItrId} setItrId={setItrId}/>}
+                element={
+                  <SwitchInterviewWindow
+                    UserDataData={UserDataData}
+                    ItrId={ItrId}
+                    setItrId={setItrId}
+                  />
+                }
               />
               <Route
                 path="/interviewList"
-                element={<InterviewList UserDataData={UserDataData} setItrId={setItrId}/>}
+                element={
+                  <InterviewList
+                    UserDataData={UserDataData}
+                    setItrId={setItrId}
+                  />
+                }
               />
               <Route
-                path="/viewresults"
-                element={<Results UserDataData={UserDataData} />}
+                path="/viewresult"
+                element={<Result UserDataData={UserDataData} />}
               />
               <Route path="*" element={<h1>404 Not Found</h1>} />
             </Routes>

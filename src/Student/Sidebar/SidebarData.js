@@ -24,8 +24,8 @@ export const SidebarData = [
   },
 
   {
-    title: "Results",
-    path: "/viewresults",
+    title: "Result",
+    path: "/viewresult",
     icon: <MdIcons.MdOutlineAssignmentLate />,
     cName: "nav-text",
   },

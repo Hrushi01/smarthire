@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 
 function Decide(props) {
-  const { setCandidateLog, setOrganizationLog, setDisplay, setStatus } = props;
+  const { setStatus } = props;
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
   useEffect(() => {
@@ -26,7 +26,7 @@ function Decide(props) {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <Header setDisplay={setDisplay} />
+      <Header />
 
       <div className=" max-w-7xl mx-auto pb-20 pt-12 px-4 sm:px-6 lg:px-8 ">
         <h1 className="text-3xl font-bold text-gray-900 bg-slate-200 items-center flex justify-center p-2 rounded-lg">
@@ -41,8 +41,6 @@ function Decide(props) {
                 className="flex items-center justify-center space-x-2 text-lg font-medium text-gray-900 hover:text-gray-700 py-3"
                 onClick={() => {
                   setStatus("org");
-                  setOrganizationLog(true);
-                  setCandidateLog(false);
                 }}
               >
                 <img src={admin} alt="admin" className="w-20 h-20" />
@@ -57,8 +55,6 @@ function Decide(props) {
                 className="flex items-center justify-center space-x-2 text-lg font-medium text-gray-900 hover:text-gray-700 py-3"
                 onClick={() => {
                   setStatus("student");
-                  setOrganizationLog(false);
-                  setCandidateLog(true);
                 }}
               >
                 <img src={student} alt="student" className="w-20 h-20" />

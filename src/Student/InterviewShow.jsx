@@ -9,7 +9,7 @@ import Cookies from "universal-cookie";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import Results from "../organization/Results/Results";
+import Results from "../organization/pages/ResultsList/Results";
 import "./InterviewShow.css";
 function InterviewShow({ ItrId, UserDataData }) {
   const [tempData, setTEmpData] = useState({});
@@ -31,8 +31,8 @@ function InterviewShow({ ItrId, UserDataData }) {
   const [loading, setLoading] = useState(true);
   const [questionArray, setQuestionArray] = useState([]);
   //Result State
-  const [result1 ,setResult1]= useState(0);
-  const [result2 ,setResult2]= useState(0);
+  const [result1, setResult1] = useState(0);
+  const [result2, setResult2] = useState(0);
   // console.log("nnn",recordWebcam.status);
   const countIncrement = () => {
     let counter = parseInt(localStorage.getItem("Counter"));
@@ -176,15 +176,15 @@ function InterviewShow({ ItrId, UserDataData }) {
         Res_Date_Of_Interview: interviewData.Date_Of_Interview,
         Res_Question_Arrays: interviewData.Question_Arrays,
         Res_Answer_Arrays: newSpreadedArrayT,
-        Res_Performance_Array:[result1,result1],
-        Res_Text_Percentage:result1,
-        Res_Time_Percentage:result2,
-        Res_confidence_Percentage:0,
-        Res_Overall_Percentage:((result1+result2)/200)*100,
+        Res_Performance_Array: [result1, result1],
+        Res_Text_Percentage: result1,
+        Res_Time_Percentage: result2,
+        Res_confidence_Percentage: 0,
+        Res_Overall_Percentage: ((result1 + result2) / 200) * 100,
       })
       .then((Data) => {
         if (Data.data.message === "Interview result added successfully !") {
-          alert("Result submitted to Company !")
+          alert("Result submitted to Company !");
         }
       })
       .catch((ErrorR) => {

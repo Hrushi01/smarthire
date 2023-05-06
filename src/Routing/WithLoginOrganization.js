@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidenaav from "../organization/Sidebar/SideNavButton";
 import AddStudent from "../organization/AddStudent/AddStudent";
 import NewInterview from "../organization/NewInterview/NewInterview";
-import Results from "../organization/Results/Results";
+import Results from "../organization/pages/ResultsList/Results";
 import OrganizationProfile from "../organization/pages/OrganizationProfile";
 
 function WithLoginOrganization({ setOrganizationLog, setSignup }) {
