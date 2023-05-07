@@ -10,6 +10,7 @@ import SpeechRecognition, {
 
 import Result from "../Student/pages/Result";
 import "./InterviewShow.css";
+import { color } from "framer-motion";
 function InterviewShow({ ItrId, UserDataData }) {
   const [tempData, setTEmpData] = useState({});
   const [switchWindow, setSwitchWindow] = useState(true);
@@ -30,9 +31,11 @@ function InterviewShow({ ItrId, UserDataData }) {
   const [loading, setLoading] = useState(true);
   const [questionArray, setQuestionArray] = useState([]);
   //Result State
-  const [result1, setResult1] = useState(0);
+  const [result1, setResult1] = useState([]);
   const [result2, setResult2] = useState(0);
+  const [result3, setResult3] = useState(0);
   // console.log("nnn",recordWebcam.status);
+ const [imageTrigger, setImageTrigger]=useState(false);
   const countIncrement = () => {
     let counter = parseInt(localStorage.getItem("Counter"));
     if (counter >= questionArray.length - 2) {
@@ -64,7 +67,11 @@ function InterviewShow({ ItrId, UserDataData }) {
     //   Answer: transcript,
     //   TimeOfQuestion:(formatTime(time)),
     // };
-    newSpreadedArray.push(transcript);
+    if(transcript===""){
+      newSpreadedArray.push("none");
+    }else{
+      newSpreadedArray.push(transcript);
+    }
     cookies.set("AnswerArray", newSpreadedArray, { maxAge: 43200 });
     console.log(cookies.get("AnswerArray"));
     console.log(parseInt(localStorage.getItem("Counter")));
@@ -78,6 +85,7 @@ function InterviewShow({ ItrId, UserDataData }) {
         setInterviewData(Data.data.data1);
         setQuestionArray(Data.data.data1.Question_Arrays);
         setTime(Data.data.data1.Time_Duration * 60);
+        setFirstTime(formatTime(time));
         if (questionArray) {
           setLoading(false);
         }
@@ -108,7 +116,6 @@ function InterviewShow({ ItrId, UserDataData }) {
   useEffect(() => {
     localStorage.setItem("Counter", -1);
     cookies.set("AnswerArray", [], { maxAge: 43200 });
-    setFirstTime(formatTime(time));
   }, []);
 
   useEffect(() => {
@@ -126,13 +133,13 @@ function InterviewShow({ ItrId, UserDataData }) {
     recordWebcam.start();
   };
 
-  const secondCounter = (strTime) => {
-    // const minuteInt = parseInt(strTime.split(":")[0]) * 60;
-    // const secondInt = parseInt(strTime.split(":")[1]);
-    // console.log(minuteInt + secondInt);
-    console.log(strTime);
-    // return minuteInt + secondInt;
-  };
+  function secondCounter(time) {
+    const timeArr = time.split(":"); // Split the time string into an array
+    const minutes = parseInt(timeArr[0]); // Parse the minutes as an integer
+    const seconds = parseInt(timeArr[1]); // Parse the seconds as an integer
+    const totalSeconds = minutes * 60 + seconds; // Calculate the total number of seconds
+    return totalSeconds; // Return the total number of seconds
+  }
 
   const handleStop = () => {
     setStartInterview(false);
@@ -175,9 +182,9 @@ function InterviewShow({ ItrId, UserDataData }) {
         Res_Date_Of_Interview: interviewData.Date_Of_Interview,
         Res_Question_Arrays: interviewData.Question_Arrays,
         Res_Answer_Arrays: newSpreadedArrayT,
-        Res_Performance_Array: [result1, result1],
-        Res_Text_Percentage: result1,
-        Res_Time_Percentage: result2,
+        Res_Performance_Array: [result1, result2],
+        Res_Text_Percentage: result2,
+        Res_Time_Percentage: result3,
         Res_confidence_Percentage: 0,
         Res_Overall_Percentage: ((result1 + result2) / 200) * 100,
       })
@@ -194,6 +201,7 @@ function InterviewShow({ ItrId, UserDataData }) {
   const handleAPIRecording = async () => {
     const ArrayFromCookie = cookies.get("AnswerArray");
     const newSpreadedArray = [...ArrayFromCookie];
+
     const submitInterviewData = await axios
       .post(`${BASEURL}/CalculateResult`, {
         Res_Interview_ID: 456456,
@@ -202,8 +210,10 @@ function InterviewShow({ ItrId, UserDataData }) {
           secondCounter(firstTime) - secondCounter(formatTime(time)),
       })
       .then((Data) => {
-        setResult1(Data.data.data1Text);
-        setResult2(Data.data.data2Time);
+        console.log("...",Data.data);
+        setResult1(Data.data.answerPercentageList);
+        setResult2(Data.data.overAllPercentage);
+        setResult3(Data.data.timeResult)
         if (Data.data.message === "Result found successfully !") {
           setSwitchWindow(false);
           setIsActive(false);
@@ -237,7 +247,7 @@ function InterviewShow({ ItrId, UserDataData }) {
         <div>Number of Questions: {interviewData.Number_Of_Questions}</div>
         <div>Description: {interviewData.Description}</div>
         <div>Interview ID: {interviewData.Interview_ID}</div>
-        <marquee> Instructions : {interviewData.Instruction}</marquee>
+        <marquee style={{color:"red"}}> Instructions : {interviewData.Instruction}</marquee>
         {switchWindow ? (
           <div className="flex flex-col md:flex-row h-screen">
             <div className="bg-gray-200 w-full md:w-1/2 h-100 md:h-auto flex items-center justify-center">
@@ -362,7 +372,7 @@ function InterviewShow({ ItrId, UserDataData }) {
                     className="Slefie-Taker"
                     style={{ height: "10rem", width: "10rem" }}
                   >
-                    <TakeSnapFunction />
+                    <TakeSnapFunction imageTrigger={imageTrigger} setImageTrigger={setImageTrigger}/>
                   </div>
                   <div className="relative h-screen flex justify-center items-center ">
                     <div className="absolute top-0 right-0 border-2 border-black p-5">
@@ -412,6 +422,7 @@ function InterviewShow({ ItrId, UserDataData }) {
                                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
                                       onClick={() => {
                                         handleStart();
+                                        setImageTrigger(!imageTrigger);
                                         console.log(
                                           "when start",
                                           parseInt(
@@ -450,13 +461,11 @@ function InterviewShow({ ItrId, UserDataData }) {
                                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
                                         onClick={() => {
                                           countIncrement();
-                                          // console.log("when next",
-                                          //   parseInt(
-                                          //     localStorage.getItem("Counter")
-                                          //   )
-                                          // );
+                                          setImageTrigger(!imageTrigger);
                                           resetTranscript();
-                                          SpeechRecognition.startListening();
+                                          if(!listening){
+                                            SpeechRecognition.startListening();
+                                          }
                                           pushAnswerFunction();
                                         }}
                                       >
@@ -470,6 +479,7 @@ function InterviewShow({ ItrId, UserDataData }) {
                                     onClick={() => {
                                       submitInterview();
                                       pushAnswerFunction();
+                                      resetTranscript();
                                     }}
                                   >
                                     Finish
@@ -491,7 +501,7 @@ function InterviewShow({ ItrId, UserDataData }) {
             </div>
           </div>
         ) : (
-          <Result result1={result1} result2={result2} />
+          <Result result1={result1} result2={result2} result3={result3} tempData={tempData}/>
         )}
       </>
     </>

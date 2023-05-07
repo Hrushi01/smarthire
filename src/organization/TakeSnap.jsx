@@ -1,75 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
-import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
-import "react-html5-camera-photo/build/css/index.css";
+import React, { useState, useRef, useEffect } from "react";
+import Webcam from "react-webcam";
 
-function TakeSnapFunction(props) {
-  const cameraRef = useRef(null);
-  let flag = false;
-  const [imgURI, setImgUri] = useState("");
-  function handleTakePhoto(dataUri) {
-    setTimeout(() => {
-      // console.log("dataUri", dataUri);
-      setImgUri(dataUri);
-    }, 2000);
-  }
+function TakeSnapFunction({ imageTrigger, setImageTrigger }) {
+  const webcamRef = useRef(null); // Create a reference to the webcam
+  const [imageUrl, setImageUrl] = useState(null); // Create a state to store the image URL
 
+  const capture = () => {
+    // Use the webcamRef to capture a photo
+    const imageSrc = webcamRef.current.getScreenshot();
+    // Convert the image data to a Blob
+    const imageBlob = new Blob([imageSrc], { type: "image/png" });
+    // Create a URL object for the Blob
+    const imageUrl = URL.createObjectURL(imageBlob);
+    // Set the image URL state to the HTTPS version of the URL object
+    setImageUrl(imageUrl.replace("http://", "https://"));
+  };
   useEffect(() => {
-    const interval = setInterval(() => {
-      const dataUri = "data:image/jpeg;base64,/9j/4AAQSkZJRgA..."; // replace with your dataUri parameter
-      if (cameraRef.current) {
-        cameraRef.current.onTakePhoto(dataUri);
-        console.log(dataUri);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  function handleTakePhotoAnimationDone(dataUri) {
-    // Do stuff with the photo...
-    // console.log("takePhoto");
-  }
-
-  function handleCameraError(error) {
-    // console.log("handleCameraError", error);
-  }
-
-  function handleCameraStart(stream) {
-    // console.log("handleCameraStart");
-  }
-
-  function handleCameraStop() {
-    // console.log("handleCameraStop");
-  }
+    // Use the setTimeout function to capture a photo after 10 seconds
+    setTimeout(() => {
+      capture();
+    }, 10000);
+  }, [imageTrigger]);
 
   return (
-    <Camera
-      ref={cameraRef}
-      onTakePhoto={(dataUri) => {
-        handleTakePhoto(dataUri);
-      }}
-      onTakePhotoAnimationDone={(dataUri) => {
-        handleTakePhotoAnimationDone(dataUri);
-      }}
-      onCameraError={(error) => {
-        handleCameraError(error);
-      }}
-      idealFacingMode={FACING_MODES.ENVIRONMENT}
-      idealResolution={{ width: 640, height: 480 }}
-      imageType={IMAGE_TYPES.JPG}
-      imageCompression={0.97}
-      isMaxResolution={true}
-      isImageMirror={false}
-      isSilentMode={false}
-      isDisplayStartCameraError={true}
-      isFullscreen={false}
-      sizeFactor={1}
-      onCameraStart={(stream) => {
-        handleCameraStart(stream);
-      }}
-      onCameraStop={() => {
-        handleCameraStop();
-      }}
-    />
+    <div>
+      <Webcam audio={false} ref={webcamRef} screenshotFormat="png" />
+      {imageUrl && (
+        <a href={imageUrl} target="_blank" rel="noopener noreferrer">
+          <img src={imageUrl} alt="Webcam capture" />
+        </a>
+      )}
+    </div>
   );
 }
 

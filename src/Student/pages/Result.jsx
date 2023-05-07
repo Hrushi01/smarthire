@@ -3,7 +3,8 @@ import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 
-const Result = () => {
+const Result = ({result1,result2,result3,tempData}) => {
+  console.log("...>>>>>>>>>>>>>>>>>>>>>.........", result1,result2,result3);
   const candidateName = "Hrushikesh";
   const scores = [80, 90, 70, 60, 85];
   const data = {
