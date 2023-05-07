@@ -43,7 +43,7 @@ const SignupForm = (props) => {
         Res_Name: initialValues.username,
         Res_EmailId: initialValues.email,
         Res_Password: initialValues.password,
-        Res_TypeOfUser: "Student",
+        Res_TypeOfUser: "student",
         Res_PhoneNumber: initialValues.phone,
         Res_Address: initialValues.address,
         Res_TechinalSkillsProgrammingLanguage: initialValues.skills.programming,
