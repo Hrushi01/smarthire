@@ -62,7 +62,7 @@ function ChatBot({ setDisplay }) {
   };
 
   return (
-    <div className="container mx-auto  marginLeftZero">
+    <div className="container mx-auto  ">
       <Header setDisplay={setDisplay} />
       <div className="flex justify-center mt-5 mb-60">
         <div className="w-full max-w-md rounded-lg shadow-lg">

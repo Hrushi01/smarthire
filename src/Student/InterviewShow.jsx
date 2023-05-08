@@ -10,7 +10,9 @@ import SpeechRecognition, {
 
 import Result from "../Student/pages/Result";
 import "./InterviewShow.css";
-import { color } from "framer-motion";
+import InterviewDetails from "./components/InterviewDetails";
+import { Button } from "@mui/material";
+
 function InterviewShow({ ItrId, UserDataData }) {
   const [tempData, setTEmpData] = useState({});
   const [switchWindow, setSwitchWindow] = useState(true);
@@ -35,7 +37,7 @@ function InterviewShow({ ItrId, UserDataData }) {
   const [result2, setResult2] = useState(0);
   const [result3, setResult3] = useState(0);
   // console.log("nnn",recordWebcam.status);
- const [imageTrigger, setImageTrigger]=useState(false);
+  const [imageTrigger, setImageTrigger] = useState(false);
   const countIncrement = () => {
     let counter = parseInt(localStorage.getItem("Counter"));
     if (counter >= questionArray.length - 2) {
@@ -67,9 +69,9 @@ function InterviewShow({ ItrId, UserDataData }) {
     //   Answer: transcript,
     //   TimeOfQuestion:(formatTime(time)),
     // };
-    if(transcript===""){
+    if (transcript === "") {
       newSpreadedArray.push("none");
-    }else{
+    } else {
       newSpreadedArray.push(transcript);
     }
     cookies.set("AnswerArray", newSpreadedArray, { maxAge: 43200 });
@@ -210,10 +212,10 @@ function InterviewShow({ ItrId, UserDataData }) {
           secondCounter(firstTime) - secondCounter(formatTime(time)),
       })
       .then((Data) => {
-        console.log("...",Data.data);
+        console.log("...", Data.data);
         setResult1(Data.data.answerPercentageList);
         setResult2(Data.data.overAllPercentage);
-        setResult3(Data.data.timeResult)
+        setResult3(Data.data.timeResult);
         if (Data.data.message === "Result found successfully !") {
           setSwitchWindow(false);
           setIsActive(false);
@@ -234,276 +236,182 @@ function InterviewShow({ ItrId, UserDataData }) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
+  const questionarraysize = 5;
+
   return (
     <>
-      <>
-        {" "}
-        <h3>Interview Details</h3>
-        <div>Company Name:{interviewData.Company_Name} </div>
-        <div>HR Name: {interviewData.HR_Name}</div>
-        <div>Date: {interviewData.Date_Of_Interview}</div>
-        <div>Name of Technlogy : {interviewData.Name_Technology}</div>
-        <div> Time Duration: {interviewData.Time_Duration}</div>
-        <div>Number of Questions: {interviewData.Number_Of_Questions}</div>
-        <div>Description: {interviewData.Description}</div>
-        <div>Interview ID: {interviewData.Interview_ID}</div>
-        <marquee style={{color:"red"}}> Instructions : {interviewData.Instruction}</marquee>
-        {switchWindow ? (
-          <div className="flex flex-col md:flex-row h-screen">
-            <div className="bg-gray-200 w-full md:w-1/2 h-100 md:h-auto flex items-center justify-center">
-              <div class="watermark1">
-                {interviewData.Company_Name} Confidential{" "}
-              </div>
-              <div class="watermark2">
-                {interviewData.Company_Name} Confidential{" "}
-              </div>
-              <div class="watermark3">
-                {interviewData.Company_Name} Confidential{" "}
-              </div>
-              {/* Left side interview section */}
-              {/* Left side webcam section start */}
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <h1 className="text-3xl font-extrabold text-gray-900 mt-12 mb-6">
-                  Webcam Section
-                </h1>
-                {/* Webcam Functioning Setup*/}
-                <div className="flex flex-col items-center space-y-4">
-                  <p className="text-lg font-bold">
-                    Camera status:{" "}
-                    <span className="inline-block bg-red-400 text-white rounded-md py-1 px-3">
-                      {recordWebcam.status}
-                    </span>
-                  </p>
-                  <div className="flex justify-between w-1/2">
-                    {/* <button
-                    onClick={() => {
-                      recordWebcam.open();
-                      setCamREfresh(!camRefresh);
-                    }}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
-                  >
-                    Open camera
-                  </button> */}
-                    {/* <button
-                    onClick={recordWebcam.start}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
-                  >
-                    Start recording
-                  </button> */}
-                    {/* 
-                  <button
-                    onClick={recordWebcam.stop}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
-                  >
-                    Stop recording
-                  </button> */}
-                    {/* <button onClick={recordWebcam.download}>Download</button> */}
-                  </div>
-                  <video
-                    className="Candidate-Screen-WebCam w-full max-w-md"
-                    ref={recordWebcam.webcamRef}
-                    autoPlay
-                    muted
-                  />
-                  {/* <div className="hidden">
-                  <video
-                    ref={recordWebcam.previewRef}
-                    autoPlay
-                    muted
-                    loop
-                    className="w-full max-w-md"
-                  />
-                </div> */}
-                </div>
-
-                {/* Left side webcam section ends */}
-
-                {/* Left side microphone section start */}
-
-                <div className="p-10 border-t-2 border-black mt-10 ">
-                  <h2 className="font-bold text-lg mb-5">
-                    Your transcript text :
-                  </h2>
-                  {/* <p className="font-bold mb-2">
-                  Microphone:{" "}
-                  <span className="bg-red-400 text-lg font-semibold p-1 border-2 border-black">
-                    {listening ? "on" : "off"}
-                  </span>
-                </p> */}
-                  {/* <div className="mb-3">
-                  Click on start before giving the answer.
-                </div> */}
-                  {/* <div className="flex items-center mb-4">
-                  <button
-                    onClick={() => {
-                      SpeechRecognition.startListening();
-                    }}
-                    className="bg-gray-600 text-white rounded p-2 w-fit m-2 ml-0  pr-3 disabled:opacity-50"
-                  >
-                    Start
-                  </button>
-                  <button
-                    onClick={SpeechRecognition.stopListening}
-                    className="bg-gray-600 text-white rounded p-2 w-fit m-2 pr-3 disabled:opacity-50"
-                  >
-                    Stop
-                  </button>
-                  <button
-                    onClick={resetTranscript}
-                    className="bg-gray-600 text-white rounded p-2 w-fit m-2 pr-3 disabled:opacity-50"
-                  >
-                    Reset
-                  </button>
-                </div> */}
-                  <p className="border-2 border-black p-5 font-semibold text-xl text-blue-500">
-                    {transcript}
-                  </p>
-                </div>
-              </div>
-              {/* Left side microphone section ends */}
-
-              {/* Left side interview section ends*/}
+      {" "}
+      <div className="mb-5">
+        <InterviewDetails interviewData={interviewData} />
+      </div>
+      {switchWindow ? (
+        <div className="flex md:flex-row h-screen p-9 justify-around w-full  ">
+          <div className="bg-gray-200 w-3/5 h-100 md:h-auto flex items-center justify-center">
+            <div className="w-full">
+              <TakeSnapFunction
+                imageTrigger={imageTrigger}
+                setImageTrigger={setImageTrigger}
+              />
             </div>
-            <div className="bg-white w-full md:w-1/2 h-screen md:h-auto flex flex-col justify-between p-4">
-              <div>
-                <div className="text-right">
-                  {/* Right side interview section */}
-                  <div
-                    className="Slefie-Taker"
-                    style={{ height: "10rem", width: "10rem" }}
+          </div>
+
+          <div className="bg-white  h-screen w-1/4 md:h-auto  p-9 relative">
+            <div className="h-20 font-bold text-4xl border-b-2 border-gray-500 text-gray-500 flex flex-row justify-around pb-4  ">
+              <span>Questions : </span>1 / {questionArray.length}
+              {/* {1 / 5} */}
+            </div>
+            <div className="font-bold text-3xl ">
+              {questionArray[parseInt(localStorage.getItem("Counter"))]}
+              {/* What makes you good fit for this position? */}
+            </div>
+            <div className="w-full text-left">
+              <div className="p-1 border-t-2 border-gray-500 mt-10">
+                <h2 className="font-bold text-lg mb-5">
+                  Your transcript text:
+                </h2>
+                <p className="border-2 border-black p-5 font-semibold text-xl text-blue-500">
+                  {transcript}
+                </p>
+              </div>
+            </div>
+            {/* bottom part below */}
+            {/* bottom part  */}
+            {/* bottom part  */}
+            <div className="absolute bottom-8  ">
+              <div className="w-10/12 mb-2 ">
+                {isActive && (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    className="w-full"
+                    onClick={() => {
+                      // recordWebcam.download();
+                      // setIsActive(false);
+                    }}
                   >
-                    <TakeSnapFunction imageTrigger={imageTrigger} setImageTrigger={setImageTrigger}/>
-                  </div>
-                  <div className="relative h-screen flex justify-center items-center ">
-                    <div className="absolute top-0 right-0 border-2 border-black p-5">
-                      <p className="text-3xl font-bold">{formatTime(time)}</p>
+                    Video is being monitered - Answer carefully !
+                  </Button>
+                )}
+              </div>
+
+              {/* Timer below  */}
+              {/* Timer below  */}
+              {/* Timer below  */}
+              <div className="text-2xl flex justify-between w-4/5 border-b-2 border-gray-500 pb-2">
+                <span className="text-gray-500"></span>Time Remaining -
+                <p className=" font-bold border-2 border-black p-0.5">
+                  {formatTime(time)}
+                </p>
+              </div>
+
+              {/* Buttons below */}
+              {/* Buttons below */}
+              {/* Buttons below */}
+              <div className="w-full">
+                <div className="flex flex-col items-between w-4/5">
+                  {submitRecord ? (
+                    <div className="flex justify-between mt-4 ">
+                      <Button
+                        variant="contained"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+                        onClick={() => recordWebcam.download()}
+                      >
+                        Download
+                      </Button>
+                      <Button
+                        variant="contained"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+                        onClick={() => handleAPIRecording()}
+                      >
+                        Submit
+                      </Button>
                     </div>
-                    <div className=" flex flex-col items-center w-4/5">
-                      <div className="w-full mt-8 border-2 border-black p-5">
-                        <p className="text-2xl mb-4">Interview Question:</p>
-                        <p className="text-lg mb-4">
-                          {
-                            questionArray[
-                              parseInt(localStorage.getItem("Counter"))
-                            ]
-                          }
-                        </p>
+                  ) : (
+                    <>
+                      <div className=" mt-8 ">
+                        {finishInterview ? (
+                          <>dfjivdivbdihvbhdu h</>
+                        ) : (
+                          <>
+                            {!isActive && (
+                              <Button
+                                variant="contained"
+                                className="w-full"
+                                onClick={() => {
+                                  handleStart();
+                                  setImageTrigger(!imageTrigger);
+                                  console.log(
+                                    "when start",
+                                    parseInt(localStorage.getItem("Counter"))
+                                  );
+                                }}
+                              >
+                                Start
+                              </Button>
+                            )}
+                          </>
+                        )}
                       </div>
-                      {submitRecord ? (
-                        <>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-                            onClick={() => {
-                              handleAPIRecording();
-                            }}
-                          >
-                            Submit Interview
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-                            onClick={() => {
-                              recordWebcam.download();
-                            }}
-                          >
-                            Download Recording
-                          </button>
-                        </>
-                      ) : (
+
+                      {startInterview ? (
                         <>
                           {" "}
-                          <div className="w-full mt-8 flex">
-                            {finishInterview ? (
-                              <>dfjivdivbdihvbhdu h</>
-                            ) : (
-                              <>
-                                <div className="w-full mt-8 flex">
-                                  {!isActive && (
-                                    <button
-                                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-                                      onClick={() => {
-                                        handleStart();
-                                        setImageTrigger(!imageTrigger);
-                                        console.log(
-                                          "when start",
-                                          parseInt(
-                                            localStorage.getItem("Counter")
-                                          )
-                                        );
-                                      }}
-                                    >
-                                      Start
-                                    </button>
-                                  )}
-                                  {isActive && (
-                                    <button
-                                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
-                                      onClick={() => {
-                                        recordWebcam.download();
-                                        setIsActive(false);
-                                      }}
-                                    >
-                                      Interview has been recording - Answer
-                                      carefully !
-                                    </button>
-                                  )}
-                                </div>
-                              </>
-                            )}
-                            {startInterview ? (
-                              <>
-                                {" "}
-                                <div className="w-1/2 flex ">
-                                  {lastQsn ? (
-                                    <></>
-                                  ) : (
-                                    <>
-                                      <button
-                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
-                                        onClick={() => {
-                                          countIncrement();
-                                          setImageTrigger(!imageTrigger);
-                                          resetTranscript();
-                                          if(!listening){
-                                            SpeechRecognition.startListening();
-                                          }
-                                          pushAnswerFunction();
-                                        }}
-                                      >
-                                        Next Question
-                                      </button>
-                                    </>
-                                  )}
-
-                                  <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    onClick={() => {
-                                      submitInterview();
-                                      pushAnswerFunction();
-                                      resetTranscript();
-                                    }}
-                                  >
-                                    Finish
-                                  </button>
-                                </div>
-                              </>
-                            ) : (
+                          <div className=" flex justify-between w-full">
+                            {lastQsn ? (
                               <></>
+                            ) : (
+                              <>
+                                <Button
+                                  variant="contained"
+                                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
+                                  onClick={() => {
+                                    countIncrement();
+                                    setImageTrigger(!imageTrigger);
+                                    resetTranscript();
+                                    if (!listening) {
+                                      SpeechRecognition.startListening();
+                                    }
+                                    pushAnswerFunction();
+                                  }}
+                                >
+                                  Next Question
+                                </Button>
+                              </>
                             )}
+
+                            <Button
+                              variant="contained"
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                              onClick={() => {
+                                submitInterview();
+                                pushAnswerFunction();
+                                resetTranscript();
+                              }}
+                            >
+                              Finish
+                            </Button>
                           </div>
                         </>
+                      ) : (
+                        <></>
                       )}
-                    </div>
-                  </div>
-
-                  {/* Right side interview section ends*/}
+                    </>
+                  )}
                 </div>
+
+                {/* Right side interview section ends*/}
               </div>
             </div>
           </div>
-        ) : (
-          <Result result1={result1} result2={result2} result3={result3} tempData={tempData}/>
-        )}
-      </>
+        </div>
+      ) : (
+        <Result
+          resultlist={result1}
+          overallpercent={result2}
+          timeresult={result3}
+          tempData={tempData}
+        />
+      )}
     </>
   );
 }

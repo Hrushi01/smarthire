@@ -7,7 +7,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Fields(props) {
   const [typeOfUser, setTypeOfUser] = useState("");
@@ -16,8 +16,7 @@ function Fields(props) {
     setIsLoggedIn,
     refresher,
     setRefresher,
-    OrganizationLog,
-    candidateLog,
+
     status,
     // setCandidateLog,
     // setOrganizationLog,
@@ -52,11 +51,11 @@ function Fields(props) {
       <RxCross2 />
     </button>
   );
-
+  const navigate = useNavigate();
   const BASEURL = process.env.REACT_APP_SAMPLE;
   //Login Api
   const OnClickLogin = async () => {
-    console.log("initialValues",initialValues);
+    console.log("initialValues", initialValues);
     setOpen(true);
     setSnackbarMsg("Please Wait ...");
     setSnackbarClass("default");
@@ -69,6 +68,7 @@ function Fields(props) {
       .then((Data) => {
         if (Data) {
           cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
+          navigate("/");
           setIsLoggedIn(true);
           setRefresher(!refresher);
           console.log(refresher);

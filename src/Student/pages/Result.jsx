@@ -2,11 +2,29 @@ import React, { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
+import Footer from "../../organization/Footer";
 
-const Result = ({result1,result2,result3,tempData}) => {
-  console.log("...>>>>>>>>>>>>>>>>>>>>>.........", result1,result2,result3);
+const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
+  console.log(
+    "...>>>>>>>>>>>>>>>>>>>>>.........",
+    resultlist,
+    overallpercent,
+    timeresult
+  );
   const candidateName = "Hrushikesh";
   const scores = [80, 90, 70, 60, 85];
+  const questiontext = [
+    "how are you?",
+    "whats up?",
+    "Are you Hrushi?",
+    "Are you from KSE",
+  ];
+  const answertext = [
+    "ans are you?",
+    "ans up?",
+    "ans you Hrushi?",
+    "ans you from KSE",
+  ];
   const data = {
     labels: [
       "Question 1",
@@ -15,15 +33,16 @@ const Result = ({result1,result2,result3,tempData}) => {
       "Question 4",
       "Question 5",
     ],
+
     datasets: [
       {
-        label: "Score",
+        label: "Score resultlist",
         backgroundColor: "rgba(46, 204, 113,0.2)",
         borderColor: "rgba(46, 204, 113,1)",
         borderWidth: 1,
         hoverBackgroundColor: "rgba(46, 204, 113,0.4)",
         hoverBorderColor: "rgba(46, 204, 113,1)",
-        data: scores,
+        data: resultlist || scores,
       },
     ],
   };
@@ -60,7 +79,7 @@ const Result = ({result1,result2,result3,tempData}) => {
     labels: [`${label} Correct`, `${label} Incorrect`],
     datasets: [
       {
-        data: [scores[index], 100 - scores[index]],
+        data: [resultlist?.[index], 100 - resultlist?.[index]],
         backgroundColor: ["rgba(46, 204, 113, 0.5)", "rgba(231, 76, 60, 0.5)"],
         borderColor: ["rgba(46, 204, 113, 1)", "rgba(231, 76, 60, 1)"],
         borderWidth: 1,
@@ -68,15 +87,44 @@ const Result = ({result1,result2,result3,tempData}) => {
     ],
   }));
 
-  const optionspi = {
-    legend: {
-      position: "right",
-      labels: {
-        boxWidth: 10,
-        padding: 20,
+  const datarespie = {
+    labels: ["Result"],
+    datasets: [
+      {
+        data: [overallpercent, 100 - overallpercent],
+        backgroundColor: ["rgba(46, 204, 113,0.2)", "rgba(255, 99, 132,0.2)"],
+        borderColor: ["rgba(46, 204, 113,1)", "rgba(255, 99, 132,1)"],
+        borderWidth: 1,
       },
+    ],
+  };
+  const datares2pie = {
+    labels: ["Result"],
+    datasets: [
+      {
+        data: [timeresult, 100 - timeresult],
+        backgroundColor: ["rgba(46, 204, 113,0.2)", "rgba(255, 99, 132,0.2)"],
+        borderColor: ["rgba(46, 204, 113,1)", "rgba(255, 99, 132,1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const optionsrespie = {
+    legend: {
+      display: true,
+      position: "bottom",
     },
   };
+
+  // const optionspi = {
+  //   legend: {
+  //     position: "right",
+  //     labels: {
+  //       boxWidth: 10,
+  //       padding: 20,
+  //     },
+  //   },
+  // };
 
   useEffect(() => {
     Chart.scaleService?.updateScaleDefaults("category", {
@@ -89,44 +137,86 @@ const Result = ({result1,result2,result3,tempData}) => {
   }, []);
 
   return (
-    <>
-      <div className="text-3xl font-serif font-bold my-4 flex justify-center">
-        <div>Result For Self Evaluation</div>{" "}
+    <div className="w-11/12">
+      <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
+        Result for Self Evaluation
       </div>
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+
+      <div className="bg-white shadow overflow-hidden rounded-lg">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            <span className="font-bold"> Name:</span> {candidateName}
+          <h3 className="text-lg font-medium text-gray-900">
+            <span className="font-bold text-xl text-blue-900">
+              Candidate Name:
+            </span>{" "}
+            {candidateName}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Bar Plot Scoring for each question
+          <p className="mt-1 text-sm text-gray-500">
+            Bar Plot Scoring for Each Question
           </p>
         </div>
-        <div className="border-t border-gray-200 w-10/12">
-          <Bar data={data} options={options} />
+        <div className="flex items-center justify-center p-4">
+          <div className="w-full max-w-lg">
+            <Bar data={data} options={options} />
+          </div>
         </div>
       </div>
 
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg mt-4">
+      <div className="bg-white shadow overflow-hidden rounded-lg mt-8">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            <span className="font-bold"> Name:</span> {candidateName}
+          <h3 className="text-lg font-medium text-gray-900">
+            <span className="font-bold text-blue-900">Candidate Name:</span>{" "}
+            {candidateName}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Pi Chart Visulozation for each question
+          <p className="mt-1 text-sm text-gray-500">
+            Pie Chart Visualization for Each Question
           </p>
         </div>
-        <div className="border-t border-gray-200 grid grid-cols-2">
-          {datapi.map((questionData, index) => (
-            <div key={index} className="flex items-center px-4 py-2">
-              <div className="w-1/3">
-                <Pie data={questionData} options={options} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 border-b border-gray-200">
+          {questiontext.map((question, index) => (
+            <div
+              key={index}
+              className="p-4 border border-gray-200 rounded-lg flex justify-around w-full"
+            >
+              <div className="mb-4 ">
+                <h4 className="text-lg font-medium text-blue-900 mb-2">
+                  {"->"} Question {index + 1}
+                </h4>
+                <p className="text-sm text-gray-500 mb-2">{question}</p>
+                <p className="text-sm font-medium text-blue-900 mb-2">
+                  {"->"} Answer:
+                </p>
+                <p className="text-sm text-gray-500">{answertext[index]}</p>
+              </div>
+              <div className=" ">
+                <Pie data={datapi[index]} options={options} />
               </div>
             </div>
           ))}
         </div>
       </div>
-    </>
+
+      <div className="bg-white shadow overflow-hidden rounded-lg mt-8">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg font-medium text-gray-900">
+            <span className="font-bold text-blue-900">Candidate Name:</span>{" "}
+            {candidateName}
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">
+            Overall result and Time Scoring
+          </p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 p-6 border-b border-gray-200">
+          <div className="border-t border-gray-200">
+            <Pie data={datarespie} options={optionsrespie} />
+          </div>
+          <div className="border-t border-gray-200">
+            <Pie data={datares2pie} options={optionsrespie} />
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
   );
 };
 

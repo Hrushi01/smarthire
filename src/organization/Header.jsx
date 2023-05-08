@@ -6,8 +6,13 @@ function Header() {
     <div className="marginLeftZero">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Smart Hire</h1>
+          <div className="space-x-3 flex items-center">
+            <img
+              className="h-12 w-auto"
+              src="https://storage.googleapis.com/mixo-files/logos/hirEx-1679323310963.svg"
+              alt="HirEx logo"
+            />
+            <p className="text-3xl font-sans font-bold text-gray-900">HirEx</p>
           </div>
           <div>
             <Link to="/">

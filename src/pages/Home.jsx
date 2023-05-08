@@ -14,10 +14,12 @@ import img12 from "../assets/zak-be2e6aeb.jpg";
 import "../assets/style-410a9dbc.css";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import Header from "../organization/Header";
 
 function Home() {
   return (
     <div>
+      <Header />
       <div id="app" className="marginLeftZero">
         <div>
           <div
