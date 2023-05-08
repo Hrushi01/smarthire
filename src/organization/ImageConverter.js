@@ -2,21 +2,29 @@ const cloudinary = require("cloudinary").v2;
 
 const base64ToHttps = (dataURI) => {
   let URLEnd;
-  cloudinary.config({
-    cloud_name: "dztfrtajl",
-    api_key: "667977251421997",
-    api_secret: "xSGbKD9hpB-wQya5bHzc_c4Nao8",
-  });
 
   async function uploadToCloudinary(base64Image) {
+    const cloudName = "dztfrtajl"; // Replace with your Cloudinary cloud name
+    const apiKey = "667977251421997"; // Replace with your Cloudinary API key
+    const apiSecret = "xSGbKD9hpB-wQya5bHzc_c4Nao8"; // Replace with your Cloudinary API secret
+    const uploadPreset = "h0ivhmwn"; // Replace with your Cloudinary upload preset name
+
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+
     try {
-      const uploadResult = await cloudinary.uploader.upload(base64Image, {
-        upload_preset: "ml_default", // Replace with your Cloudinary upload preset name
+      const response = await axios.post(url, {
+        file: `${base64Image}`,
+        upload_preset: uploadPreset,
+        api_key: apiKey,
+        api_secret: apiSecret,
       });
 
-      return uploadResult.secure_url;
+      return response.data.secure_url;
     } catch (error) {
-      console.error("Error uploading image to Cloudinary:", error);
+      console.error(
+        "Error uploading image to Cloudinary:",
+        error.response.data
+      );
       throw error;
     }
   }
