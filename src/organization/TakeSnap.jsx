@@ -20,16 +20,15 @@ function TakeSnapFunction({ imageTrigger, setImageTrigger }) {
   //   setImageUrl(imageUrl.replace("http://", "https://"));
   // };
 
-
   // const cameraRef = useRef(null);
   let flag = false;
   const [imgURI, setImgUri] = useState("");
   function handleTakePhoto(dataUri) {
     setTimeout(() => {
       // console.log("dataUri", dataUri);
-      let tingTong=base64ToHttps(dataUri);
+      let tingTong = base64ToHttps(dataUri);
       setImgUri(tingTong);
-            console.log("dataUri", dataUri);
+      console.log("dataUri", dataUri);
     }, 2000);
   }
 
@@ -116,49 +115,48 @@ function TakeSnapFunction({ imageTrigger, setImageTrigger }) {
     //   )}
     // </div>
     <div>
-
-    <div className="w-full">
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="png"
-        style={{ height: "100%", width: "100%" }}
-      />
-      {imageUrl && (
+      <div className="w-full">
+        {/* <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="png"
+          style={{ height: "100%", width: "100%" }}
+        /> */}
+        {/* {imageUrl && (
         <a href={imageUrl} target="_blank" rel="noopener noreferrer">
           <img src={imageUrl} alt="Webcam capture" />
         </a>
-      )}
-      <canvas ref={canvasRef} className="face-lines" />
-    </div>
-    <Camera
-      onTakePhoto={(dataUri) => {
-        handleTakePhoto(dataUri);
-      }}
-      onTakePhotoAnimationDone={(dataUri) => {
-        handleTakePhotoAnimationDone(dataUri);
-      }}
-      onCameraError={(error) => {
-        handleCameraError(error);
-      }}
-      idealFacingMode={FACING_MODES.ENVIRONMENT}
-      idealResolution={{ width: 640, height: 480 }}
-      imageType={IMAGE_TYPES.JPG}
-      imageCompression={0.97}
-      isMaxResolution={true}
-      isImageMirror={false}
-      isSilentMode={false}
-      isDisplayStartCameraError={true}
-      isFullscreen={false}
-      sizeFactor={1}
-      onCameraStart={(stream) => {
-        handleCameraStart(stream);
-      }}
-      onCameraStop={() => {
-        handleCameraStop();
-      }}
-      />
+      )} */}
+        <canvas ref={canvasRef} className="face-lines" />
       </div>
+      <Camera
+        onTakePhoto={(dataUri) => {
+          handleTakePhoto(dataUri);
+        }}
+        onTakePhotoAnimationDone={(dataUri) => {
+          handleTakePhotoAnimationDone(dataUri);
+        }}
+        onCameraError={(error) => {
+          handleCameraError(error);
+        }}
+        idealFacingMode={FACING_MODES.ENVIRONMENT}
+        idealResolution={{ width: 640, height: 480 }}
+        imageType={IMAGE_TYPES.JPG}
+        imageCompression={0.97}
+        isMaxResolution={true}
+        isImageMirror={false}
+        isSilentMode={false}
+        isDisplayStartCameraError={true}
+        isFullscreen={false}
+        sizeFactor={1}
+        onCameraStart={(stream) => {
+          handleCameraStart(stream);
+        }}
+        onCameraStop={() => {
+          handleCameraStop();
+        }}
+      />
+    </div>
   );
 }
 

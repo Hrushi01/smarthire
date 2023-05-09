@@ -6,9 +6,9 @@ import Logo from "../images/Company-Logo.jpg";
 
 function AboutUs({ setDisplay }) {
   return (
-    <div className="bg-white">
+    <div className="">
       <Header setDisplay={setDisplay} />
-      <div className="container px-4 py-16">
+      <div className="container ">
         <div className="flex flex-wrap justify-between items-center text-center">
           <div className="w-full md:w-1/2 lg:w-2/3 mb-8 md:mb-0">
             <h1 className="text-5xl font-bold text-center pb-5">About Us</h1>

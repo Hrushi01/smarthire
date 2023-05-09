@@ -20,7 +20,7 @@ function Home() {
   return (
     <div>
       <Header />
-      <div id="app" className="marginLeftZero">
+      <div id="app" className="">
         <div>
           <div
             className="site-content  overflow-hidden"

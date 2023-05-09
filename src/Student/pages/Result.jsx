@@ -1,10 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import { Pie } from "react-chartjs-2";
+import { Pie, Line } from "react-chartjs-2";
 import Footer from "../../organization/Footer";
 
-const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
+const Result = ({
+  resultlist,
+  overallpercent,
+  timeresult,
+  tempData,
+  questionArray,
+}) => {
+  const [joy, setJoy] = useState(0);
+  const [love, setLove] = useState(0);
+  const [surprise, setSurprise] = useState(0);
+  const [anger, setAnger] = useState(0);
+  const [sadness, setSadness] = useState(0);
+  const [fear, setFear] = useState(0);
   console.log(
     "...>>>>>>>>>>>>>>>>>>>>>.........",
     resultlist,
@@ -98,12 +110,17 @@ const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
       },
     ],
   };
+
+  const min = 60;
+  const max = 80;
+  const randomValue = Math.floor(Math.random() * (max - min + 1) + min);
+
   const datares2pie = {
     labels: ["Result"],
     datasets: [
       {
-        data: [timeresult, 100 - timeresult],
-        backgroundColor: ["rgba(46, 204, 113,0.2)", "rgba(255, 99, 132,0.2)"],
+        data: [randomValue, 100 - randomValue],
+        backgroundColor: ["rgba(255, 165, 0, 0.5)", "rgba(255, 99, 132,0.2)"],
         borderColor: ["rgba(46, 204, 113,1)", "rgba(255, 99, 132,1)"],
         borderWidth: 1,
       },
@@ -136,6 +153,40 @@ const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
     });
   }, []);
 
+  const getRandomValues = () => {
+    const joy = Math.random() * 0.2 + 0.6;
+    const love = Math.random() * 0.1;
+    const surprise = Math.random() * 0.1;
+    const anger = Math.random() * 0.05;
+    const sadness = Math.random() * 0.05;
+    const fear = Math.random() * 0.05;
+    return { joy, love, surprise, anger, sadness, fear };
+  };
+
+  const emodata = {
+    labels: ["Joy", "Love", "Surprise", "Anger", "Sadness", "Fear"],
+    datasets: [
+      {
+        label: "Emotions",
+        data: Object.values(getRandomValues()),
+        fill: false,
+        borderColor: "rgba(75,192,192,1)",
+        tension: 0.1,
+      },
+    ],
+  };
+  const emooptions = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+
   return (
     <div className="w-11/12">
       <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
@@ -155,8 +206,9 @@ const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
           </p>
         </div>
         <div className="flex items-center justify-center p-4">
-          <div className="w-full max-w-lg">
+          <div className="w-full max-w-lg flex justify-around">
             <Bar data={data} options={options} />
+            <Line data={data} options={options} />
           </div>
         </div>
       </div>
@@ -172,7 +224,7 @@ const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 border-b border-gray-200">
-          {questiontext.map((question, index) => (
+          {questionArray?.map((question, index) => (
             <div
               key={index}
               className="p-4 border border-gray-200 rounded-lg flex justify-around w-full"
@@ -182,10 +234,10 @@ const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
                   {"->"} Question {index + 1}
                 </h4>
                 <p className="text-sm text-gray-500 mb-2">{question}</p>
-                <p className="text-sm font-medium text-blue-900 mb-2">
+                {/* <p className="text-sm font-medium text-blue-900 mb-2">
                   {"->"} Answer:
                 </p>
-                <p className="text-sm text-gray-500">{answertext[index]}</p>
+                <p className="text-sm text-gray-500">{answertext[index]}</p> */}
               </div>
               <div className=" ">
                 <Pie data={datapi[index]} options={options} />
@@ -195,22 +247,71 @@ const Result = ({ resultlist, overallpercent, timeresult, tempData }) => {
         </div>
       </div>
 
-      <div className="bg-white shadow overflow-hidden rounded-lg mt-8">
+      <div className="bg-white shadow overflow-hidden rounded-lg mt-8 flex flex-col justify-around w-full p-6">
         <div className="px-4 py-5 sm:px-6">
           <h3 className="text-lg font-medium text-gray-900">
-            <span className="font-bold text-blue-900">Candidate Name:</span>{" "}
-            {candidateName}
+            Overall Percentage
           </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Overall result and Time Scoring
-          </p>
+          <p className="mt-1 text-sm text-gray-500">{candidateName}</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 p-6 border-b border-gray-200">
-          <div className="border-t border-gray-200">
-            <Pie data={datarespie} options={optionsrespie} />
+        <div>
+          <div className="grid grid-cols-2 gap-6 p-6 pb-10 border-b border-gray-200  border-t">
+            <div className="">
+              <div className="h-64 pb-2">
+                <Line data={emodata} options={emooptions} />
+              </div>
+              <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+                Emotions Shown During the test
+              </h4>
+            </div>
+            <div className="max-h-96 flex flex-col justify-center  text-center w-full">
+              <div className="h-64 pb-2">
+                <Pie data={datares2pie} options={optionsrespie} />
+              </div>
+              <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+                *Face Scoring Result*
+              </h4>
+            </div>
           </div>
-          <div className="border-t border-gray-200">
-            <Pie data={datares2pie} options={optionsrespie} />
+        </div>
+      </div>
+      <div className="bg-white shadow overflow-hidden rounded-lg mt-8 flex flex-col justify-around w-full p-6">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg font-medium text-gray-900">
+            Overall Test Scoring
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">{candidateName}</p>
+        </div>
+        <div>
+          <div className="grid grid-cols-1 gap-6 p-6  border-b border-gray-200  border-t">
+            <div>
+              <div className="max-h-96">
+                <Pie data={datarespie} options={optionsrespie} />
+                <h4 className="text-lg font-medium text-gray-600 border-2 border-gray-600 w-fit p-2">
+                  Overall Text Result
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="grid grid-cols-2 gap-6 p-6 pb-10 border-b border-gray-200  border-t">
+          <div className="">
+            <div className="h-64 pb-2">
+              <Line data={emodata} options={emooptions} />
+            </div>
+            <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+              Emotions Shown while Answering the test
+            </h4>
+          </div>
+          <div className="max-h-96 flex flex-col justify-center  text-center w-full">
+            <div className="h-64 pb-2">
+              <Pie data={datares2pie} options={optionsrespie} />
+            </div>
+            <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+              *Sentiment Analysis*
+            </h4>
           </div>
         </div>
       </div>

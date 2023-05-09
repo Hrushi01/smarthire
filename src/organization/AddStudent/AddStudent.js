@@ -11,18 +11,33 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
-import { Subject } from "@mui/icons-material";
+import { Button } from "@material-ui/core";
+import SendIcon from "@mui/icons-material/Send";
 
-function AddStudent({ list, setList }) {
+function AddStudent({}) {
   const [name, setName] = useState("");
+  const [list, setList] = useState([]);
   const [email, setEmail] = useState("");
 
-  function sendAcceptanceEmailToCandidate(candidateEmail) {
-    const subject = "Smart Hire Acceptance Mail";
-    const body =
-      "Hrushikesh Ambike HR of the company XYZ invited you to give the interview for the position of XYZ";
-    window.location.href = `mailto:${candidateEmail}?subject=${subject}&body=${body}`;
+  function sendAcceptanceEmailToCandidate(candidateEmail, candidatename) {
+    const subject = "Congratulations!! Smart Hire Acceptance Mail";
+    const body = `Dear [${candidatename}],
+  
+  I hope this email finds you well. I am pleased to inform you that you have been selected for the position at Smart Hire. Your skills and experience impressed us, and we believe that you will be a valuable addition to our team.
+  
+  We would like to formally offer you the position of [Job Title] at Smart Hire. Please let us know if you accept this offer, and we can discuss the next steps.
+  
+  Congratulations once again, and we look forward to working with you.
+  
+  Best regards,
+  [Hrushikesh Ambike]`;
+
+    const mailToLink = `mailto:${candidateEmail}?subject=${subject}&body=${encodeURIComponent(
+      body
+    )}`;
+    window.location.href = mailToLink;
   }
+
   return (
     <div className="">
       <div className="container mx-auto py-8">
@@ -102,8 +117,10 @@ function AddStudent({ list, setList }) {
               </button>
             </Form>
           </Formik>
-          <div className="mb-8 card min-h-[400px]">
-            <h2 className="text-lg font-bold mb-4 w-full borderBottom">Candidate List</h2>
+          <div className="mb-8 card min-h-[400px]  flex flex-col">
+            <h2 className="text-lg font-bold mb-4 w-full borderBottom">
+              Candidate List
+            </h2>
             <div className="bg-white rounded-lg w-full p-4">
               <TableContainer component={Paper}>
                 <Table>
@@ -111,7 +128,7 @@ function AddStudent({ list, setList }) {
                     <TableRow>
                       <TableCell className="font-bold">Name</TableCell>
                       <TableCell className="font-bold">Email</TableCell>
-                      <TableCell className="font-bold" >Send Mail</TableCell>
+                      <TableCell className="font-bold">Send Mail</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -120,14 +137,19 @@ function AddStudent({ list, setList }) {
                         <TableCell>{user.name}</TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>
-                          <button
-                            className="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
+                          <Button
+                            variant="contained"
+                            color="primary"
                             onClick={() =>
-                              sendAcceptanceEmailToCandidate(`${user.email}`)
+                              sendAcceptanceEmailToCandidate(
+                                `${user.email}`,
+                                `${user.name}`
+                              )
                             }
+                            endIcon={<SendIcon />}
                           >
                             Send acceptance
-                          </button>
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}

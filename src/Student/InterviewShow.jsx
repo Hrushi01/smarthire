@@ -21,6 +21,7 @@ function InterviewShow({ ItrId, UserDataData }) {
   const [startInterview, setStartInterview] = useState(false);
   const [finishInterview, setFinishedInterview] = useState(false);
   const [lastQsn, setLastQsn] = useState(false);
+  const [firstQsn, setFirstQsn] = useState(false);
   const [time, setTime] = useState(20 * 60);
   const [isActive, setIsActive] = useState(false);
   const [camOpener, setCamOpen] = useState(false);
@@ -133,6 +134,7 @@ function InterviewShow({ ItrId, UserDataData }) {
     resetTranscript();
     SpeechRecognition.startListening();
     recordWebcam.start();
+    setFirstQsn(true);
   };
 
   function secondCounter(time) {
@@ -236,8 +238,6 @@ function InterviewShow({ ItrId, UserDataData }) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
-  const questionarraysize = 5;
-
   return (
     <>
       {" "}
@@ -256,43 +256,68 @@ function InterviewShow({ ItrId, UserDataData }) {
           </div>
 
           <div className="bg-white  h-screen w-1/4 md:h-auto  p-9 relative">
-            <div className="h-20 font-bold text-4xl border-b-2 border-gray-500 text-gray-500 flex flex-row justify-around pb-4  ">
-              <span>Questions : </span>1 / {questionArray.length}
-              {/* {1 / 5} */}
-            </div>
+            {firstQsn ? (
+              <div className="h-20 font-bold text-3xl border-b-2 border-gray-500 text-gray-500 flex flex-row justify-around pb-4  ">
+                <span>Questions : </span>
+                {localStorage.getItem("Counter")} / {questionArray.length}
+                {/* {1 / 5} */}
+              </div>
+            ) : (
+              <></>
+            )}
+
             <div className="font-bold text-3xl ">
-              {questionArray[parseInt(localStorage.getItem("Counter"))]}
+              {/* {submitRecord ? (
+                <Button variant="contained" color="sucess">
+                  End of the interview!
+                </Button>
+              ) : ( */}
+              {/* // <div className="">End of the interview!</div> */}
+              <div>
+                {" "}
+                {questionArray[parseInt(localStorage.getItem("Counter"))]}
+              </div>
+              {/* )} */}
+
               {/* What makes you good fit for this position? */}
             </div>
-            <div className="w-full text-left">
-              <div className="p-1 border-t-2 border-gray-500 mt-10">
-                <h2 className="font-bold text-lg mb-5">
-                  Your transcript text:
-                </h2>
-                <p className="border-2 border-black p-5 font-semibold text-xl text-blue-500">
-                  {transcript}
-                </p>
+            {submitRecord ? (
+              <></>
+            ) : (
+              <div className="w-full text-left ">
+                <div className="p-1 border-t-2 border-gray-500 mt-10">
+                  <h2 className="font-bold text-lg mb-5">
+                    Your transcript text:
+                  </h2>
+                  <p className="border-2 border-black p-5 font-semibold text-xl text-blue-500">
+                    {transcript}
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
             {/* bottom part below */}
             {/* bottom part  */}
             {/* bottom part  */}
             <div className="absolute bottom-8  ">
-              <div className="w-10/12 mb-2 ">
-                {isActive && (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    className="w-full"
-                    onClick={() => {
-                      // recordWebcam.download();
-                      // setIsActive(false);
-                    }}
-                  >
-                    Video is being monitered - Answer carefully !
-                  </Button>
-                )}
-              </div>
+              {submitRecord ? (
+                <></>
+              ) : (
+                <div className="w-10/12 mb-2 ">
+                  {isActive && (
+                    <Button
+                      variant="contained"
+                      color="error"
+                      className="w-full"
+                      onClick={() => {
+                        // recordWebcam.download();
+                        // setIsActive(false);
+                      }}
+                    >
+                      Video is being monitered - Answer carefully !
+                    </Button>
+                  )}
+                </div>
+              )}
 
               {/* Timer below  */}
               {/* Timer below  */}
@@ -410,6 +435,7 @@ function InterviewShow({ ItrId, UserDataData }) {
           overallpercent={result2}
           timeresult={result3}
           tempData={tempData}
+          questionArray={questionArray}
         />
       )}
     </>
