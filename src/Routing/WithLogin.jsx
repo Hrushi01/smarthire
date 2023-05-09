@@ -44,83 +44,87 @@ function WithLogin({ status, setStatus, setIsLoggedIn }) {
 
   return (
     <>
-      {/* {loading ? (
+      {loading ? (
         <>Loading</>
       ) : (
-        <> */}{" "}
-      <div>
-        {status === "org" ? (
-          <>
-            <SidebarOrg setIsLoggedIn={setIsLoggedIn} />
-            <Routes>
-              <Route
-                path="/"
-                element={<OrganizationProfile UserDataData={UserDataData} />}
-              />
-              <Route
-                path="/profile"
-                element={<OrganizationProfile UserDataData={UserDataData} />}
-              />
-              <Route
-                path="/newinterview"
-                element={<NewInterview UserDataData={UserDataData} />}
-              />
-              <Route
-                path="/addstudents"
-                element={<AddStudent UserDataData={UserDataData} />}
-              />
-              <Route
-                path="/viewresults"
-                element={<Results UserDataData={UserDataData} />}
-              />
-              <Route path="*" element={<h1>404 Not Found</h1>} />
-            </Routes>
-          </>
-        ) : status === "student" ? (
-          <>
-            <SidebarStudent setIsLoggedIn={setIsLoggedIn} />
-            <Routes>
-              <Route
-                path="/"
-                element={<StudentProfilePage UserDataData={UserDataData} />}
-              />
-              <Route
-                path="/profile"
-                element={<StudentProfilePage UserDataData={UserDataData} />}
-              />
-              <Route
-                path="interview"
-                element={
-                  <SwitchInterviewWindow
-                    UserDataData={UserDataData}
-                    ItrId={ItrId}
-                    setItrId={setItrId}
+        <>
+          <div>
+            {status === "org" ? (
+              <>
+                <SidebarOrg setIsLoggedIn={setIsLoggedIn} />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <OrganizationProfile UserDataData={UserDataData} />
+                    }
                   />
-                }
-              />
-              <Route
-                path="/interviewList"
-                element={
-                  <InterviewList
-                    UserDataData={UserDataData}
-                    setItrId={setItrId}
+                  <Route
+                    path="/profile"
+                    element={
+                      <OrganizationProfile UserDataData={UserDataData} />
+                    }
                   />
-                }
-              />
-              <Route
-                path="/viewresult"
-                element={<Result UserDataData={UserDataData} />}
-              />
-              <Route path="*" element={<h1>404 Not Found</h1>} />
-            </Routes>
-          </>
-        ) : (
-          <>Somthing went wrong...</>
-        )}
-      </div>
+                  <Route
+                    path="/newinterview"
+                    element={<NewInterview UserDataData={UserDataData} />}
+                  />
+                  <Route
+                    path="/addstudents"
+                    element={<AddStudent UserDataData={UserDataData} />}
+                  />
+                  <Route
+                    path="/viewresults"
+                    element={<Results UserDataData={UserDataData} />}
+                  />
+                  <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+              </>
+            ) : status === "student" ? (
+              <>
+                <SidebarStudent setIsLoggedIn={setIsLoggedIn} />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<StudentProfilePage UserDataData={UserDataData} />}
+                  />
+                  <Route
+                    path="/profile"
+                    element={<StudentProfilePage UserDataData={UserDataData} />}
+                  />
+                  <Route
+                    path="interview"
+                    element={
+                      <SwitchInterviewWindow
+                        UserDataData={UserDataData}
+                        ItrId={ItrId}
+                        setItrId={setItrId}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/interviewList"
+                    element={
+                      <InterviewList
+                        UserDataData={UserDataData}
+                        setItrId={setItrId}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/viewresult"
+                    element={<Result UserDataData={UserDataData} />}
+                  />
+                  <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+              </>
+            ) : (
+              <>Somthing went wrong...</>
+            )}
+          </div>
+        </>
+      )}
     </>
-    //   )}
-    // </>
   );
 }
 
