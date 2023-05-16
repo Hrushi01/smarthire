@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Results({ result1, result2, UserDataData }) {
+function Results({ UserDataData }) {
   const [tempUserData, setTemUserData] = useState({});
   const [resultList, setResultList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -98,9 +98,9 @@ function Results({ result1, result2, UserDataData }) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {resultList.map((Item) => {
+                    {resultList.map((Item, index) => {
                       return (
-                        <TableRow>
+                        <TableRow key={index}>
                           <TableCell>
                             <Typography variant="body1">
                               {Item.Candidate_Name}

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const StudentProfilePage = ({UserDataData}) => {
+const StudentProfilePage = ({ UserDataData }) => {
   const [studentData, setStudentData] = useState({});
+  console.log("Hrushikesh Student data", studentData);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setStudentData(UserDataData);
-    console.log("Orm",studentData);
-    if(studentData){
+
+    if (studentData) {
       setLoading(false);
     }
   }, [loading]);
