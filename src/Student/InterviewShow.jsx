@@ -137,6 +137,7 @@ function InterviewShow({ ItrId, UserDataData }) {
 
   useEffect(() => {
     localStorage.setItem("Counter", -1);
+    localStorage.setItem("AWSResult", JSON.stringify([]));
     cookies.set("AnswerArray", [], { maxAge: 43200 });
   }, []);
 
