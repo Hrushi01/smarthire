@@ -71,3 +71,13 @@
   padding: 16px;
   display: flex;
 }
+
+.invalid .MuiSnackbarContent-root{
+  Background-color: red !important;
+}
+.default .MuiSnackbarContent-root{
+  /* Background-color: ; */
+}
+.valid .MuiSnackbarContent-root{
+  Background-color: #4BB543 !important;
+}

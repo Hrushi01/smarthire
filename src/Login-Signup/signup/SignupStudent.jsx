@@ -5,9 +5,10 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import Snackbar from "@mui/material/Snackbar"; //for snackbar
+import { RxCross2 } from "react-icons/rx"; //for snackbar
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -397,6 +398,19 @@ const SignupForm = (props) => {
                 >
                   Register
                 </Button>
+                <Snackbar
+                className={snackbarClass}
+                sx={{ width: "310px" }}
+                open={open}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                action={action}
+                message={snackbarMsg}
+                anchorOrigin={{
+                  vertical: "Bottom",
+                  horizontal: "Left",
+                }}
+              />
               </div>
             </div>
           </Form>

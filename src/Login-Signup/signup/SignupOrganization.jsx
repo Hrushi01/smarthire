@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import { RxCross2 } from "react-icons/rx";
+import Snackbar from "@mui/material/Snackbar"; //for snackbar
+import { RxCross2 } from "react-icons/rx"; //for snackbar
 
 function SignupOrganization({ status, setIsLoggedIn }) {
   const [initialValues, setInitialvalues] = useState({
@@ -31,7 +32,6 @@ function SignupOrganization({ status, setIsLoggedIn }) {
   const [Error, setError] = useState("");
   const cookies = new Cookies();
   const BASEURL = process.env.REACT_APP_SAMPLE;
-
   const SignUpOrg = async () => {
     const Temp = await axios
       .post(`${BASEURL}/SignUp`, {
@@ -74,13 +74,13 @@ function SignupOrganization({ status, setIsLoggedIn }) {
   const [snackbarMsg, setSnackbarMsg] = useState();
   const [snackbarClass, setSnackbarClass] = useState();
   const handleClose = () => {
-    setOpen(false);
+      setOpen(false);
   };
 
   const action = (
-    <button onClick={handleClose}>
-      <RxCross2 />
-    </button>
+      <button onClick={handleClose}>
+          <RxCross2 />
+      </button>
   );
 
   const validationSchema = Yup.object({
@@ -391,6 +391,19 @@ function SignupOrganization({ status, setIsLoggedIn }) {
                 >
                   Submit
                 </button>
+                <Snackbar
+                className={snackbarClass}
+                sx={{ width: "310px" }}
+                open={open}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                action={action}
+                message={snackbarMsg}
+                anchorOrigin={{
+                  vertical: "Bottom",
+                  horizontal: "Left",
+                }}
+              />
                 <Link
                   to={
                     status === "org"

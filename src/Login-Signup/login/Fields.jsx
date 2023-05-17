@@ -5,10 +5,10 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { RxCross2 } from "react-icons/rx";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-
+import Snackbar from "@mui/material/Snackbar"; //for snackbar
+import { RxCross2 } from "react-icons/rx"; //for snackbar
 function Fields(props) {
   const [typeOfUser, setTypeOfUser] = useState("");
   const [loading, setLoading] = useState(true);
@@ -43,13 +43,13 @@ function Fields(props) {
   const [snackbarMsg, setSnackbarMsg] = useState();
   const [snackbarClass, setSnackbarClass] = useState();
   const handleClose = () => {
-    setOpen(false);
+      setOpen(false);
   };
 
   const action = (
-    <button onClick={handleClose}>
-      <RxCross2 />
-    </button>
+      <button onClick={handleClose}>
+          <RxCross2 />
+      </button>
   );
   const navigate = useNavigate();
   const BASEURL = process.env.REACT_APP_SAMPLE;
@@ -70,6 +70,9 @@ function Fields(props) {
           cookies.set("SmartToken", Data.data.data, { maxAge: 86400 });
           navigate("/");
           setIsLoggedIn(true);
+          setSnackbarClass("valid");
+          setOpen(true);
+          setSnackbarMsg("Log in successfully");
           setRefresher(!refresher);
           console.log(refresher);
         }
@@ -163,6 +166,7 @@ function Fields(props) {
                 // className="w-fit p-3 rounded-lg text-white font-semibold button flex"
                 onClick={() => {
                   setInitialvalues(props.values);
+                  setOpen(true);
                 }}
               >
                 <div className="pr-20 pl-5">Log In</div>
@@ -170,6 +174,19 @@ function Fields(props) {
                   <FaArrowRight />
                 </div>
               </Button>
+              <Snackbar
+                className={snackbarClass}
+                sx={{ width: "310px" }}
+                open={open}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                action={action}
+                message={snackbarMsg}
+                anchorOrigin={{
+                  vertical: "Bottom",
+                  horizontal: "Left",
+                }}
+              />
             </div>
             <div className="h-20">
               <div className="login ml-24 text-xs h-12 flex rounded-full border-gray-400  pr-3 pl-3 round">
