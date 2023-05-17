@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import DateConverter from "../../assets/DateConverter";
-// import { Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Card = ({
   organization,
@@ -13,63 +12,9 @@ const Card = ({
   qsnNumber,
   timeDuration,
   jobDesc,
-  id,
-  setItrId,,
   setItrId,
   card,
 }) => {
-  const [validIntr, setValidIntr] = useState(false);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const date = new Date(); // create a new Date object with the current date and time
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      timeZoneName: "short",
-    };
-    const formattedDate = date.toLocaleString("en-US", options);
-    setValidIntr(interviewDate <=formattedDate);
-    console.log("testEmail", interviewDate, "-------",formattedDate);
-    setLoading(false);
-  });
-  const startButton = (sts) => {
-    if (sts === true) {
-      return (
-        <p className="text-gray-700 text-base mb-2">
-          <Link to="/interview">
-            <button
-              variant="contained"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-              onClick={() => {
-                setItrId(id);
-              }}
-            >
-              Start Interview
-            </button>
-          </Link>
-        </p>
-      );
-    } else {
-      return (
-        <>
-          <p className="text-gray-700 text-base mb-2">
-            <button
-              variant="contained"
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
-            >
-              Expired
-            </button>
-          </p>
-        </>
-      );
-    }
-  };
-
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpansion = () => {
@@ -125,7 +70,6 @@ const Card = ({
           <span className="font-bold text-gray-900">Interview Date:</span>{" "}
           &nbsp;
           {formattedInterviewDate}
-          
         </p>
         <p className="text-gray-700 text-base mb-2">
           <span className="font-bold text-gray-900">Interview Time:</span>{" "}
@@ -164,6 +108,8 @@ const CardList = ({ cards, UserDataData, setItrId }) => {
   const [loading, setLoading] = useState(true);
 
   const findInterviewList = async () => {
+    console.log("testEmail", testEmail);
+
     const viewData = await axios
       .post(`${BASEURL}/ViewInterviewList`, {
         Res_Interviewer_Email: testEmail,
@@ -209,24 +155,6 @@ const CardList = ({ cards, UserDataData, setItrId }) => {
                     timeDuration={card.Time_Duration}
                     setItrId={setItrId}
                     card={card}
-                  />
-                </div>
-            {IntrList.map((card) => (
-              <div>
-                <div
-                  key={card.organization}
-                  className="transform hover:scale-110 transition-all duration-500"
-                >
-                  <Card
-                    organization={card.Company_Name}
-                    jobPosition={card.Name_Technology}
-                    jobDesc={card.Description}
-                    interviewDate={card.Date_Of_Interview}
-                    interviewTime={card.Time_Of_Interview}
-                    qsnNumber={card.Number_Of_Questions}
-                    timeDuration={card.Time_Duration}
-                    id={card.Interview_ID}
-                    setItrId={setItrId}
                   />
                 </div>
               </div>
