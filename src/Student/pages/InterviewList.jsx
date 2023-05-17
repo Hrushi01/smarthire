@@ -33,7 +33,7 @@ function InterviewList({ setItrId, UserDataData }) {
           <div>
             <div className="flex justify-center">
               <div className="font-bold text-4xl font mt-4 ">
-                Upcoming Interviews
+                 Interviews Battle
               </div>
             </div>
             <div>
@@ -43,7 +43,7 @@ function InterviewList({ setItrId, UserDataData }) {
           <hr />
           <hr />
           <hr />
-          <div>
+          {/* <div>
             <div>
               <div className="flex justify-center">
                 <div className="font-bold text-4xl font mt-4 ">
@@ -52,7 +52,7 @@ function InterviewList({ setItrId, UserDataData }) {
               </div>
               <CardList cards={cards} UserDataData={UserDataData}/>
             </div>
-          </div>
+          </div> */}
         </>
     //   )}
     // </>

@@ -248,6 +248,18 @@ function InterviewShow({ ItrId, UserDataData }) {
         <div className="flex md:flex-row h-screen p-9 justify-around w-full  ">
           <div className="bg-gray-200 w-3/5 h-100 md:h-auto flex items-center justify-center">
             <div className="w-full">
+              <p className="text-lg font-bold">
+                Camera status:{" "}
+                <span className="inline-block bg-red-400 text-white rounded-md py-1 px-3">
+                  {recordWebcam.status}
+                </span>
+              </p>
+              <video
+                className="Candidate-Screen-WebCam w-full max-w-md"
+                ref={recordWebcam.webcamRef}
+                autoPlay
+                muted
+              />
               <TakeSnapFunction
                 imageTrigger={imageTrigger}
                 setImageTrigger={setImageTrigger}

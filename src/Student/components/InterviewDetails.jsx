@@ -1,4 +1,6 @@
 import React from "react";
+import DateConverter from "../../assets/DateConverter";
+
 
 function InterviewDetails({ interviewData }) {
   return (
@@ -18,7 +20,7 @@ function InterviewDetails({ interviewData }) {
         </div>
         <div>
           <span className="font-bold">Date:</span>{" "}
-          {interviewData.Date_Of_Interview}
+         { DateConverter(interviewData.Date_Of_Interview,"Date")}
         </div>
         <div>
           <span className="font-bold">Name of Technology:</span>{" "}
@@ -26,7 +28,7 @@ function InterviewDetails({ interviewData }) {
         </div>
         <div>
           <span className="font-bold">Time Duration:</span>{" "}
-          {interviewData.Time_Duration}
+          {interviewData.Time_Duration} Minutes 
         </div>
         <div>
           <span className="font-bold">Number of Questions:</span>{" "}
