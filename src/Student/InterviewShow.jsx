@@ -1,7 +1,9 @@
 // import BlobToVideo from "../TestingAssets/BlobHelpingFunction";
 import React, { useState, useEffect } from "react";
 import { useRecordWebcam } from "react-record-webcam";
+import Webcam from 'react-webcam'; // using this for clickng images
 import TakeSnapFunction from "../organization/TakeSnap";
+import base64ToHttps from "../organization/ImageConverter";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import SpeechRecognition, {
@@ -14,6 +16,21 @@ import InterviewDetails from "./components/InterviewDetails";
 import { Button } from "@mui/material";
 
 function InterviewShow({ ItrId, UserDataData }) {
+  // rahat code for base64 on clicking next
+  const [link, setLink]= useState();
+
+  const webcamRef = React.useRef(null);
+  const capture = React.useCallback( () => {
+    setTimeout(async () => {
+      const dataUri = webcamRef.current.getScreenshot();
+      console.log(dataUri)
+      // setDataUri(dataUri);
+      var httpImage = await base64ToHttps(dataUri);
+
+  }, 10000); // 10 seconds delay
+  }, [webcamRef]);
+
+  // dend
   const [tempData, setTEmpData] = useState({});
   const [switchWindow, setSwitchWindow] = useState(true);
   const [camRefresh, setCamREfresh] = useState(false);
@@ -248,22 +265,11 @@ function InterviewShow({ ItrId, UserDataData }) {
         <div className="flex md:flex-row h-screen p-9 justify-around w-full  ">
           <div className="bg-gray-200 w-3/5 h-100 md:h-auto flex items-center justify-center">
             <div className="w-full">
-              <p className="text-lg font-bold">
-                Camera status:{" "}
-                <span className="inline-block bg-red-400 text-white rounded-md py-1 px-3">
-                  {recordWebcam.status}
-                </span>
-              </p>
-              <video
-                className="Candidate-Screen-WebCam w-full max-w-md"
-                ref={recordWebcam.webcamRef}
-                autoPlay
-                muted
-              />
-              <TakeSnapFunction
+              {/* <TakeSnapFunction
                 imageTrigger={imageTrigger}
                 setImageTrigger={setImageTrigger}
-              />
+              /> */}
+              <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
             </div>
           </div>
 
@@ -409,10 +415,12 @@ function InterviewShow({ ItrId, UserDataData }) {
                                       SpeechRecognition.startListening();
                                     }
                                     pushAnswerFunction();
+                                    capture();
                                   }}
                                 >
                                   Next Question
                                 </Button>
+                                
                               </>
                             )}
 

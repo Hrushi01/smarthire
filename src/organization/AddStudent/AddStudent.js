@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AddStudent.css";
 import { Formik, Form, Field } from "formik";
 import { useState } from "react";
@@ -13,11 +13,16 @@ import {
 } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
 
-function AddStudent({}) {
+function AddStudent({ UserDataData }) {
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
   const [email, setEmail] = useState("");
+  const [tempUserData, setTemUserData] = useState({});
+  const [resultList, setResultList] = useState([]);
+
+  const BASEURL = process.env.REACT_APP_SAMPLE;
 
   function sendAcceptanceEmailToCandidate(candidateEmail, candidatename) {
     const subject = "Congratulations!! Smart Hire Acceptance Mail";
@@ -37,6 +42,38 @@ function AddStudent({}) {
     )}`;
     window.location.href = mailToLink;
   }
+
+  // Obtaining list of students below
+  // Obtaining list of students below
+  // Obtaining list of students below
+  // Obtaining list of students below
+  // Obtaining list of students below
+
+  // Obtaining list of students below
+
+  const ViewInterviewResults = async () => {
+    console.log("wewewe");
+    const Temp = await axios
+      .post(`${BASEURL}/FindResult`, {
+        Res_Company_Name: tempUserData.Name,
+      })
+      .then((Data) => {
+        console.log("Data--->", Data);
+        if (Data.data.message === "Interview result found successfully !") {
+          setResultList(Data.data.data);
+        }
+      })
+      .catch((ErrorR) => {
+        console.log("kkkkk", ErrorR);
+      });
+  };
+
+  useEffect(() => {
+    setTemUserData(UserDataData);
+    if (tempUserData) {
+      ViewInterviewResults();
+    }
+  }, []);
 
   return (
     <div className="">
@@ -132,18 +169,18 @@ function AddStudent({}) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {list?.map((user) => (
-                      <TableRow key={user.id}>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.email}</TableCell>
+                    {resultList?.map((user, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{user.Candidate_Name}</TableCell>
+                        <TableCell>{user.Candidate_Email}</TableCell>
                         <TableCell>
                           <Button
                             variant="contained"
                             color="primary"
                             onClick={() =>
                               sendAcceptanceEmailToCandidate(
-                                `${user.email}`,
-                                `${user.name}`
+                                `${user.Candidate_Email}`,
+                                `${user.Candidate_Name}`
                               )
                             }
                             endIcon={<SendIcon />}
