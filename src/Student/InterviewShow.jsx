@@ -26,7 +26,9 @@ function InterviewShow({ ItrId, UserDataData }) {
       console.log(dataUri)
       // setDataUri(dataUri);
       var httpImage = await base64ToHttps(dataUri);
-
+      if(httpImage){
+        console.log("-------------->",httpImage);
+      }
   }, 10000); // 10 seconds delay
   }, [webcamRef]);
 
@@ -383,6 +385,7 @@ function InterviewShow({ ItrId, UserDataData }) {
                                 onClick={() => {
                                   handleStart();
                                   setImageTrigger(!imageTrigger);
+                                  capture();
                                   console.log(
                                     "when start",
                                     parseInt(localStorage.getItem("Counter"))
