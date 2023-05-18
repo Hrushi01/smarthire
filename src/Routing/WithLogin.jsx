@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import SidebarOrg from "../organization/Sidebar/SideNavButton";
-import SidebarStudent from "../Student/Sidebar/SideNavButton";
+import SidebarOrg from "../organization/Sidebar/SideNavBar";
+import SidebarStudent from "../Student/Sidebar/SideNavBar";
 import OrganizationProfile from "../organization/pages/OrganizationProfile";
 import NewInterview from "../organization/NewInterview/NewInterview";
 import AddStudent from "../organization/AddStudent/AddStudent";

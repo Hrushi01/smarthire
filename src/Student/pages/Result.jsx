@@ -195,6 +195,7 @@ const Result = ({
   };
 
   return (
+<<<<<<< HEAD
     <div className="w-11/12">
       {loading ? (
         <>Loading</>
@@ -202,6 +203,29 @@ const Result = ({
         <>
           <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
             Result for Self Evaluation
+=======
+    <div className="w-11/12 m-auto">
+      <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
+        Result for Self Evaluation
+      </div>
+
+      <div className="bg-white shadow overflow-hidden rounded-lg">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg font-medium text-gray-900">
+            <span className="font-bold text-xl text-blue-900">
+              Candidate Name:
+            </span>{" "}
+            {candidateName}
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">
+            Bar Plot Scoring for Each Question
+          </p>
+        </div>
+        <div className="flex items-center justify-center p-4">
+          <div className="w-full max-w-lg flex justify-around">
+            <Bar data={data} options={options} />
+            <Line data={data} options={options} />
+>>>>>>> 3f44d24208c336f74f7c0e3ecaa79849396ccb59
           </div>
 
           <div className="bg-white shadow overflow-hidden rounded-lg">
