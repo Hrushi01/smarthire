@@ -2,60 +2,71 @@
 
 
 :root {
-    font-size: 16px;
-    --sidebar: #281a63;
-    font-family: Poppins;
-    --main-color: #f3f6fd;
-    --message-box-hover: #fafcff;
-    --message-box-border: #e9ebf0;
-  }
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    background-color: var(--main-color);
-    /* margin-left: 7rem; */
-    transition: 0.5s ease-in;
-  }
-  
-  .bodyMargin-withNavClose{
-    margin-left: 6rem;
-  }
-  .bodyMargin-withNavOpen{
-    margin-left: 250px;
-  }
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  
-.marginLeftZero{
+  font-size: 16px;
+  --sidebar: #281a63;
+  font-family: Poppins;
+  --main-color: #f3f6fd;
+  --message-box-hover: #fafcff;
+  --message-box-border: #e9ebf0;
+  --primary: #0091ff;
+  /* --dark: #061b28; */
+  --dark: #111;
+  --gray: #756388;
+  --light: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--main-color);
+  /* margin-left: 7rem; */
+  transition: 0.5s ease-in;
+}
+
+.bodyMargin-withNavClose {
+  margin-left: 6rem;
+}
+
+.bodyMargin-withNavOpen {
+  margin-left: 250px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.marginLeftZero {
   margin-left: -7rem;
 }
 
-.borderBottom{
+.borderBottom {
   border-bottom: solid 1.2px #e9ebf0 !important;
 }
 
-.flexRowReverse{
+.flexRowReverse {
   display: flex;
   flex-direction: row-reverse;
   align-items: start;
   justify-content: flex-start;
 }
 
-.width30{
+.width30 {
   max-width: 30% !important;
 }
-.width80{
+
+.width80 {
   max-width: 80%;
 }
 
-.buttonBlack{
+.buttonBlack {
   background-color: #111;
 }
-.buttonBlack:hover{
+
+.buttonBlack:hover {
   background-color: #c3cff4;
 }
 
@@ -72,12 +83,14 @@
   display: flex;
 }
 
-.invalid .MuiSnackbarContent-root{
+.invalid .MuiSnackbarContent-root {
   Background-color: red !important;
 }
-.default .MuiSnackbarContent-root{
+
+.default .MuiSnackbarContent-root {
   /* Background-color: ; */
 }
-.valid .MuiSnackbarContent-root{
+
+.valid .MuiSnackbarContent-root {
   Background-color: #4BB543 !important;
 }

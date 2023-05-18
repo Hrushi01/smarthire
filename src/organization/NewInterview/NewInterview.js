@@ -83,7 +83,7 @@ function NewInterview({ UserDataData }) {
       ) : (
         <>
           {" "}
-          <div className="bg-gray-50 py-4 flex">
+          <div className="py-4 flex">
             <div className="flex w-2/4 mx-auto">
               <div className="max-w-2xl mx-auto px-4  ">
                 <div className="flex justify-between items-center mx-auto">
