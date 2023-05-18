@@ -17,6 +17,12 @@ const Result = ({
   const [anger, setAnger] = useState(0);
   const [sadness, setSadness] = useState(0);
   const [fear, setFear] = useState(0);
+
+  // -----------------------
+  let OriginalResult =JSON.parse((localStorage.getItem("AWSResult")));
+  
+  // -----------------------
+
   console.log(
     "...>>>>>>>>>>>>>>>>>>>>>.........",
     resultlist,
