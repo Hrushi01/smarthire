@@ -17,10 +17,11 @@ const Result = ({
   const [anger, setAnger] = useState(0);
   const [sadness, setSadness] = useState(0);
   const [fear, setFear] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   // -----------------------
-  let OriginalResult =JSON.parse((localStorage.getItem("AWSResult")));
-  
+  let OriginalResult = JSON.parse(localStorage.getItem("AWSResult"));
+
   // -----------------------
 
   console.log(
@@ -157,7 +158,7 @@ const Result = ({
         },
       },
     });
-  }, []);
+  }, [loading]);
 
   const getRandomValues = () => {
     const joy = Math.random() * 0.2 + 0.6;
@@ -195,134 +196,140 @@ const Result = ({
 
   return (
     <div className="w-11/12">
-      <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
-        Result for Self Evaluation
-      </div>
-
-      <div className="bg-white shadow overflow-hidden rounded-lg">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-medium text-gray-900">
-            <span className="font-bold text-xl text-blue-900">
-              Candidate Name:
-            </span>{" "}
-            {candidateName}
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Bar Plot Scoring for Each Question
-          </p>
-        </div>
-        <div className="flex items-center justify-center p-4">
-          <div className="w-full max-w-lg flex justify-around">
-            <Bar data={data} options={options} />
-            <Line data={data} options={options} />
+      {loading ? (
+        <>Loading</>
+      ) : (
+        <>
+          <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
+            Result for Self Evaluation
           </div>
-        </div>
-      </div>
 
-      <div className="bg-white shadow overflow-hidden rounded-lg mt-8">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-medium text-gray-900">
-            <span className="font-bold text-blue-900">Candidate Name:</span>{" "}
-            {candidateName}
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Pie Chart Visualization for Each Question
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 border-b border-gray-200">
-          {questionArray?.map((question, index) => (
-            <div
-              key={index}
-              className="p-4 border border-gray-200 rounded-lg flex justify-around w-full"
-            >
-              <div className="mb-4 ">
-                <h4 className="text-lg font-medium text-blue-900 mb-2">
-                  {"->"} Question {index + 1}
-                </h4>
-                <p className="text-sm text-gray-500 mb-2">{question}</p>
-                {/* <p className="text-sm font-medium text-blue-900 mb-2">
+          <div className="bg-white shadow overflow-hidden rounded-lg">
+            <div className="px-4 py-5 sm:px-6">
+              <h3 className="text-lg font-medium text-gray-900">
+                <span className="font-bold text-xl text-blue-900">
+                  Candidate Name:
+                </span>{" "}
+                {candidateName}
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Bar Plot Scoring for Each Question
+              </p>
+            </div>
+            <div className="flex items-center justify-center p-4">
+              <div className="w-full max-w-lg flex justify-around">
+                <Bar data={data} options={options} />
+                <Line data={data} options={options} />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white shadow overflow-hidden rounded-lg mt-8">
+            <div className="px-4 py-5 sm:px-6">
+              <h3 className="text-lg font-medium text-gray-900">
+                <span className="font-bold text-blue-900">Candidate Name:</span>{" "}
+                {candidateName}
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Pie Chart Visualization for Each Question
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 border-b border-gray-200">
+              {questionArray?.map((question, index) => (
+                <div
+                  key={index}
+                  className="p-4 border border-gray-200 rounded-lg flex justify-around w-full"
+                >
+                  <div className="mb-4 ">
+                    <h4 className="text-lg font-medium text-blue-900 mb-2">
+                      {"->"} Question {index + 1}
+                    </h4>
+                    <p className="text-sm text-gray-500 mb-2">{question}</p>
+                    {/* <p className="text-sm font-medium text-blue-900 mb-2">
                   {"->"} Answer:
                 </p>
                 <p className="text-sm text-gray-500">{answertext[index]}</p> */}
-              </div>
-              <div className=" ">
-                <Pie data={datapi[index]} options={options} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="bg-white shadow overflow-hidden rounded-lg mt-8 flex flex-col justify-around w-full p-6">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-medium text-gray-900">
-            Overall Percentage
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">{candidateName}</p>
-        </div>
-        <div>
-          <div className="grid grid-cols-2 gap-6 p-6 pb-10 border-b border-gray-200  border-t">
-            <div className="">
-              <div className="h-64 pb-2">
-                <Line data={emodata} options={emooptions} />
-              </div>
-              <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
-                Emotions Shown During the test
-              </h4>
-            </div>
-            <div className="max-h-96 flex flex-col justify-center  text-center w-full">
-              <div className="h-64 pb-2">
-                <Pie data={datares2pie} options={optionsrespie} />
-              </div>
-              <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
-                *Face Scoring Result*
-              </h4>
+                  </div>
+                  <div className=" ">
+                    <Pie data={datapi[index]} options={options} />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
-      <div className="bg-white shadow overflow-hidden rounded-lg mt-8 flex flex-col justify-around w-full p-6">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-medium text-gray-900">
-            Overall Test Scoring
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">{candidateName}</p>
-        </div>
-        <div>
-          <div className="grid grid-cols-1 gap-6 p-6  border-b border-gray-200  border-t">
+
+          <div className="bg-white shadow overflow-hidden rounded-lg mt-8 flex flex-col justify-around w-full p-6">
+            <div className="px-4 py-5 sm:px-6">
+              <h3 className="text-lg font-medium text-gray-900">
+                Overall Percentage
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">{candidateName}</p>
+            </div>
             <div>
-              <div className="max-h-96">
-                <Pie data={datarespie} options={optionsrespie} />
-                <h4 className="text-lg font-medium text-gray-600 border-2 border-gray-600 w-fit p-2">
-                  Overall Text Result
+              <div className="grid grid-cols-2 gap-6 p-6 pb-10 border-b border-gray-200  border-t">
+                <div className="">
+                  <div className="h-64 pb-2">
+                    <Line data={emodata} options={emooptions} />
+                  </div>
+                  <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+                    Emotions Shown During the test
+                  </h4>
+                </div>
+                <div className="max-h-96 flex flex-col justify-center  text-center w-full">
+                  <div className="h-64 pb-2">
+                    <Pie data={datares2pie} options={optionsrespie} />
+                  </div>
+                  <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+                    *Face Scoring Result*
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white shadow overflow-hidden rounded-lg mt-8 flex flex-col justify-around w-full p-6">
+            <div className="px-4 py-5 sm:px-6">
+              <h3 className="text-lg font-medium text-gray-900">
+                Overall Test Scoring
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">{candidateName}</p>
+            </div>
+            <div>
+              <div className="grid grid-cols-1 gap-6 p-6  border-b border-gray-200  border-t">
+                <div>
+                  <div className="max-h-96">
+                    <Pie data={datarespie} options={optionsrespie} />
+                    <h4 className="text-lg font-medium text-gray-600 border-2 border-gray-600 w-fit p-2">
+                      Overall Text Result
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="grid grid-cols-2 gap-6 p-6 pb-10 border-b border-gray-200  border-t">
+              <div className="">
+                <div className="h-64 pb-2">
+                  <Line data={emodata} options={emooptions} />
+                </div>
+                <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+                  Emotions Shown while Answering the test
+                </h4>
+              </div>
+              <div className="max-h-96 flex flex-col justify-center  text-center w-full">
+                <div className="h-64 pb-2">
+                  <Pie data={datares2pie} options={optionsrespie} />
+                </div>
+                <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
+                  *Sentiment Analysis*
                 </h4>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div>
-        <div className="grid grid-cols-2 gap-6 p-6 pb-10 border-b border-gray-200  border-t">
-          <div className="">
-            <div className="h-64 pb-2">
-              <Line data={emodata} options={emooptions} />
-            </div>
-            <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
-              Emotions Shown while Answering the test
-            </h4>
-          </div>
-          <div className="max-h-96 flex flex-col justify-center  text-center w-full">
-            <div className="h-64 pb-2">
-              <Pie data={datares2pie} options={optionsrespie} />
-            </div>
-            <h4 className="text-lg font-medium text-gray-600 mb-2 border-2 border-gray-600 w-fit p-2">
-              *Sentiment Analysis*
-            </h4>
-          </div>
-        </div>
-      </div>
 
-      <Footer />
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

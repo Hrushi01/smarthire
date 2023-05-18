@@ -14,6 +14,8 @@ const Card = ({
   jobDesc,
   id,
   setItrId,
+  visited_Array,
+  testEmail,
 }) => {
   const [validIntr, setValidIntr] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -29,13 +31,44 @@ const Card = ({
       second: "numeric",
       timeZoneName: "short",
     };
-    const formattedDate = date.toLocaleString("en-US", options);
-    setValidIntr(interviewDate <=formattedDate);
-    console.log("testEmail", interviewDate, "-------",formattedDate);
+    function convertDateFormat(dateString) {
+      const date = new Date(dateString);
+      const isoDateString = date.toISOString().split("T")[0] + "T00:00:00.000Z";
+      return isoDateString;
+    }
+    setValidIntr(interviewDate >= convertDateFormat(new Date()));
+    console.log("testEmail", interviewDate <= convertDateFormat(new Date()));
     setLoading(false);
   });
-  const startButton = (sts) => {
-    if (sts === true) {
+  const dFunction = () => {
+    if (visited_Array.includes(testEmail)) {
+      return (
+        <p className="text-gray-700 text-base mb-2">
+          <button
+            variant="contained"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
+          >
+            Attempted
+          </button>
+        </p>
+      );
+    } else {
+      return (
+        <p className="text-gray-700 text-base mb-2">
+          <button
+            variant="contained"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
+          >
+            Expired
+          </button>
+        </p>
+      );
+    }
+  };
+
+  const startButton = (validIntr) => {
+    if (validIntr === true) {
+      console.log(validIntr);
       return (
         <p className="text-gray-700 text-base mb-2">
           <Link to="/interview">
@@ -52,18 +85,7 @@ const Card = ({
         </p>
       );
     } else {
-      return (
-        <>
-          <p className="text-gray-700 text-base mb-2">
-            <button
-              variant="contained"
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-4"
-            >
-              Expired
-            </button>
-          </p>
-        </>
-      );
+      return <>{dFunction()}</>;
     }
   };
 
@@ -120,7 +142,6 @@ const CardList = ({ cards, UserDataData, setItrId }) => {
       })
       .then((Data) => {
         setIntrList(Data.data.data1);
-        console.log("kkkkk=====", Data);
         setLoading(false);
       })
       .catch((ErrorR) => {
@@ -159,6 +180,8 @@ const CardList = ({ cards, UserDataData, setItrId }) => {
                     timeDuration={card.Time_Duration}
                     id={card.Interview_ID}
                     setItrId={setItrId}
+                    visited_Array={card.visited_Array}
+                    testEmail={testEmail}
                   />
                 </div>
               </div>

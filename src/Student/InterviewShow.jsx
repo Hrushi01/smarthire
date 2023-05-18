@@ -1,7 +1,7 @@
 // import BlobToVideo from "../TestingAssets/BlobHelpingFunction";
 import React, { useState, useEffect } from "react";
 import { useRecordWebcam } from "react-record-webcam";
-import Webcam from 'react-webcam'; // using this for clickng images
+import Webcam from "react-webcam"; // using this for clickng images
 import TakeSnapFunction from "../organization/TakeSnap";
 import base64ToHttps from "../organization/ImageConverter";
 import axios from "axios";
@@ -17,19 +17,19 @@ import { Button } from "@mui/material";
 
 function InterviewShow({ ItrId, UserDataData }) {
   // rahat code for base64 on clicking next
-  const [link, setLink]= useState();
+  const [link, setLink] = useState();
 
   const webcamRef = React.useRef(null);
-  const capture = React.useCallback( () => {
+  const capture = React.useCallback(() => {
     setTimeout(async () => {
       const dataUri = webcamRef.current.getScreenshot();
-      console.log(dataUri)
+      console.log(dataUri);
       // setDataUri(dataUri);
       var httpImage = await base64ToHttps(dataUri);
-      if(httpImage){
-        console.log("-------------->",httpImage);
+      if (httpImage) {
+        console.log("-------------->", httpImage);
       }
-  }, 10000); // 10 seconds delay
+    }, 10000); // 10 seconds delay
   }, [webcamRef]);
 
   // dend
@@ -214,7 +214,7 @@ function InterviewShow({ ItrId, UserDataData }) {
       })
       .then((Data) => {
         if (Data.data.message === "Interview result added successfully !") {
-          alert("Result submitted to Company !");
+          // alert("Result submitted to Company !");
         }
       })
       .catch((ErrorR) => {
@@ -257,11 +257,17 @@ function InterviewShow({ ItrId, UserDataData }) {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
+  const checkTime = (time) => {
+    console.log(time);
+    if (time === 0) {
+      handleAPIRecording();
+    }
+  };
 
   return (
     <>
-      {" "}
       <div className="mb-5">
+        {checkTime(time)}
         <InterviewDetails interviewData={interviewData} />
       </div>
       {switchWindow ? (
@@ -272,7 +278,11 @@ function InterviewShow({ ItrId, UserDataData }) {
                 imageTrigger={imageTrigger}
                 setImageTrigger={setImageTrigger}
               /> */}
-              <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+              />
             </div>
           </div>
 
@@ -424,7 +434,6 @@ function InterviewShow({ ItrId, UserDataData }) {
                                 >
                                   Next Question
                                 </Button>
-                                
                               </>
                             )}
 
