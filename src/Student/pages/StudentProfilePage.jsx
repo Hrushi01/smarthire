@@ -32,9 +32,9 @@ const StudentProfilePage = ({ UserDataData }) => {
                     </div>
                     <div>
                       <h1 className="text-3xl font-bold mb-1">
-                        Hrushikesh Ambike
+                        {studentData.Name}
                       </h1>
-                      <p className="text-lg text-gray-500">Hrushi@gmail.com</p>
+                      <p className="text-lg text-gray-500">{studentData.emailId}</p>
                     </div>
                   </div>
                   <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -50,10 +50,10 @@ const StudentProfilePage = ({ UserDataData }) => {
                       <dl className="sm:divide-y sm:divide-gray-200">
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                           <dt className="text-sm font-medium text-gray-500">
-                            Full name
+                            UserName
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            Hrushikesh Ambike
+                            {studentData.Name}
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -61,7 +61,7 @@ const StudentProfilePage = ({ UserDataData }) => {
                             Email address
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            hrushi@example.com
+                          {studentData.emailId}
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -69,17 +69,15 @@ const StudentProfilePage = ({ UserDataData }) => {
                             Phone number
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            9359402672
+                            {studentData.PhoneNumber}
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                           <dt className="text-sm font-medium text-gray-500">
-                            Address
+                            Residentail Address
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            b1-101,Swapnapurti,
-                            <br />
-                            Pune,411028
+                          {studentData.Address}
                           </dd>
                         </div>
                       </dl>
@@ -91,7 +89,7 @@ const StudentProfilePage = ({ UserDataData }) => {
                         Technical Skills
                       </h3>
                       <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                        Here are some of the technical skills I've learned:
+                      Well known languages, Frameworks and Libraries :
                       </p>
                     </div>
                     <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
@@ -101,7 +99,7 @@ const StudentProfilePage = ({ UserDataData }) => {
                             Programming languages
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            JavaScript, Python, C++,C
+                          {studentData.TechinalSkillsProgrammingLanguage}
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -109,7 +107,7 @@ const StudentProfilePage = ({ UserDataData }) => {
                             Frameworks and libraries
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            React, Angular, Django, NumPy, Pandas
+                          {studentData.TechnicalSkillsFrameworks}
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -117,7 +115,7 @@ const StudentProfilePage = ({ UserDataData }) => {
                             Database technologies
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            MySQL, MongoDB
+                          {studentData.TechnicalSkillsDatabase}
                           </dd>
                         </div>
                       </dl>
@@ -136,32 +134,27 @@ const StudentProfilePage = ({ UserDataData }) => {
                       <dl className="sm:divide-y sm:divide-gray-200">
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                           <dt className="text-sm font-medium text-gray-500">
-                            Project X
+                            Projects
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            Led a team of 5 to develop a web application using
-                            React and Django, which was deployed to production
-                            and used by over 10,000 users.
+                          {studentData.PastPerformanceProjectDetails}
+
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                           <dt className="text-sm font-medium text-gray-500">
-                            Hackathon Y
+                            Hackathons
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            Won 2nd place in a hackathon with a team of 3, by
-                            developing a mobile app using React Native and
-                            Firebase.
+                          {studentData.PastPerformanceHackathonDetails}
                           </dd>
                         </div>
                         <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                           <dt className="text-sm font-medium text-gray-500">
-                            Internship Z
+                            Internships
                           </dt>
                           <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            Completed a 3-month internship at XYZ company, where
-                            I developed and maintained their e-commerce website
-                            using React and Redux.
+                          {studentData.PastPerformanceInternshipDetails}
                           </dd>
                         </div>
                       </dl>

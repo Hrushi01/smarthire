@@ -21,7 +21,7 @@ const Result = ({
 
   // -----------------------
   let OriginalResult = JSON.parse(localStorage.getItem("AWSResult"));
-
+  
   // -----------------------
 
   console.log(
@@ -196,10 +196,10 @@ const Result = ({
 
   return (
     <div className="w-11/12">
-      {loading ? (
+      {/* {loading ? (
         <>Loading</>
       ) : (
-        <>
+        <> */}
           <div className="text-4xl font-serif font-bold my-8 flex justify-center text-blue-900">
             Result for Self Evaluation
           </div>
@@ -328,8 +328,8 @@ const Result = ({
           </div>
 
           <Footer />
-        </>
-      )}
+        {/* </>
+      )} */}
     </div>
   );
 };
