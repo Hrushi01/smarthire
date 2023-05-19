@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import DateConverter from "../../assets/DateConverter";
+import { Button } from "@mui/material";
 
 const Card = ({
   organization,
@@ -16,6 +17,8 @@ const Card = ({
   setItrId,
   visited_Array,
   testEmail,
+
+  card,
 }) => {
   const [validIntr, setValidIntr] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -66,28 +69,69 @@ const Card = ({
     }
   };
 
-  const startButton = (validIntr) => {
-    if (validIntr === true) {
-      console.log(validIntr);
-      return (
-        <p className="text-gray-700 text-base mb-2">
-          <Link to="/interview">
-            <button
-              variant="contained"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
-              onClick={() => {
-                setItrId(id);
-              }}
-            >
-              Start Interview
-            </button>
-          </Link>
-        </p>
-      );
-    } else {
-      return <>{dFunction()}</>;
-    }
+  // const startButton = (validIntr) => {
+  //   if (validIntr === true) {
+  //     console.log(validIntr);
+  //     return (
+  //       <p className="text-gray-700 text-base mb-2">
+  //         <Link to="/interview">
+  //           <button
+  //             variant="contained"
+  //             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+  //             onClick={() => {
+  //               setItrId(id);
+  //             }}
+  //           >
+  //             Start Interview
+  //           </button>
+  //         </Link>
+  //       </p>
+  //     );
+  //   } else {
+  //     return <>{dFunction()}</>;
+  //   }
+  // };
+
+  // New Section By Hrushikesh
+
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpansion = () => {
+    setExpanded(!expanded);
   };
+
+  const getDescription = () => {
+    if (expanded) {
+      return jobDesc;
+    }
+    return jobDesc.slice(0, 50) + "...";
+  };
+
+  const getReadMoreButton = () => {
+    if (!expanded && jobDesc.length > 50) {
+      return (
+        <Link to="/interview">
+          <button
+            className="text-blue-500 font-bold hover:underline focus:outline-none"
+            onClick={toggleExpansion}
+          >
+            Read More
+          </button>
+        </Link>
+      );
+    }
+    return null;
+  };
+
+  const formattedInterviewDate = new Date(interviewDate).toLocaleDateString();
+  const formattedInterviewTime = new Date(interviewTime).toLocaleTimeString(
+    [],
+    {
+      hour: "numeric",
+      minute: "numeric",
+      timeZoneName: "short",
+    }
+  );
 
   return (
     <>
@@ -96,31 +140,51 @@ const Card = ({
       ) : (
         <div className="bg-white shadow-lg rounded-lg overflow-hidden w-80 mx-4 my-8">
           <div className="p-4">
-            <h3 className="font-bold text-2xl mb-2">{organization}</h3>
-            <p className="text-gray-700 text-base mb-2 font-bold">
+            <h3 className="font-bold text-2xl mb-2 text-gray-900">
+              {organization}
+            </h3>
+            <p className="text-gray-700 text-base mb-2 font-semibold">
               {jobPosition}
             </p>
+            <p className="text-gray-700 text-base mb-4 h-20 overflow-scroll leading-6">
+              <span className="font-bold text-gray-900">Description:</span>{" "}
+              &nbsp;
+              {getDescription()}
+              {getReadMoreButton()}
+            </p>
+
             <p className="text-gray-700 text-base mb-2">
-              <span className="font-bold ">Description:</span> &nbsp;
-              {jobDesc}
+              <span className="font-bold text-gray-900">Interview Date:</span>{" "}
+              &nbsp;
+              {formattedInterviewDate}
             </p>
             <p className="text-gray-700 text-base mb-2">
-              <span className="font-bold ">Interview Date :</span> &nbsp;
-              {DateConverter(interviewDate, "Date")}
+              <span className="font-bold text-gray-900">Interview Time:</span>{" "}
+              &nbsp;
+              {formattedInterviewTime}
             </p>
             <p className="text-gray-700 text-base mb-2">
-              <span className="font-bold ">Interview Time:</span> &nbsp;
-              {interviewTime} [24 Hrs Format]
-            </p>
-            <p className="text-gray-700 text-base mb-2">
-              <span className="font-bold ">Number of Questions:</span> &nbsp;
+              <span className="font-bold text-gray-900">
+                Number of Questions:
+              </span>{" "}
+              &nbsp;
               {qsnNumber}
             </p>
             <p className="text-gray-700 text-base mb-2">
-              <span className="font-bold ">Duration:</span> &nbsp;
+              <span className="font-bold text-gray-900">Duration:</span> &nbsp;
               {timeDuration} Minutes
             </p>
-            {startButton(validIntr)}
+            {/* {startButton(validIntr)} */}
+          </div>
+          <div className="flex justify-center p-4">
+            <Button
+              variant="contained"
+              onClick={() => {
+                setItrId(card.Interview_ID);
+              }}
+            >
+              Give Test
+            </Button>
           </div>
         </div>
       )}
@@ -164,8 +228,8 @@ const CardList = ({ cards, UserDataData, setItrId }) => {
         <>
           {" "}
           <div className="flex flex-wrap justify-center">
-            {IntrList.map((card) => (
-              <div>
+            {IntrList.map((card, index) => (
+              <div key={index}>
                 <div
                   key={card.organization}
                   className="transform hover:scale-110 transition-all duration-500"
@@ -178,10 +242,8 @@ const CardList = ({ cards, UserDataData, setItrId }) => {
                     interviewTime={card.Time_Of_Interview}
                     qsnNumber={card.Number_Of_Questions}
                     timeDuration={card.Time_Duration}
-                    id={card.Interview_ID}
                     setItrId={setItrId}
-                    visited_Array={card.visited_Array}
-                    testEmail={testEmail}
+                    card={card}
                   />
                 </div>
               </div>
